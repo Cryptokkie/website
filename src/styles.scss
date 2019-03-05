@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'material.scss';
+
+body {
+    font-family: $font;
+}
+
+.mat-button,
+.mat-flat-button,
+.mat-raised-button {
+    border-radius: 10px;
+}

@@ -1,0 +1,43 @@
+<table mat-table [dataSource]="currencies" matSort class="mat-elevation-z8">
+
+    <!-- Currency Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Currency </th>
+      <td mat-cell *matCellDef="let element">
+        <img class="icon" src="{{element.icon}}" /> {{element.name}} {{element.ticker}}
+      </td>
+    </ng-container>
+  
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    </ng-container>
+  
+    <!-- Change Column -->
+    <ng-container matColumnDef="change">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Change (24h) </th>
+      <td mat-cell *matCellDef="let element"> {{element.change}} </td>
+    </ng-container>
+  
+    <!-- Volume Column -->
+    <ng-container matColumnDef="volume">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Volume (24h) </th>
+      <td mat-cell *matCellDef="let element"> {{element.volume}} </td>
+    </ng-container>
+  
+    <!-- Circulating Supply Column -->
+    <ng-container matColumnDef="circulating">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Circulating Supply </th>
+      <td mat-cell *matCellDef="let element"> {{element.circulating}} </td>
+    </ng-container>
+  
+    <!-- Market Cap Column -->
+    <ng-container matColumnDef="marketcap">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Market Cap </th>
+      <td mat-cell *matCellDef="let element"> {{element.marketcap}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

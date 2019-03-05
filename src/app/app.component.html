@@ -1,11 +1,8 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to posmn.com test site
-  </h1>
-  <h2>
-    This is the test-site. New updates will appear here first for testing purposes.
-  </h2>
-</div>
-
-<router-outlet></router-outlet>
+<mat-sidenav-container class="site-container">
+  <mat-sidenav mode="side" opened>
+    <app-side-menu></app-side-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

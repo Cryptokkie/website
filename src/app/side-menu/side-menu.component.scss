@@ -1,0 +1,57 @@
+@import 'styles';
+
+.logo {
+    width: 80%;
+    margin: 20px auto;
+    display: block;
+}
+
+.horizontal-line {
+    border-bottom: 1px solid mat-color($primary, 300);
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+
+.menu-buttons {
+    width: 80%;
+    margin: 25px auto;
+    color: white;
+
+    button {
+        width: 100%;
+        margin: 5px 0;
+        text-align: left;
+
+        mat-icon {
+            margin-right: 10px;
+        }
+    }
+}
+
+.menu-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+
+    a {
+        color: white;
+    }
+
+    i {
+        margin: 16px 8px;
+    }
+
+    .footer-links {
+        margin: 16px 0;
+        font-size: 9pt;
+
+        a {
+            text-decoration: none;
+            margin: 0 8px;
+        }
+    }
+}
