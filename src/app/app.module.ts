@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { TitleService } from './core/title.service';
 import { MaterialModule } from './material/material.module';
 import { PagesModule } from './pages/pages.module';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -18,9 +20,14 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    PagesModule
+    PagesModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(titleService: TitleService) {
+    titleService.init();
+  }
+ }
