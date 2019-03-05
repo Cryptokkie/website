@@ -1,0 +1,26 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$font: "Roboto", sans-serif;
+$primary: mat-palette($mat-teal);
+$accent: mat-palette($mat-amber);
+$warn: mat-palette($mat-red);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+@include angular-material-theme($theme);
+
+@mixin md-icon-size($size: 24px) {
+    font-size: $size;
+    height: $size;
+    width: $size;
+    line-height: $size;
+}
+
+// @include transition(.3s);
+@mixin transition($second) {
+	-webkit-transition : all $second ease 0s;
+	   -moz-transition : all $second ease 0s;
+		 -o-transition : all $second ease 0s;
+			transition : all $second ease 0s;
+}

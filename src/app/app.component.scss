@@ -1,0 +1,30 @@
+@import '../material.scss';
+
+.site-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    & > mat-sidenav {
+        width: 280px;
+        background-color: mat-color($primary);
+        background: linear-gradient(
+            to bottom right
+            mat-color($primary), 
+            mat-color($primary, 700));
+        transition: box-shadow 200ms;
+        @include mat-elevation(8);
+
+        &:hover {
+            transition: box-shadow 200ms;
+            @include mat-elevation(12);
+        }
+    }
+
+    & > mat-sidenav-content {
+        flex-grow: 1;
+        background-color: #dfdfdf;
+    }
+}

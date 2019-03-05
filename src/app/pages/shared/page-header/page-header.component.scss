@@ -1,0 +1,26 @@
+@import 'styles';
+
+:host {
+    width: 100%;
+    background-color: white;
+    display: block;
+    padding: 20px 30px;
+    border-bottom: 1px solid #CCC;
+}
+
+h1 {
+    display: inline-block;
+    font-size: 18pt;
+    vertical-align: bottom;
+    font-weight: normal;
+    color: #4d4d4d;
+    margin: 14px 0;
+}
+
+mat-icon {
+    @include md-icon-size(50px);
+    background: -webkit-gradient(linear, left top, right bottom, from(mat-color($accent, 700)), to(mat-color($accent, 300)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
