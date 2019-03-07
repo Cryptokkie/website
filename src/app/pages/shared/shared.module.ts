@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PageHeaderComponent } from './page-header/page-header.component';
 import { MaterialModule } from '../../material/material.module';
+import { PageHeaderComponent } from './page-header/page-header.component';
 
 @NgModule({
   declarations: [PageHeaderComponent],
