@@ -6,6 +6,7 @@
     display: block;
     padding: 20px 30px;
     border-bottom: 1px solid #CCC;
+    box-sizing: border-box;
 }
 
 h1 {
@@ -14,7 +15,7 @@ h1 {
     vertical-align: bottom;
     font-weight: normal;
     color: #4d4d4d;
-    margin: 14px 0;
+    margin: 14px;
 }
 
 mat-icon {

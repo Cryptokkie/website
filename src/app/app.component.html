@@ -1,8 +1,18 @@
-<mat-sidenav-container class="site-container">
-  <mat-sidenav mode="side" opened>
-    <app-side-menu></app-side-menu>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="site-container" fxFlex>
+  <mat-toolbar color="primary" fxHide fxShow.lt-sm="true" class="mobile-toolbar" [class.mat-elevation-z8]="sidenav.opened">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a href="/">
+      <img src="/assets/logo.png" alt="posmn.com logo" class="logo" />
+    </a>
+  </mat-toolbar>
+  <mat-sidenav-container fxFill>
+    <mat-sidenav [mode]="mediaObserver.isActive('lt-sm') ? 'over' : 'side'" #sidenav [opened]="!mediaObserver.isActive('lt-sm')">
+      <app-side-menu></app-side-menu>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
