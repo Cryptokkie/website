@@ -26,7 +26,8 @@ steps:
   inputs:
     command: publish
     arguments: '--configuration Release --output publish_output'
-    projects: '*.csproj'
+    projects: 'extensions.csproj'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/functions/posmn-send-mail'
     publishWebProjects: false
     modifyOutputPath: true
     zipAfterPublish: false
