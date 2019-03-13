@@ -26,4 +26,4 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     ArtifactName: 'function'
-    PathtoPublish: '$(System.DefaultWorkingDirectory)'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/functions/posmn-send-mail'
