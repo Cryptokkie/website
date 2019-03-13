@@ -13,9 +13,19 @@
   z-index: 2;
 
   .logo {
-    width: 80%;
-    margin: 20px auto;
+    width: 150px;
     display: block;
+  }
+
+  .powered-by {
+    padding-top: 5px;
+    font-size: 7pt;
+    line-height: 7pt;
+    text-align: center;
+
+    img {
+      width: 70px;
+    }
   }
 }
 
