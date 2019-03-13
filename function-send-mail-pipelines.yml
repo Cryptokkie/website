@@ -9,7 +9,7 @@ trigger:
     - master
   paths:
     include:
-    - src/*
+    - functions/posmn-send-mail/*
 pr: none
 
 pool:
