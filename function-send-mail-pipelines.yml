@@ -22,8 +22,16 @@ steps:
 - script: dotnet build extensions.csproj --configuration $(buildConfiguration)
   workingDirectory: '$(System.DefaultWorkingDirectory)/functions/posmn-send-mail'
   displayName: 'dotnet build $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: publish
+    arguments: '--configuration Release --output publish_output'
+    projects: '*.csproj'
+    publishWebProjects: false
+    modifyOutputPath: true
+    zipAfterPublish: false
 
 - task: PublishBuildArtifacts@1
   inputs:
     ArtifactName: 'function'
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/functions/posmn-send-mail'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/functions/posmn-send-mail/publish_output'
