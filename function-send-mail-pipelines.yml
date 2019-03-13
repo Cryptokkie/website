@@ -20,6 +20,7 @@ variables:
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
+  workingDirectory: '$(System.DefaultWorkingDirectory)/functions/posmn-send-mail'
   displayName: 'dotnet build $(buildConfiguration)'
 
 - task: PublishBuildArtifacts@1
