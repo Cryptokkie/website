@@ -1,0 +1,64 @@
+<app-page-header icon="contact_support" title="Contact Us">
+</app-page-header>
+<app-page-content>
+  <p>Do you experience issues or do you just want to get in touch with us, please submit the form below.</p>
+
+  <div class="sending-message" *ngIf="isSending">
+    <span>Hold on, we're sending your message...</span>
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+
+  <div [formGroup]="contact" [hidden]="wasSent || isSending">
+
+    <div class="contact-form">
+      <h4>Please fill in your details</h4>
+
+      <mat-form-field>
+        <input matInput placeholder="EMAIL" formControlName="email">
+        <mat-error *ngIf="contact.get('email').hasError('required')">
+          Email is
+          <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="contact.get('email').hasError('email')">
+          Email is
+          <strong>not valid</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="NAME" formControlName="name">
+        <mat-error *ngIf="contact.get('name').hasError('required')">
+          Name is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <h4>What's your question?</h4>
+
+      <mat-form-field>
+        <textarea matInput placeholder="MESSAGE" formControlName="message"></textarea>
+        <mat-error *ngIf="contact.get('message').hasError('required')">
+          Message is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div #recaptcha class="g-recaptcha" data-sitekey="6Lc1YZcUAAAAAKX8hqL_TtbE8n2LhNJs39LP4NOf"></div>
+      <p></p>
+
+      <button mat-flat-button color="primary" [disabled]="!this.contact.valid" (click)="send()">
+        Send message
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="row" [hidden]="!wasSent">
+
+    <div class="contact-form">
+      <h4>Your message has been sent succesfully</h4>
+    </div>
+  </div>
+
+</app-page-content>

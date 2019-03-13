@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContactComponent } from './pages/contact/contact.component';
 import { CurrenciesComponent } from './pages/currencies/currencies.component';
 import { DisclaimerComponent } from './pages/disclaimer/disclaimer.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'privacy-policy', component: PrivacyComponent, data: { title: 'Privacy Policy' } },
   { path: 'disclaimer', component: DisclaimerComponent, data: { title: 'Disclaimer' } },
   { path: 'terms-and-conditions', component: TermsAndConditionsComponent, data: { title: 'Terms & Conditions' } },
+  { path: 'contact', component: ContactComponent, data: { title: 'Contact Us' } },
   // all else to /
   { path: '**', redirectTo: '' }
 ];

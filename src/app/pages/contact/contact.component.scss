@@ -1,0 +1,45 @@
+@import 'material.scss';
+
+.sending-message {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+
+    mat-progress-spinner {
+        margin: auto;
+    }
+}
+
+.contact-form {
+    padding: 3em;
+    background: #FFFFFF;
+    box-shadow: 0 1px 18px 10px rgba(0, 0, 0, 0.06);
+    border-radius: 4px;
+
+    h4 {
+        margin-bottom: 1em;
+        text-transform: uppercase;
+        color: mat-color($primary);
+        font-size: 16px;
+    }
+    
+    mat-form-field {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    textarea {
+        height: 150px;
+    }
+    
+    button {
+        min-width: 40px;
+        line-height: 30px;
+        padding: 0 12px;
+    }
+    
+    .form-group label {
+        margin-bottom: 0;
+        vertical-align: middle;
+    }
+}
