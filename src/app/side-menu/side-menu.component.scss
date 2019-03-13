@@ -3,7 +3,23 @@
 .logo {
     width: 80%;
     margin: 20px auto;
+    margin-bottom: 0px;
     display: block;
+}
+
+.powered-by {
+    color: white;
+    text-align: center;
+    font-size: 9pt;
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+
+    img {
+        width: 80px;
+        vertical-align: middle;
+        margin-bottom: 2px;
+    }
 }
 
 .horizontal-line {
