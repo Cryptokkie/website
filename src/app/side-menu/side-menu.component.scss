@@ -26,18 +26,10 @@
         mat-icon {
             margin-right: 10px;
         }
-
-        // &.active {
-        //     background-color: mat-color($accent);
-        // }
     }
 }
 
 .menu-footer {
-    // position: absolute;
-    // bottom: 0;
-    // left: 0;
-    // right: 0;
     text-align: center;
     color: white;
 
@@ -51,7 +43,8 @@
 
     .footer-links {
         margin: 16px 0;
-        font-size: 9pt;
+        padding: 0 10px;
+        font-size: 8pt;
 
         a {
             text-decoration: none;
