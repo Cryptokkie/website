@@ -1,36 +1,42 @@
-<a href="/" fxHide.lt-sm="true">
-  <img src="/assets/logo.png" alt="posmn.com logo" class="logo" />
-</a>
-<span fxHide.lt-sm="true" class="horizontal-line"></span>
-<div class="menu-buttons">
-  <button mat-flat-button color="primary" routerLink="work-in-progress" routerLinkActive="mat-accent">
-    <mat-icon>build</mat-icon> Work in progress
-  </button>
-  <!-- <button mat-flat-button color="primary" routerLink="currencies" routerLinkActive="mat-accent">
-    <mat-icon>attach_money</mat-icon> Currencies
-  </button>
-  <button mat-flat-button color="primary" routerLink="market-overview" routerLinkActive="mat-accent">
-    <mat-icon>bar_chart</mat-icon> Market Overview
-  </button>
-  <button mat-flat-button color="primary" routerLink="pos-pools" routerLinkActive="mat-accent">
-    <mat-icon>bubble_chart</mat-icon> PoS Pools
-  </button>
-  <button mat-flat-button color="primary" routerLink="masternode-hosting" routerLinkActive="mat-accent">
-    <mat-icon>storage</mat-icon> Masternode Hosting
-  </button>
-  <button mat-flat-button color="primary" routerLink="exchanges" routerLinkActive="mat-accent">
-    <mat-icon>show_chart</mat-icon> Exchanges
-  </button> -->
-</div>
-<div class="menu-footer">
-  <div>follow us</div>
-  <a href="#"><i class="fab fa-twitter"></i></a>
-  <a href="#"><i class="fab fa-facebook"></i></a>
-  <a href="#"><i class="fab fa-linkedin"></i></a>
-  <span class="horizontal-line"></span>
-  <div class="footer-links">
-    <a href="#">Privacy Policy</a>
-    <a href="#">Disclaimer</a>
-    <a href="#">Contact</a>
+<div fxLayout="column" fxFill>
+  <div fxHide.lt-sm="true">
+    <a href="/">
+      <img src="/assets/logo.png" alt="posmn.com logo" class="logo" />
+    </a>
+    <span class="powered-by">POWERED BY <a href="https://www.monkey.vision"><img src="/assets/monkey_logo.png" /></a></span>
+  </div>
+  <span fxHide.lt-sm="true" class="horizontal-line"></span>
+  <div class="menu-buttons" fxFlex="grow">
+    <button mat-flat-button color="primary" routerLink="work-in-progress" routerLinkActive="mat-accent">
+      <mat-icon>build</mat-icon> Work in progress
+    </button>
+    <button mat-flat-button disabled color="primary" routerLinkActive="mat-accent">
+      <mat-icon>attach_money</mat-icon> Currencies
+    </button>
+    <button mat-flat-button disabled color="primary" routerLinkActive="mat-accent">
+      <mat-icon>bar_chart</mat-icon> Market Overview
+    </button>
+    <button mat-flat-button disabled color="primary" routerLinkActive="mat-accent">
+      <mat-icon>bubble_chart</mat-icon> PoS Pools
+    </button>
+    <button mat-flat-button disabled color="primary" routerLinkActive="mat-accent">
+      <mat-icon>storage</mat-icon> Masternode Hosting
+    </button>
+    <button mat-flat-button disabled color="primary" routerLinkActive="mat-accent">
+      <mat-icon>show_chart</mat-icon> Exchanges
+    </button>
+  </div>
+  <div class="menu-footer">
+    <div>follow us</div>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+    <span class="horizontal-line"></span>
+    <div class="footer-links">
+      <a routerLink="privacy-policy">Privacy</a>
+      <a routerLink="disclaimer">Disclaimer</a>
+      <a routerLink="terms-and-conditions">Terms</a>
+      <a routerLink="contact">Contact</a>
+    </div>
   </div>
 </div>

@@ -1,17 +1,17 @@
 @import 'styles';
 
-.container {
-    padding: 20px;
-    display: block;
-}
-
 .content {
     background-color: white;
     float: left;
     padding: 20px;
     box-sizing: border-box;
+    text-align: center;
 
     img {
         width: 100%;
     }
+}
+
+.social-link i {
+    margin: 20px;
 }

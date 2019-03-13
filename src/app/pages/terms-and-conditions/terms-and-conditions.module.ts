@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { WorkInProgressComponent } from './work-in-progress.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions.component';
 
 @NgModule({
-  declarations: [WorkInProgressComponent],
+  declarations: [TermsAndConditionsComponent],
   imports: [
     CommonModule,
     SharedModule
   ]
 })
-export class WorkInProgressModule { }
+export class TermsAndConditionsModule { }

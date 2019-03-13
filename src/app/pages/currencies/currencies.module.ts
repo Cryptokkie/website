@@ -9,8 +9,7 @@ import { CurrenciesComponent } from './currencies.component';
   declarations: [CurrenciesComponent, CurrenciesOverviewComponent],
   imports: [
     CommonModule,
-    SharedModule,
-    MaterialModule
+    SharedModule
   ]
 })
 export class CurrenciesModule { }
