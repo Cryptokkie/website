@@ -19,7 +19,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet publish extensions.csproj --configuration $(buildConfiguration) --output publish_output
+- script: dotnet publish --configuration $(buildConfiguration) --output publish_output
   workingDirectory: '$(System.DefaultWorkingDirectory)/functions/posmn-send-mail'
   displayName: 'dotnet build $(buildConfiguration)'
 
