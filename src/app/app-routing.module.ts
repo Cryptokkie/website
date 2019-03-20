@@ -8,7 +8,7 @@ import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-
 import { WorkInProgressComponent } from './pages/work-in-progress/work-in-progress.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/work-in-progress', pathMatch: 'full' },
+  { path: '', redirectTo: '/currencies', pathMatch: 'full' },
   { path: 'work-in-progress', component: WorkInProgressComponent, data: { title: 'Work in progress' } },
   { path: 'currencies', component: CurrenciesComponent, data: { title: 'Currencies' } },
   { path: 'privacy-policy', component: PrivacyComponent, data: { title: 'Privacy Policy' } },
