@@ -12,9 +12,9 @@ namespace posmn_coin_info
     private readonly ICurrenciesRetriever currenciesRetriever;
     private readonly ILogger log;
 
-    public CurrenciesFunction(ILogger<CurrenciesFunction> log, ICurrenciesRetriever currenciesRetriever)
+    public CurrenciesFunction(ILoggerFactory loggerFactory, ICurrenciesRetriever currenciesRetriever)
     {
-      this.log = log;
+      this.log = loggerFactory.CreateLogger(Constants.FUNCTION_LOG_KEY);
       this.currenciesRetriever = currenciesRetriever;
     }
 

@@ -12,14 +12,19 @@ namespace posmn_coin_info.Test
   [TestClass]
   public class CurrenciesRetrieverTest
   {
-    private Mock<ILogger<CurrenciesFunction>> logMock;
+    private Mock<ILoggerFactory> loggerFactoryMock;
     private Mock<ICoinExplorerService> explorerServiceMock;
     private Mock<ICachingService> cachingServiceMock;
 
     [TestInitialize()]
     public void Startup()
     {
-      logMock = new Mock<ILogger<CurrenciesFunction>>();
+      loggerFactoryMock = new Mock<ILoggerFactory>();
+
+      // implement loggerFactory.CreateLogger("xxx") and return ILogger
+      var logMock = new Mock<ILogger>();
+      loggerFactoryMock.Setup(x => x.CreateLogger(It.IsAny<string>())).Returns(logMock.Object);
+
       explorerServiceMock = new Mock<ICoinExplorerService>();
       cachingServiceMock = new Mock<ICachingService>();
     }
@@ -30,7 +35,7 @@ namespace posmn_coin_info.Test
       cachingServiceMock.Setup(x => x.GetCurrencies()).Returns<IEnumerable<CurrencyStats>>(null);
       explorerServiceMock.Setup(x => x.GetCurrencies()).ReturnsAsync(Enumerable.Empty<CurrencyStats>());
 
-      var currenciesRetriever = new CurrenciesRetriever(logMock.Object, cachingServiceMock.Object, explorerServiceMock.Object);
+      var currenciesRetriever = new CurrenciesRetriever(loggerFactoryMock.Object, cachingServiceMock.Object, explorerServiceMock.Object);
       var currenciesResponse = await currenciesRetriever.Get();
       Assert.IsNotNull(currenciesResponse);
 
@@ -43,7 +48,7 @@ namespace posmn_coin_info.Test
       cachingServiceMock.Setup(x => x.GetCurrencies()).Returns(Enumerable.Empty<CurrencyStats>());
       explorerServiceMock.Setup(x => x.GetCurrencies());
 
-      var currenciesRetriever = new CurrenciesRetriever(logMock.Object, cachingServiceMock.Object, explorerServiceMock.Object);
+      var currenciesRetriever = new CurrenciesRetriever(loggerFactoryMock.Object, cachingServiceMock.Object, explorerServiceMock.Object);
       var currenciesResponse = await currenciesRetriever.Get();
       Assert.IsNotNull(currenciesResponse);
 
