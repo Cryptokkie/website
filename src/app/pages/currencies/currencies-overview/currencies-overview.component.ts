@@ -1,56 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
-
-const CURRENCIES_DUMMY = [
-  {
-    icon: 'https://res.cloudinary.com/coinexplorer/image/upload/v0/DASH/logo_35.png',
-    name: 'Dash', ticker: 'DASH', price: 76.9519, change: -1.67, volume: 721646157, circulating: 8640246, marketcap: 664883686
-  },
-  {
-    icon: 'https://res.cloudinary.com/coinexplorer/image/upload/v0/DASH/logo_35.png',
-    name: 'Dash', ticker: 'DASH', price: 76.9519, change: -1.67, volume: 721646157, circulating: 8640246, marketcap: 664883686
-  },
-  {
-    icon: 'https://res.cloudinary.com/coinexplorer/image/upload/v0/DASH/logo_35.png',
-    name: 'Dash', ticker: 'DASH', price: 76.9519, change: -1.67, volume: 721646157, circulating: 8640246, marketcap: 664883686
-  },
-  {
-    icon: 'https://res.cloudinary.com/coinexplorer/image/upload/v0/DASH/logo_35.png',
-    name: 'Dash', ticker: 'DASH', price: 76.9519, change: -1.67, volume: 721646157, circulating: 8640246, marketcap: 664883686
-  },
-  {
-    icon: 'https://res.cloudinary.com/coinexplorer/image/upload/v0/DASH/logo_35.png',
-    name: 'Dash', ticker: 'DASH', price: 76.9519, change: -1.67, volume: 721646157, circulating: 8640246, marketcap: 664883686
-  },
-  {
-    icon: 'https://res.cloudinary.com/coinexplorer/image/upload/v0/DASH/logo_35.png',
-    name: 'Dash', ticker: 'DASH', price: 76.9519, change: -1.67, volume: 721646157, circulating: 8640246, marketcap: 664883686
-  },
-  {
-    icon: 'https://res.cloudinary.com/coinexplorer/image/upload/v0/DASH/logo_35.png',
-    name: 'Dash', ticker: 'DASH', price: 76.9519, change: -1.67, volume: 721646157, circulating: 8640246, marketcap: 664883686
-  },
-  {
-    icon: 'https://res.cloudinary.com/coinexplorer/image/upload/v0/DASH/logo_35.png',
-    name: 'Dash', ticker: 'DASH', price: 76.9519, change: -1.67, volume: 721646157, circulating: 8640246, marketcap: 664883686
-  },
-  {
-    icon: 'https://res.cloudinary.com/coinexplorer/image/upload/v0/DASH/logo_35.png',
-    name: 'Dash', ticker: 'DASH', price: 76.9519, change: -1.67, volume: 721646157, circulating: 8640246, marketcap: 664883686
-  },
-  {
-    icon: 'https://res.cloudinary.com/coinexplorer/image/upload/v0/DASH/logo_35.png',
-    name: 'Dash', ticker: 'DASH', price: 76.9519, change: -1.67, volume: 721646157, circulating: 8640246, marketcap: 664883686
-  },
-  {
-    icon: 'https://res.cloudinary.com/coinexplorer/image/upload/v0/DASH/logo_35.png',
-    name: 'Dash', ticker: 'DASH', price: 76.9519, change: -1.67, volume: 721646157, circulating: 8640246, marketcap: 664883686
-  },
-  {
-    icon: 'https://res.cloudinary.com/coinexplorer/image/upload/v0/DASH/logo_35.png',
-    name: 'Dash', ticker: 'DASH', price: 76.9519, change: -1.67, volume: 721646157, circulating: 8640246, marketcap: 664883686
-  }
-];
+import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 
 @Component({
   selector: 'app-currencies-overview',
@@ -59,13 +9,24 @@ const CURRENCIES_DUMMY = [
 })
 export class CurrenciesOverviewComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'price', 'change', 'volume', 'circulating', 'marketcap'];
-  currencies = new MatTableDataSource(CURRENCIES_DUMMY);
+  displayedColumns: string[] = [
+    'name',
+    'lastPriceBtc',
+    'dailyChange',
+    'dailyVolumeBtc',
+    'supply',
+    'marketcap'];
+  currencies: MatTableDataSource<CoinStats>;
 
   @ViewChild(MatSort) sort: MatSort;
 
+  constructor(private coinInfoService: CoinInfoService) { }
+
   ngOnInit() {
-    this.currencies.sort = this.sort;
+    this.coinInfoService.getCurrencies().subscribe(currencies => {
+      this.currencies = new MatTableDataSource(currencies);
+      this.currencies.sort = this.sort;
+    });
   }
 
 }
