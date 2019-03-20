@@ -5,23 +5,31 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using posmn_coin_info.Models;
 
 namespace posmn_coin_info.Services
 {
-  public class CoinExplorerService
+  public class CoinExplorerService : ICoinExplorerService
   {
     // store coins hardcoded for now, should retrieve these dynamically
     private static readonly string[] currencyNames = {
       "monkey-project",
-      //"zest",
-      //"bitcoin-green",
-      //"blocknode",
-      //"deviantcoin",
-      //"mastercoin",
-      //"smartcash"
+      "zest",
+      "bitcoin-green",
+      "blocknode",
+      "deviantcoin",
+      "mastercoin",
+      "smartcash"
     };
+
+    private readonly ILogger<CurrenciesFunction> log;
+
+    public CoinExplorerService(ILogger<CurrenciesFunction> log)
+    {
+      this.log = log;
+    }
 
     public async Task<IEnumerable<CurrencyStats>> GetCurrencies()
     {
@@ -34,11 +42,13 @@ namespace posmn_coin_info.Services
 
       using (var httpClient = new HttpClient())
       {
-        httpClient.DefaultRequestHeaders.Add("api-key", "8e9e9f0e5b917da814cd24c57b56bed7");
+        var apiKey = Environment.GetEnvironmentVariable("monk_explorer_api_key");
+
+        httpClient.DefaultRequestHeaders.Add("api-key", apiKey);
 
         using (var message = await httpClient.GetAsync(requestUrl).ConfigureAwait(false))
         {
-          // do some error handling and logging here
+          message.EnsureSuccessStatusCode();
 
           var result = await message.Content.ReadAsStringAsync().ConfigureAwait(false);
           var res = JsonConvert.DeserializeObject<CurrencyStats>(result);
