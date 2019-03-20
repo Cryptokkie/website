@@ -33,7 +33,14 @@ namespace posmn_coin_info.Services
 
     public async Task<IEnumerable<CurrencyStats>> GetCurrencies()
     {
-      return await Task.WhenAll(currencyNames.Select(x => GetCurrency(x)));
+      // asynchronously iterate get currencies
+      var currencies = await Task.WhenAll(currencyNames.Select(async currencyName =>
+      {
+        var currency = await GetCurrency(currencyName);
+        currency.Name = currencyName;
+        return currency;
+      }));
+      return currencies;
     }
 
     public async Task<CurrencyStats> GetCurrency(string currencyName)

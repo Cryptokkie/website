@@ -7,31 +7,34 @@ namespace posmn_coin_info.Models
 {
   public class CurrencyStats
   {
+    public string Name { get; set; }
+
     [JsonProperty("24h_change")]
+    public decimal setDailyChange { set { DailyChange = value; } }
     public decimal DailyChange { get; set; }
 
     [JsonProperty("24h_volume_btc")]
+    public decimal setDailyVolumeBtc { set { DailyVolumeBtc = value; } }
     public decimal DailyVolumeBtc { get; set; }
 
     [JsonProperty("24h_volume_currency")]
+    public decimal setDailyVolumeCurrency { set { DailyVolumeCurrency = value; } }
     public decimal DailyVolumeCurrency { get; set; }
 
-    [JsonProperty("currency")]
     public string Currency { get; set; }
 
     [JsonProperty("lastprice_btc")]
+    public decimal setLastPriceBtc { set { LastPriceBtc = value; } }
     public decimal LastPriceBtc { get; set; }
 
     [JsonProperty("lastprice_currency")]
+    public decimal setLastPriceCurrency { set { LastPriceCurrency = value; } }
     public decimal LastPriceCurrency { get; set; }
 
-    [JsonProperty("marketcap")]
     public decimal Marketcap { get; set; }
 
-    [JsonProperty("supply")]
     public decimal Supply { get; set; }
 
-    [JsonProperty("ticker")]
     public string Ticker { get; set; }
 
 
