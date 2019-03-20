@@ -14,11 +14,11 @@ namespace posmn_coin_info
     private readonly ILogger log;
 
     public CurrenciesRetriever(
-      ILogger<CurrenciesFunction> log,
+      ILoggerFactory loggerFactory,
       ICachingService cachingService,
       ICoinExplorerService explorerService)
     {
-      this.log = log;
+      this.log = loggerFactory.CreateLogger(Constants.FUNCTION_LOG_KEY);
       this.cachingService = cachingService;
       this.explorerService = explorerService;
     }

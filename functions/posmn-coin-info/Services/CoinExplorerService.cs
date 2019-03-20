@@ -24,11 +24,11 @@ namespace posmn_coin_info.Services
       "smartcash"
     };
 
-    private readonly ILogger<CurrenciesFunction> log;
+    private readonly ILogger log;
 
-    public CoinExplorerService(ILogger<CurrenciesFunction> log)
+    public CoinExplorerService(ILoggerFactory loggerFactory)
     {
-      this.log = log;
+      this.log = loggerFactory.CreateLogger(Constants.FUNCTION_LOG_KEY);
     }
 
     public async Task<IEnumerable<CurrencyStats>> GetCurrencies()
