@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace posmn_coin_info.Services
 {
-  public class CachingService
+  public class CachingService : ICachingService
   {
     private static readonly MemoryCache memoryCache = new MemoryCache(new MemoryCacheOptions());
     private const string CurrenciesCacheKey = "currencies";
