@@ -10,6 +10,7 @@ export class CurrenciesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }
