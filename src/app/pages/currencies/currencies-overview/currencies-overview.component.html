@@ -1,5 +1,8 @@
-<table mat-table [dataSource]="currencies" matSort matSortActive="marketcap" matSortDirection="desc"
-  class="mat-elevation-z8">
+<app-loader></app-loader>
+<table mat-table [dataSource]="currencies" 
+  matSort matSortActive="marketcap" matSortDirection="desc"
+  class="mat-elevation-z8"
+  *ngIf="!loader.loading">
 
   <!-- Currency Column -->
   <ng-container matColumnDef="name">
