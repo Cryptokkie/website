@@ -1,12 +1,12 @@
 class CoinStats {
-    // tslint:disable-next-line:variable-name
     name: string;
     dailyChange: number;
+    dailyChangePercentage: number;
     dailyVolumeBtc: number;
     dailyVolumeCurrency: number;
     currency: string;
-    lastpriceBtc: number;
-    lastpriceCurrency: number;
+    lastPriceBtc: number;
+    lastPriceCurrency: number;
     marketcap: number;
     supply: number;
     ticker: string;

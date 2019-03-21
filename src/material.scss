@@ -6,6 +6,8 @@ $font: "Roboto", sans-serif;
 $primary: mat-palette($mat-teal);
 $accent: mat-palette($mat-amber);
 $warn: mat-palette($mat-red);
+$positive: mat-palette($mat-green);
+$negative: mat-palette($mat-red);
 
 $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
