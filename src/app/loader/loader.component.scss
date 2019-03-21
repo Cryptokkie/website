@@ -1,0 +1,12 @@
+@import 'styles';
+
+mat-progress-bar {
+    margin: 20px 0;
+}
+
+.loading-text {
+    font-size: 48px;
+    width: 100%;
+    text-align: center;
+    color: mat-color($primary, 100);
+}

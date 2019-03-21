@@ -65,12 +65,12 @@ th.mat-sort-header-sorted {
 
     &.positive-number {
         color: #fff;
-        background-color: mat-color($positive);
+        background-color: mat-color($positive, 500);
     }
 
     &.negative-number {
         color: #fff;
-        background-color: mat-color($negative);
+        background-color: mat-color($negative, 500);
     }
 }
 
