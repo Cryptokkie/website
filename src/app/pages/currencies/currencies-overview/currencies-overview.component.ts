@@ -11,9 +11,9 @@ export class CurrenciesOverviewComponent implements OnInit {
 
   displayedColumns: string[] = [
     'name',
-    'lastPriceBtc',
-    'dailyChange',
-    'dailyVolumeBtc',
+    'lastPriceCurrency',
+    'dailyChangePercentage',
+    'dailyVolumeCurrency',
     'supply',
     'marketcap'];
   currencies: MatTableDataSource<CoinStats>;

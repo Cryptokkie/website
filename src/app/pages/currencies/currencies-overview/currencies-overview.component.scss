@@ -1,10 +1,5 @@
 @import 'styles';
 
-:host {
-    padding: 20px;
-    display: block;
-}
-
 table {
     width: 100%;
 }
@@ -17,4 +12,76 @@ th.mat-sort-header-sorted {
     height: 22px;
     vertical-align: bottom;
     margin-right: 5px;
+}
+
+::ng-deep th:not(:first-of-type) .mat-sort-header-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+::ng-deep .mat-sort-header-arrow {
+    color: mat-color($accent);
+}
+
+.currency-column {
+    padding: 10px 0;
+}
+
+.mat-cell {
+    font-size: 12px;
+
+    &:not(:first-of-type) {
+        text-align: right;
+    
+        &:not(:last-of-type) {
+            padding-right: 18px;
+        }
+    
+        &:last-of-type {
+            padding-right: 42px;
+        }
+    }
+}
+
+.name {
+    padding-right: 10px;
+}
+
+.ticker {
+    color: mat-color($primary, 200);
+}
+
+.mat-chip {
+    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    display: inline-flex;
+    padding: 7px 10px;
+    border-radius: 13px;
+    align-items: center;
+    cursor: default;
+    min-height: 26px;
+    height: 1px;
+    font-size: 12px;
+
+    &.positive-number {
+        color: #fff;
+        background-color: mat-color($positive);
+    }
+
+    &.negative-number {
+        color: #fff;
+        background-color: mat-color($negative);
+    }
+}
+
+.positive-number {
+    color: mat-color($positive);
+}
+
+.negative-number {
+    color: mat-color($negative);
+}
+
+.nowrap {
+    white-space: nowrap;
 }

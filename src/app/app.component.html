@@ -1,5 +1,5 @@
 <div class="site-container" fxFlex fxFill fxLayout="column">
-  <mat-toolbar color="primary" fxHide fxShow.lt-sm="true" class="mobile-toolbar" 
+  <mat-toolbar color="primary" fxHide fxShow.lt-md="true" class="mobile-toolbar" 
     fxLayoutAlign="space-between center" [class.mat-elevation-z8]="sidenav.opened">
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
@@ -10,7 +10,7 @@
     <div class="powered-by"><div>POWERED BY</div><img src="/assets/monkey_logo.png" /></div>
   </mat-toolbar>
   <mat-sidenav-container fxFlex="grow">
-    <mat-sidenav [mode]="mediaObserver.isActive('lt-sm') ? 'over' : 'side'" #sidenav [opened]="!mediaObserver.isActive('lt-sm')">
+    <mat-sidenav [mode]="mediaObserver.isActive('lt-md') ? 'over' : 'side'" #sidenav [opened]="!mediaObserver.isActive('lt-md')">
       <app-side-menu></app-side-menu>
     </mat-sidenav>
     <mat-sidenav-content>
