@@ -13,6 +13,14 @@ namespace posmn_coin_info.Models
     public decimal setDailyChange { set { DailyChange = value; } }
     public decimal DailyChange { get; set; }
 
+    public decimal DailyChangePercentage
+    {
+      get
+      {
+        return (DailyChange / LastPriceBtc) * 100;
+      }
+    }
+
     [JsonProperty("24h_volume_btc")]
     public decimal setDailyVolumeBtc { set { DailyVolumeBtc = value; } }
     public decimal DailyVolumeBtc { get; set; }
