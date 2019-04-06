@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
@@ -18,17 +18,28 @@ export class CurrenciesOverviewComponent implements OnInit {
     'dailyChangePercentage',
     'dailyVolumeCurrency',
     'supply',
-    'marketcap'];
-  currencies: MatTableDataSource<CoinStats>;
+    'marketcap'
+  ];
+  currencies = new MatTableDataSource([{name: '1'}, { name: '2'}]);
 
-  @ViewChild(MatSort) sort: MatSort;
+  sort: MatSort;
+  paginator: MatPaginator;
+
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
 
   constructor(
     private coinInfoService: CoinInfoService,
     public loader: LoaderService) { }
 
   ngOnInit() {
-
     this.loader.show();
     this.coinInfoService.getCurrencies()
       .pipe(
@@ -39,10 +50,14 @@ export class CurrenciesOverviewComponent implements OnInit {
         }),
         tap(currencies => {
           this.currencies = new MatTableDataSource(currencies);
-          this.currencies.sort = this.sort;
+          this.setDataSourceAttributes();
         })
       )
       .subscribe();
   }
 
+  setDataSourceAttributes() {
+    this.currencies.paginator = this.paginator;
+    this.currencies.sort = this.sort;
+  }
 }
