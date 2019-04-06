@@ -46,7 +46,7 @@
   <!-- Circulating Supply Column -->
   <ng-container matColumnDef="supply">
     <th mat-header-cell fxHide.lt-sm *matHeaderCellDef mat-sort-header> Circulating Supply </th>
-    <td mat-cell fxHide.lt-sm *matCellDef="let element"> {{element.supply | number:'1.0-0'}} </td>
+    <td mat-cell fxHide.lt-sm *matCellDef="let element"> {{element.supply | number:'1.0-0'}} {{element.ticker}} </td>
   </ng-container>
 
   <!-- Market Cap Column -->
@@ -56,5 +56,5 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row [routerLink]="row.name" *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
