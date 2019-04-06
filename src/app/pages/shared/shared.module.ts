@@ -5,9 +5,11 @@ import { LoaderModule } from '../../loader/loader.module';
 import { MaterialModule } from '../../material/material.module';
 import { PageContentComponent } from './page-content/page-content.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
+import { PercentageComponent } from './percentage/percentage.component';
+import { PrettyLinkPipe } from './pretty-link.pipe';
 
 @NgModule({
-  declarations: [PageHeaderComponent, PageContentComponent],
+  declarations: [PageHeaderComponent, PageContentComponent, PercentageComponent, PrettyLinkPipe],
   imports: [
     CommonModule,
     MaterialModule,
@@ -17,6 +19,8 @@ import { PageHeaderComponent } from './page-header/page-header.component';
   exports: [
     PageHeaderComponent,
     PageContentComponent,
+    PercentageComponent,
+    PrettyLinkPipe,
     FlexLayoutModule,
     MaterialModule,
     LoaderModule

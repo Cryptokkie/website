@@ -1,0 +1,11 @@
+@import 'styles';
+
+span {
+    &.positive-number {
+        color: mat-color($positive, 500);
+    }
+
+    &.negative-number {
+        color: mat-color($negative, 500);
+    }
+}

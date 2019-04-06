@@ -11,6 +11,9 @@ export class PageHeaderComponent implements OnInit {
   icon: string;
 
   @Input()
+  thumb: string;
+
+  @Input()
   title: string;
 
   constructor() { }

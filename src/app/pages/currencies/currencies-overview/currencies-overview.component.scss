@@ -85,3 +85,15 @@ th.mat-sort-header-sorted {
 .nowrap {
     white-space: nowrap;
 }
+
+.mat-row{
+    transition: box-shadow 200ms;
+
+    &:hover {
+         background-color: #fcfcfc;
+        cursor: pointer;
+
+        transition: box-shadow 200ms;
+        @include mat-elevation(12, black, 0.5);
+    }
+}
