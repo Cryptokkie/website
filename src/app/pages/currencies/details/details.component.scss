@@ -1,0 +1,25 @@
+@import 'styles';
+
+/* Force full width */
+/deep/ app-page-content > div {
+    width: 100%;
+}
+
+.content, .tabs {
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 12px;
+    width: 100%;
+    color: #4d4d4d;
+    display: block;
+}
+
+.tabs {
+    margin-top: 20px;
+
+    /deep/ .mat-tab-label {
+        min-width: 120px;
+    }
+}
+

@@ -1,0 +1,8 @@
+<span 
+  [class.positive-number]="value > 0"
+  [class.negative-number]="value < 0">
+  {{ value | number:'1.1-2'}}%
+  <mat-icon *ngIf="value > 0">trending_up</mat-icon>
+  <mat-icon *ngIf="value == 0">trending_flat</mat-icon>
+  <mat-icon *ngIf="value < 0">trending_down</mat-icon>
+</span>

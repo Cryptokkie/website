@@ -90,11 +90,8 @@ th.mat-sort-header-sorted {
     transition: box-shadow 200ms;
 
     &:hover {
-        // background-color: #eee;
+         background-color: #fcfcfc;
         cursor: pointer;
-        transform: scale(1);
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
 
         transition: box-shadow 200ms;
         @include mat-elevation(12, black, 0.5);

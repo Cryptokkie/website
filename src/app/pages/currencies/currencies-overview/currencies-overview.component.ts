@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
@@ -10,7 +10,9 @@ import { LoaderService } from 'src/app/loader/loader.service';
   templateUrl: './currencies-overview.component.html',
   styleUrls: ['./currencies-overview.component.scss']
 })
-export class CurrenciesOverviewComponent implements OnInit {
+export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
+
+  private sub: any;
 
   displayedColumns: string[] = [
     'name',
@@ -41,7 +43,7 @@ export class CurrenciesOverviewComponent implements OnInit {
 
   ngOnInit() {
     this.loader.show();
-    this.coinInfoService.getCurrencies()
+    this.sub = this.coinInfoService.getCurrencies()
       .pipe(
         finalize(() => this.loader.hide()),
         catchError(err => {
@@ -59,5 +61,9 @@ export class CurrenciesOverviewComponent implements OnInit {
   setDataSourceAttributes() {
     this.currencies.paginator = this.paginator;
     this.currencies.sort = this.sort;
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

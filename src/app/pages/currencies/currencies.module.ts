@@ -6,9 +6,10 @@ import { SharedModule } from '../shared/shared.module';
 import { CurrenciesOverviewComponent } from './currencies-overview/currencies-overview.component';
 import { CurrenciesComponent } from './currencies.component';
 import { DetailsComponent } from './details/details.component';
+import { DetailsHeaderComponent } from './details/details-header/details-header.component';
 
 @NgModule({
-  declarations: [CurrenciesComponent, CurrenciesOverviewComponent, DetailsComponent],
+  declarations: [CurrenciesComponent, CurrenciesOverviewComponent, DetailsComponent, DetailsHeaderComponent],
   imports: [
     CommonModule,
     CoinInfoModule,

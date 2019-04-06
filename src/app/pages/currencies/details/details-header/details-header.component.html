@@ -1,0 +1,133 @@
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch">
+  <div fxFlex="66" fxLayout="column">
+
+    <p class="big">
+      {{ currency.market_data.current_price.usd | number:'0.2-5' }} USD
+      <app-percentage [value]="currency.market_data.price_change_percentage_24h_in_currency.usd"></app-percentage>
+    </p>
+    <p class="medium margin-bottom">
+      {{ currency.market_data.current_price.btc | number:'0.2-8' }} BTC
+      <app-percentage [value]="currency.market_data.price_change_percentage_24h_in_currency.btc"></app-percentage>
+    </p>
+
+    <div fxLayout="row" fxLayout.lt-md="column">
+      <div fxFlex="50">
+
+        <h6>Website</h6>
+        <div class="item">
+          <ng-template ngFor let-link [ngForOf]="currency.links.homepage">
+            <a mat-flat-button color="accent" *ngIf="link" target="_blank" [href]="link">{{ link | prettyLink }}</a>
+          </ng-template>
+        </div>
+
+        <h6>Explorer</h6>
+        <div class="item" *ngFor="let link of currency.links.blockchain_site">
+          <a mat-flat-button color="accent" *ngIf="link" target="_blank" [href]="link">{{ link | prettyLink }}</a>
+        </div>
+
+        <h6 *ngIf="currency.links.repos_url.github.length || currency.links.repos_url.bitbucket.length">Development</h6>
+        <div class="item" *ngIf="currency.links.repos_url.github.length">
+          <a mat-flat-button color="accent" target="_blank" href="{{currency.links.repos_url.github[0]}}">
+            <i class="fab fa-github"></i>
+            Github
+          </a>
+        </div>
+
+        <div class="item" *ngIf="currency.links.repos_url.bitbucket.length">
+          <a mat-flat-button color="accent" target="_blank" href="{{currency.links.repos_url.bitbucket[0]}}">
+            <i class="fab fa-bitbucket"></i>
+            Bitbucket
+          </a>
+        </div>
+      </div>
+
+      <div fxFlex="50">
+        <h6>Social</h6>
+        <div class="item" *ngIf="currency.links.twitter_screen_name">
+          <a mat-flat-button color="accent" target="_blank"
+            href="https://twitter.com/{{currency.links.twitter_screen_name}}">
+            <i class="fab fa-twitter"></i>
+            Twitter ({{currency.community_data.twitter_followers}})
+          </a>
+        </div>
+
+        <div class="item" *ngIf="currency.links.facebook_username">
+          <a mat-flat-button color="accent" target="_blank"
+            href="https://facebook.com/{{currency.links.facebook_username}}">
+            <i class="fab fa-facebook"></i>
+            Facebook ({{currency.community_data.facebook_likes}})
+          </a>
+        </div>
+
+        <div class="item" *ngIf="currency.links.telegram_channel_identifier">
+          <a mat-flat-button color="accent" target="_blank"
+            href="https://t.me/{{currency.links.telegram_channel_identifier}}">
+            <i class="fab fa-telegram"></i>
+            Telegram ({{currency.community_data.telegram_channel_user_count}})
+          </a>
+        </div>
+
+        <div class="item" *ngIf="currency.links.bitcointalk_thread_identifier">
+          <a mat-flat-button color="accent" target="_blank"
+            href="https://bitcointalk.org/index.php?topic={{currency.links.bitcointalk_thread_identifier}}">
+            <i class="fab fa-bitcoin"></i>
+            Bitcointalk
+          </a>
+        </div>
+
+        <div class="item" *ngIf="currency.links.subreddit_url">
+          <a mat-flat-button color="accent" target="_blank" href="{{currency.links.subreddit_url}}">
+            <i class="fab fa-reddit"></i>
+            Reddit ({{currency.community_data.reddit_subscribers}})
+          </a>
+        </div>
+
+        <ng-template ngFor let-link [ngForOf]="currency.links.chat_url">
+          <div class="item" *ngIf="link.includes('discord')">
+            <a mat-flat-button color="accent" target="_blank" href="{{link}}">
+              <i class="fab fa-discord"></i>
+              Discord
+            </a>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div fxFlex="33">
+    <div class="item">
+      <h6>Market Cap Rank</h6>
+      <p>#{{ currency.market_cap_rank }}</p>
+    </div>
+
+    <div class="item">
+      <h6>Market Cap</h6>
+      <p>{{ currency.market_data.market_cap.usd | number:'1.0-0' }} USD</p>
+    </div>
+
+    <div class="item">
+      <h6>24h Low</h6>
+      <p>{{ currency.market_data.low_24h.usd | number:'0.2-8' }} USD</p>
+    </div>
+
+    <div class="item">
+      <h6>24h High</h6>
+      <p>{{ currency.market_data.high_24h.usd | number:'0.2-8' }} USD</p>
+    </div>
+
+    <div class="item">
+      <h6>24h Trading Volume</h6>
+      <p>{{ currency.market_data.total_volume.usd | number:'1.0-0' }} USD</p>
+    </div>
+
+    <div class="item">
+      <h6>Circulating Supply</h6>
+      <p>{{ currency.market_data.circulating_supply | number:'1.0-0' }} {{ currency.symbol | uppercase }}</p>
+    </div>
+
+    <div class="item">
+      <h6>Total Supply</h6>
+      <p>{{ currency.market_data.total_supply | number:'1.0-0' }} {{ currency.symbol | uppercase }}</p>
+    </div>
+  </div>
+</div>

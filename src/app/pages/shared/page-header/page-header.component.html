@@ -1,3 +1,7 @@
-<mat-icon>{{ icon }}</mat-icon>
+
+<mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+<ng-template [ngIf]="thumb">
+    <img src="{{ thumb }}" />
+</ng-template>
 <h1>{{ title }}</h1>
 <ng-content></ng-content>
