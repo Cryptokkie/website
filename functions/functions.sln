@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "posmn-coin-info.Test", "pos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "coingecko-importer", "coingecko-importer\coingecko-importer.csproj", "{7D29F814-8B72-47B7-AE0C-201DC356CEAD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Posmn.Models", "Posmn.Models\Posmn.Models.csproj", "{1ADB5A6D-AEE2-4601-B770-A8EAE8864D17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7D29F814-8B72-47B7-AE0C-201DC356CEAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D29F814-8B72-47B7-AE0C-201DC356CEAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D29F814-8B72-47B7-AE0C-201DC356CEAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ADB5A6D-AEE2-4601-B770-A8EAE8864D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ADB5A6D-AEE2-4601-B770-A8EAE8864D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ADB5A6D-AEE2-4601-B770-A8EAE8864D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ADB5A6D-AEE2-4601-B770-A8EAE8864D17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
