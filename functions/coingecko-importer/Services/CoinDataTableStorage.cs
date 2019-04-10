@@ -61,9 +61,13 @@ namespace coingecko_importer.Services
       }
     }
 
-    public async Task AddCoin(CoinEntity coin)
+    public async Task AddCoin(Coin coin)
     {
-      TableOperation insertOperation = TableOperation.InsertOrMerge(coin);
+      var flattenedObject = EntityPropertyConverter.Flatten(coin, new OperationContext());
+      var tableEntity = new DynamicTableEntity("coin", coin.Id);
+      tableEntity.Properties = flattenedObject;
+
+      TableOperation insertOperation = TableOperation.InsertOrMerge(tableEntity);
 
       await this.coinsTable.ExecuteAsync(insertOperation);
     }

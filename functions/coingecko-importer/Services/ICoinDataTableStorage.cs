@@ -6,7 +6,7 @@ namespace coingecko_importer.Services
 {
   public interface ICoinDataTableStorage
   {
-    Task AddCoin(CoinEntity coin);
+    Task AddCoin(Coin coin);
     Task<IEnumerable<string>> GetSupportedCoins();
     Task Init();
   }
