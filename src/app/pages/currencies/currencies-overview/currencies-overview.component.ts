@@ -22,7 +22,7 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
     'supply',
     'marketcap'
   ];
-  currencies = new MatTableDataSource([{name: '1'}, { name: '2'}]);
+  coins = new MatTableDataSource([{name: '1'}, { name: '2'}]);
 
   sort: MatSort;
   paginator: MatPaginator;
@@ -43,15 +43,15 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loader.show();
-    this.sub = this.coinInfoService.getCurrencies()
+    this.sub = this.coinInfoService.getCoins()
       .pipe(
         finalize(() => this.loader.hide()),
         catchError(err => {
           // show error dialog
           return throwError(err);
         }),
-        tap(currencies => {
-          this.currencies = new MatTableDataSource(currencies);
+        tap(coins => {
+          this.coins = new MatTableDataSource(coins);
           this.setDataSourceAttributes();
         })
       )
@@ -59,8 +59,8 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
   }
 
   setDataSourceAttributes() {
-    this.currencies.paginator = this.paginator;
-    this.currencies.sort = this.sort;
+    this.coins.paginator = this.paginator;
+    this.coins.sort = this.sort;
   }
 
   ngOnDestroy() {
