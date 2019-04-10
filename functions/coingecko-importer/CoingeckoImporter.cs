@@ -31,17 +31,16 @@ namespace coingecko_importer
 
       foreach (var coinId in supportedCoins)
       {
-        this.log.LogInformation("Start importing coin {0} from Coingecko and storing it in the CoinData Table Storage", coinId);
         try
         {
           var coinData = await coinGeckoClient.GetAllCoinDataWithId(coinId);
-          var coinEntity = CoinEntity.FromCoinGecko(coinData);
-          await coinDataTableStorage.AddCoin(coinEntity);
-          this.log.LogInformation("Imported coin {0} succesfully", coinId);
+          var coin = Coin.FromCoinGecko(coinData);
+          await coinDataTableStorage.AddCoin(coin);
+          this.log.LogInformation("Imported '{0}' succesfully", coinId);
         }
         catch (Exception ex)
         {
-          this.log.LogError("Error retrieving coin {0} from Coingecko and storing it in the CoinData Table Storage: {1}", coinId, ex.ToString());
+          this.log.LogError("Error retrieving '{0}' from Coingecko and storing it in the CoinData Table Storage: {1}", coinId, ex.ToString());
         }
       }
     }
