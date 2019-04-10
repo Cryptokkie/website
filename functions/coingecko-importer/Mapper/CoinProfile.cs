@@ -15,6 +15,8 @@ namespace coingecko_importer.Mapper
       this.CreateMap<CoinFullDataById, Posmn.Models.Coin>()
         .ForMember(d => d.Ticker, o => o.MapFrom(s => s.Symbol))
         .ForMember(d => d.MarketcapRank, o => o.MapFrom(s => s.MarketCapRank.HasValue ? s.MarketCapRank.Value : 0))
+        .ForMember(d => d.ImageUrlSmall, o => o.MapFrom(s => s.Image.Small.ToString()))
+        .ForMember(d => d.ImageUrlThumbnail, o => o.MapFrom(s => s.Image.Thumb.ToString()))
         .ForMember(d => d.Social, o => o.MapFrom(s => s));
 
       this.CreateMap<CoinGecko.Entities.Response.Coins.Links, Posmn.Models.Links>()
