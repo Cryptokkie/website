@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CoinDetails } from 'src/app/coin-info/coin-details.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { Coin } from 'src/app/coin-info/coin.model';
 
 @Component({
   selector: 'app-details-header',
@@ -9,7 +9,7 @@ import { CoinDetails } from 'src/app/coin-info/coin-details.model';
 export class DetailsHeaderComponent implements OnInit {
 
   @Input()
-  currency: CoinDetails;
+  coin: Coin;
 
   constructor() { }
 
