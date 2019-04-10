@@ -1,3 +1,4 @@
+using AutoMapper;
 using CoinGecko.Clients;
 using CoinGecko.Interfaces;
 using coingecko_importer;
@@ -6,6 +7,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http;
+using System.Reflection;
 
 [assembly: WebJobsStartup(typeof(Startup))]
 namespace coingecko_importer
@@ -18,6 +20,7 @@ namespace coingecko_importer
       builder.Services.AddTransient<ICoinDataTableStorage, CoinDataTableStorage>();
       builder.Services.AddTransient<ICoingeckoImporter, CoingeckoImporter>();
       builder.Services.AddTransient<ICoinsClient>(x => new CoinsClient(new HttpClient()));
+      builder.Services.AddAutoMapper(Assembly.GetAssembly(this.GetType()));
     }
   }
 }

@@ -1,4 +1,4 @@
-using coingecko_importer.Models;
+using Posmn.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

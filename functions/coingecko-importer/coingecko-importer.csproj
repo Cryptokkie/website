@@ -5,9 +5,14 @@
     <RootNamespace>coingecko_importer</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="CoinGeckoAsyncApi" Version="1.2.1" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.26" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Posmn.Models\Posmn.Models.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

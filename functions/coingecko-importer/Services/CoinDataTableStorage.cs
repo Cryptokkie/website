@@ -1,6 +1,6 @@
-using coingecko_importer.Models;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
+using Posmn.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +67,7 @@ namespace coingecko_importer.Services
       var tableEntity = new DynamicTableEntity("coin", coin.Id);
       tableEntity.Properties = flattenedObject;
 
-      TableOperation insertOperation = TableOperation.InsertOrMerge(tableEntity);
+      TableOperation insertOperation = TableOperation.InsertOrReplace(tableEntity);
 
       await this.coinsTable.ExecuteAsync(insertOperation);
     }
