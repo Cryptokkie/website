@@ -16,8 +16,7 @@ namespace posmn_coin_info
     {
       // Registers custom services.
       builder.Services.AddTransient<ICurrenciesRetriever, CurrenciesRetriever>();
-      builder.Services.AddTransient<ICachingService, CachingService>();
-      builder.Services.AddTransient<ICoinExplorerService, CoinExplorerService>();
+      builder.Services.AddTransient<ICoinDataTableStorage, CoinDataTableStorage>();
     }
   }
 }
