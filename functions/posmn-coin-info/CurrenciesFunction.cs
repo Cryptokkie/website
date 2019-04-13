@@ -4,26 +4,27 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Posmn.CoinData.Services;
 
 namespace posmn_coin_info
 {
   public class CurrenciesFunction
   {
-    private readonly ICurrenciesRetriever currenciesRetriever;
-    private readonly ILogger log;
+    private readonly ICoinDataTableStorage coinDataTableStorage;
 
-    public CurrenciesFunction(ILoggerFactory loggerFactory, ICurrenciesRetriever currenciesRetriever)
+    public CurrenciesFunction(ICoinDataTableStorage coinDataTableStorage)
     {
-      this.log = loggerFactory.CreateLogger(Constants.FUNCTION_LOG_KEY);
-      this.currenciesRetriever = currenciesRetriever;
+      this.coinDataTableStorage = coinDataTableStorage;
     }
 
     [FunctionName("currencies")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req)
+    public async Task<IActionResult> Run(
+      [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
+      ILogger log)
     {
-      this.log.LogInformation("C# HTTP trigger function processed a request.");
+      log.LogInformation("Currencies function processed a request.");
 
-      var currenciesResponse = await currenciesRetriever.Get();
+      var currenciesResponse = await coinDataTableStorage.GetCoins();
 
       return new OkObjectResult(currenciesResponse);
     }

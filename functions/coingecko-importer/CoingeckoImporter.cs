@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using CoinGecko.Clients;
 using CoinGecko.Interfaces;
-using coingecko_importer.Services;
 using Microsoft.Extensions.Logging;
-using Posmn.Models;
+using Posmn.CoinData.Models;
+using Posmn.CoinData.Services;
 
 namespace coingecko_importer
 {
