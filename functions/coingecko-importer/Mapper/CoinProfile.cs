@@ -1,10 +1,7 @@
 using AutoMapper;
 using CoinGecko.Entities.Response.Coins;
-using Posmn.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace coingecko_importer.Mapper
 {
@@ -12,14 +9,14 @@ namespace coingecko_importer.Mapper
   {
     public CoinProfile()
     {
-      this.CreateMap<CoinFullDataById, Posmn.Models.Coin>()
+      this.CreateMap<CoinFullDataById, Posmn.CoinData.Models.Coin>()
         .ForMember(d => d.Ticker, o => o.MapFrom(s => s.Symbol))
         .ForMember(d => d.MarketcapRank, o => o.MapFrom(s => s.MarketCapRank.HasValue ? s.MarketCapRank.Value : 0))
         .ForMember(d => d.ImageUrlSmall, o => o.MapFrom(s => s.Image.Small.ToString()))
         .ForMember(d => d.ImageUrlThumbnail, o => o.MapFrom(s => s.Image.Thumb.ToString()))
         .ForMember(d => d.Social, o => o.MapFrom(s => s));
 
-      this.CreateMap<CoinGecko.Entities.Response.Coins.Links, Posmn.Models.Links>()
+      this.CreateMap<CoinGecko.Entities.Response.Coins.Links, Posmn.CoinData.Models.Links>()
         .ForMember(d => d.Homepage, o => o.MapFrom(s => s.Homepage.ElementAtOrDefault(0)))
         .ForMember(d => d.Explorer, o => o.MapFrom(s => s.BlockchainSite.ElementAtOrDefault(0)))
         .ForMember(d => d.Github, o => o.MapFrom(s =>
@@ -31,7 +28,7 @@ namespace coingecko_importer.Mapper
           ? s.ReposUrl.Bitbucket.ElementAtOrDefault(0).ToString()
           : null));
 
-      this.CreateMap<CoinGecko.Entities.Response.Coins.CoinByIdMarketData, Posmn.Models.MarketData>()
+      this.CreateMap<CoinGecko.Entities.Response.Coins.CoinByIdMarketData, Posmn.CoinData.Models.MarketData>()
         .ForMember(d => d.DailyChangePercentageBtc, o => o.MapFrom(s => s.PriceChangePercentage24HInCurrency["btc"]))
         .ForMember(d => d.DailyChangePercentageUsd, o => o.MapFrom(s => s.PriceChangePercentage24HInCurrency["usd"]))
         .ForMember(d => d.DailyVolumeBtc, o => o.MapFrom(s => s.TotalVolume["btc"]))
@@ -47,7 +44,7 @@ namespace coingecko_importer.Mapper
         .ForMember(d => d.DailyLowUsd, o => o.MapFrom(s => s.Low24H["usd"]))
         .ForMember(d => d.DailyHighUsd, o => o.MapFrom(s => s.High24H["usd"]));
 
-      this.CreateMap<CoinFullDataById, Posmn.Models.Social>()
+      this.CreateMap<CoinFullDataById, Posmn.CoinData.Models.Social>()
         .ForMember(d => d.BitcointalkLink, o => o.MapFrom(s =>
           !string.IsNullOrEmpty(s.Links.BitcointalkThreadIdentifier + "")
           ? "https://bitcointalk.org/index.php?topic=" + s.Links.BitcointalkThreadIdentifier

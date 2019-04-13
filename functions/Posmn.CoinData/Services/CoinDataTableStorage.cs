@@ -1,18 +1,19 @@
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
-using Posmn.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace coingecko_importer.Services
+namespace Posmn.CoinData.Services
 {
+  using Models;
+
   public class CoinDataTableStorage : ICoinDataTableStorage
   {
     CloudTableClient tableClient;
     CloudTable coinsTable;
+    CloudTable masternodeStatsTable;
     CloudTable supportedCoinsTable;
     
     public CoinDataTableStorage()
@@ -21,6 +22,7 @@ namespace coingecko_importer.Services
 
       this.tableClient = storageAccount.CreateCloudTableClient();
       this.coinsTable = tableClient.GetTableReference("coins");
+      this.masternodeStatsTable = tableClient.GetTableReference("masternodestats");
       this.supportedCoinsTable = tableClient.GetTableReference("supportedcoins");
     }
 
@@ -28,12 +30,18 @@ namespace coingecko_importer.Services
     {
       await Task.WhenAll(
         CreateCoinsTableIfNotExists(),
+        CreateMasternodeStatsTableIfNotExists(),
         CreateSupportedCoinsTableIfNotExists());
     }
 
     private async Task CreateCoinsTableIfNotExists()
     {
       await coinsTable.CreateIfNotExistsAsync();
+    }
+
+    private async Task CreateMasternodeStatsTableIfNotExists()
+    {
+      await masternodeStatsTable.CreateIfNotExistsAsync();
     }
 
     private async Task CreateSupportedCoinsTableIfNotExists()
@@ -85,6 +93,41 @@ namespace coingecko_importer.Services
       } while (token != null);
 
       return list;
+    }
+
+    public async Task<IEnumerable<Coin>> GetCoins()
+    {
+      TableContinuationToken token = null;
+      var list = new List<Coin>();
+
+      do
+      {
+        var queryResult = await this.coinsTable.ExecuteQuerySegmentedAsync(new TableQuery<DynamicTableEntity>(), token);
+        list.AddRange(queryResult.Results.Select(x => EntityPropertyConverter.ConvertBack<Coin>(x.Properties, new OperationContext())));
+        token = queryResult.ContinuationToken;
+      } while (token != null);
+
+      return list;
+    }
+
+    public async Task AddMasternodeStats(MasternodeStats masternodeStats)
+    {
+      var flattenedObject = EntityPropertyConverter.Flatten(masternodeStats, new OperationContext());
+      var tableEntity = new DynamicTableEntity("coin", masternodeStats.CoinId);
+      tableEntity.Properties = flattenedObject;
+
+      TableOperation insertOperation = TableOperation.InsertOrReplace(tableEntity);
+
+      await this.masternodeStatsTable.ExecuteAsync(insertOperation);
+    }
+
+    public async Task<MasternodeStats> GetMasternodeStats(string coinId)
+    {
+      TableOperation getOperation = TableOperation.Retrieve<DynamicTableEntity>("coin", coinId);
+      var result = await this.masternodeStatsTable.ExecuteAsync(getOperation);
+
+      var tableEntity = result.Result as DynamicTableEntity;
+      return EntityPropertyConverter.ConvertBack<MasternodeStats>(tableEntity.Properties, new OperationContext());
     }
   }
 }

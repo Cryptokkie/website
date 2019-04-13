@@ -2,10 +2,10 @@ using AutoMapper;
 using CoinGecko.Clients;
 using CoinGecko.Interfaces;
 using coingecko_importer;
-using coingecko_importer.Services;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Posmn.CoinData.Services;
 using System.Net.Http;
 using System.Reflection;
 
