@@ -16,6 +16,7 @@ namespace monkey_importer
     {
       // Registers custom services.
       builder.Services.AddTransient<IMonkeyImporter, MonkeyImporter>();
+      builder.Services.AddTransient<IDataPointsRecorder, DataPointsRecorder>();
       builder.Services.AddTransient<ICoinDataTableStorage, CoinDataTableStorage>();
       builder.Services.AddTransient<ICoinExplorerService, CoinExplorerService>();
       builder.Services.AddAutoMapper(Assembly.GetAssembly(this.GetType()));

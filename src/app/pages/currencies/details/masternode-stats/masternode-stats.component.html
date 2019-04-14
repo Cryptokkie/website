@@ -28,28 +28,36 @@
   <div fxFlex="70" fxLayout="column">
     <div fxLayout="row" fxLayout.lt-sm="column">
       <div fxFlex="25">
-        <h6>Daily Income</h6>
-        <p>{{ masternodeStats.dailyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
-        <p>{{ masternodeStats.dailyRewardBtc }} BTC</p>
-        <p>{{ masternodeStats.dailyRewardUsd }} USD</p>
+        <div class="list">
+          <h6>Daily Income</h6>
+          <p>{{ masternodeStats.dailyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
+          <p>{{ masternodeStats.dailyRewardBtc }} BTC</p>
+          <p>{{ masternodeStats.dailyRewardUsd }} USD</p>
+        </div>
       </div>
       <div fxFlex="25">
-        <h6>Weekly Income</h6>
-        <p>{{ masternodeStats.weeklyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
-        <p>{{ masternodeStats.weeklyRewardBtc }} BTC</p>
-        <p>{{ masternodeStats.weeklyRewardUsd }} USD</p>
+        <div class="list">
+          <h6>Weekly Income</h6>
+          <p>{{ masternodeStats.weeklyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
+          <p>{{ masternodeStats.weeklyRewardBtc }} BTC</p>
+          <p>{{ masternodeStats.weeklyRewardUsd }} USD</p>
+        </div>
       </div>
       <div fxFlex="25">
-        <h6>Monthly Income</h6>
-        <p>{{ masternodeStats.monthlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
-        <p>{{ masternodeStats.monthlyRewardBtc }} BTC</p>
-        <p>{{ masternodeStats.monthlyRewardUsd }} USD</p>
+        <div class="list">
+          <h6>Monthly Income</h6>
+          <p>{{ masternodeStats.monthlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
+          <p>{{ masternodeStats.monthlyRewardBtc }} BTC</p>
+          <p>{{ masternodeStats.monthlyRewardUsd }} USD</p>
+        </div>
       </div>
       <div fxFlex="25">
-        <h6>Yearly Income</h6>
-        <p>{{ masternodeStats.yearlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
-        <p>{{ masternodeStats.yearlyRewardBtc }} BTC</p>
-        <p>{{ masternodeStats.yearlyRewardUsd }} USD</p>
+        <div class="list">
+          <h6>Yearly Income</h6>
+          <p>{{ masternodeStats.yearlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
+          <p>{{ masternodeStats.yearlyRewardBtc }} BTC</p>
+          <p>{{ masternodeStats.yearlyRewardUsd }} USD</p>
+        </div>
       </div>
     </div>
     <div>Charts</div>
