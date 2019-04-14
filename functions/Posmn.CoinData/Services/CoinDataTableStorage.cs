@@ -15,7 +15,8 @@ namespace Posmn.CoinData.Services
     CloudTable coinsTable;
     CloudTable masternodeStatsTable;
     CloudTable supportedCoinsTable;
-    
+    CloudTable dataPointsTable;
+
     public CoinDataTableStorage()
     {
       CloudStorageAccount storageAccount = CloudStorageAccount.Parse(Environment.GetEnvironmentVariable("CoinDataStorage"));
@@ -24,6 +25,7 @@ namespace Posmn.CoinData.Services
       this.coinsTable = tableClient.GetTableReference("coins");
       this.masternodeStatsTable = tableClient.GetTableReference("masternodestats");
       this.supportedCoinsTable = tableClient.GetTableReference("supportedcoins");
+      this.dataPointsTable = tableClient.GetTableReference("datapoints");
     }
 
     public async Task Init()
@@ -31,12 +33,18 @@ namespace Posmn.CoinData.Services
       await Task.WhenAll(
         CreateCoinsTableIfNotExists(),
         CreateMasternodeStatsTableIfNotExists(),
+        CreateDataPointsTableIfNotExists(),
         CreateSupportedCoinsTableIfNotExists());
     }
 
     private async Task CreateCoinsTableIfNotExists()
     {
       await coinsTable.CreateIfNotExistsAsync();
+    }
+
+    private async Task CreateDataPointsTableIfNotExists()
+    {
+      await dataPointsTable.CreateIfNotExistsAsync();
     }
 
     private async Task CreateMasternodeStatsTableIfNotExists()
@@ -128,6 +136,35 @@ namespace Posmn.CoinData.Services
 
       var tableEntity = result.Result as DynamicTableEntity;
       return EntityPropertyConverter.ConvertBack<MasternodeStats>(tableEntity.Properties, new OperationContext());
+    }
+
+
+    public async Task AddDataPoint(DataPoint dataPoint)
+    {
+      var flattenedObject = EntityPropertyConverter.Flatten(dataPoint, new OperationContext());
+      var tableEntity = new DynamicTableEntity(dataPoint.CoinId, DateTime.UtcNow.ToString("yyyyMMdd"));
+      tableEntity.Properties = flattenedObject;
+
+      TableOperation insertOperation = TableOperation.InsertOrReplace(tableEntity);
+
+      await this.dataPointsTable.ExecuteAsync(insertOperation);
+    }
+
+    public async Task<IEnumerable<DataPoint>> GetDataPoints(string coinId)
+    {
+      TableContinuationToken token = null;
+      var list = new List<DataPoint>();
+      var query = new TableQuery<DynamicTableEntity>();
+      query.FilterString = $"PartitionKey eq '{coinId}'";
+
+      do
+      {
+        var queryResult = await this.dataPointsTable.ExecuteQuerySegmentedAsync(query, token);
+        list.AddRange(queryResult.Results.Select(x => EntityPropertyConverter.ConvertBack<DataPoint>(x.Properties, new OperationContext())));
+        token = queryResult.ContinuationToken;
+      } while (token != null);
+
+      return list;
     }
   }
 }

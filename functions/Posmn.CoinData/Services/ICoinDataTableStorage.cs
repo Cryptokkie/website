@@ -14,5 +14,8 @@ namespace Posmn.CoinData.Services
 
     Task AddMasternodeStats(MasternodeStats masternodeStats);
     Task<MasternodeStats> GetMasternodeStats(string coinId);
+
+    Task AddDataPoint(DataPoint dataPoint);
+    Task<IEnumerable<DataPoint>> GetDataPoints(string coinId);
   }
 }
