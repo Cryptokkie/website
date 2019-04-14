@@ -8,6 +8,7 @@ namespace Posmn.CoinData.Models
     public int ActiveMasternodes { get; set; }
     public int Collateral { get; set; }
     public long LockedAmount { get; set; }
+    public int Blockheight { get; set; }
     public double LockedPercentage { get; set; }
 
     public double YearlyRoi { get; set; }

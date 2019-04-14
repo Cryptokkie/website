@@ -7,8 +7,8 @@
     <app-details-header class="content mat-elevation-z8" [coin]="coin"></app-details-header>
 
     <mat-tab-group class="tabs mat-elevation-z8">
-      <mat-tab label="Overview"> Overview content </mat-tab>
-      <mat-tab label="Masternode Stats"> Masternode Stats content </mat-tab>
+      <mat-tab label="Overview"><app-coin-overview></app-coin-overview></mat-tab>
+      <mat-tab label="Masternode Stats"><app-masternode-stats [coin]="coin"></app-masternode-stats></mat-tab>
       <mat-tab label="PoS Stats"> Proof Of Stake Stats content </mat-tab>
       <mat-tab label="PoS Pools"> Proof Of Stake Pools </mat-tab>
       <mat-tab label="Masternode Hosting"> MN Hosting content </mat-tab>
