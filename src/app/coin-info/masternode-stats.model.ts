@@ -1,4 +1,4 @@
-export class MasternodeStats {
+export interface MasternodeStats {
     coinId: string;
     activeMasternodes: number;
     collateral: number;
