@@ -13,8 +13,7 @@ import { MasternodeStats } from 'src/app/coin-info/masternode-stats.model';
 })
 export class MasternodeStatsComponent implements OnInit, OnDestroy {
 
-  private masternodeStatsSubscriber: any;
-  private historicalDataSubscriber: any;
+  private sub: any;
   public loading = true;
 
   @Input()
@@ -26,19 +25,18 @@ export class MasternodeStatsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.masternodeStatsSubscriber = this.coinInfoService.getMasternodeStats(this.coin.id)
+    const masternodeStats = this.coinInfoService.getMasternodeStats(this.coin.id)
       .pipe(tap(x => this.masternodeStats = x));
 
-    this.historicalDataSubscriber = this.coinInfoService.getHistoricalData(this.coin.id)
+    const historicalData = this.coinInfoService.getHistoricalData(this.coin.id)
       .pipe(tap(x => this.historicalData = x));
 
-    forkJoin(this.masternodeStatsSubscriber, this.historicalDataSubscriber)
+    this.sub = forkJoin(masternodeStats, historicalData)
         .pipe(finalize(() => this.loading = false))
         .subscribe();
   }
 
   ngOnDestroy() {
-    this.masternodeStatsSubscriber.unsubscribe();
-    this.historicalDataSubscriber.unsubscribe();
+    this.sub.unsubscribe();
   }
 }
