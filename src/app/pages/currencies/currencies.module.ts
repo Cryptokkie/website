@@ -9,6 +9,7 @@ import { CoinOverviewComponent } from './details/coin-overview/coin-overview.com
 import { DetailsHeaderComponent } from './details/details-header/details-header.component';
 import { DetailsComponent } from './details/details.component';
 import { MasternodeStatsComponent } from './details/masternode-stats/masternode-stats.component';
+import { AmountMasternodesChartComponent } from './details/masternode-stats/amount-masternodes-chart/amount-masternodes-chart.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MasternodeStatsComponent } from './details/masternode-stats/masternode-
     DetailsComponent,
     DetailsHeaderComponent,
     MasternodeStatsComponent,
-    CoinOverviewComponent],
+    CoinOverviewComponent,
+    AmountMasternodesChartComponent],
   imports: [
     CommonModule,
     CoinInfoModule,

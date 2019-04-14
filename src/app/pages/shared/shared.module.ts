@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ChartsModule } from 'ng2-charts';
 import { LoaderModule } from '../../loader/loader.module';
 import { MaterialModule } from '../../material/material.module';
 import { PageContentComponent } from './page-content/page-content.component';
@@ -14,7 +15,8 @@ import { PrettyLinkPipe } from './pretty-link.pipe';
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
-    LoaderModule
+    LoaderModule,
+    ChartsModule
   ],
   exports: [
     PageHeaderComponent,
@@ -23,7 +25,8 @@ import { PrettyLinkPipe } from './pretty-link.pipe';
     PrettyLinkPipe,
     FlexLayoutModule,
     MaterialModule,
-    LoaderModule
+    LoaderModule,
+    ChartsModule
   ]
 })
 export class SharedModule { }

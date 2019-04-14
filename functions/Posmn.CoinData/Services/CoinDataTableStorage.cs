@@ -142,7 +142,7 @@ namespace Posmn.CoinData.Services
     public async Task AddDataPoint(DataPoint dataPoint)
     {
       var flattenedObject = EntityPropertyConverter.Flatten(dataPoint, new OperationContext());
-      var tableEntity = new DynamicTableEntity(dataPoint.CoinId, DateTime.UtcNow.ToString("yyyyMMdd"));
+      var tableEntity = new DynamicTableEntity(dataPoint.CoinId, dataPoint.Date);
       tableEntity.Properties = flattenedObject;
 
       TableOperation insertOperation = TableOperation.InsertOrReplace(tableEntity);
@@ -164,7 +164,7 @@ namespace Posmn.CoinData.Services
         token = queryResult.ContinuationToken;
       } while (token != null);
 
-      return list;
+      return list.OrderByDescending(x => x.Date);
     }
   }
 }

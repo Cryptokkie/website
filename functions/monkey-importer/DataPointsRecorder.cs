@@ -42,6 +42,7 @@ namespace monkey_importer
           var coinExplorerData = await coinExplorerService.GetData(coinId);
           var dataPoint = mapper.Map<DataPoint>(coinExplorerData.Masternode);
           dataPoint.CoinId = coinId;
+          dataPoint.Date = DateTime.UtcNow.ToString("yyyyMMdd");
           await coinDataTableStorage.AddDataPoint(dataPoint);
           this.log.LogInformation("Recorded data point for '{0}' succesfully", coinId);
         }
