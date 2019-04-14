@@ -1,7 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 import { Coin } from 'src/app/coin-info/coin.model';
+import { HistoricalData } from 'src/app/coin-info/historical-data.model';
 import { MasternodeStats } from 'src/app/coin-info/masternode-stats.model';
 
 @Component({
@@ -11,25 +13,32 @@ import { MasternodeStats } from 'src/app/coin-info/masternode-stats.model';
 })
 export class MasternodeStatsComponent implements OnInit, OnDestroy {
 
-  private sub: any;
+  private masternodeStatsSubscriber: any;
+  private historicalDataSubscriber: any;
   public loading = true;
 
   @Input()
   coin: Coin;
   masternodeStats: MasternodeStats;
+  historicalData: HistoricalData[];
 
   constructor(private coinInfoService: CoinInfoService) { }
 
   ngOnInit() {
-    this.sub = this.coinInfoService.getMasternodeStats(this.coin.id)
-      .pipe(
-        tap(x => this.masternodeStats = x),
-        finalize(() => this.loading = false)
-      )
-      .subscribe();
+
+    this.masternodeStatsSubscriber = this.coinInfoService.getMasternodeStats(this.coin.id)
+      .pipe(tap(x => this.masternodeStats = x));
+
+    this.historicalDataSubscriber = this.coinInfoService.getHistoricalData(this.coin.id)
+      .pipe(tap(x => this.historicalData = x));
+
+    forkJoin(this.masternodeStatsSubscriber, this.historicalDataSubscriber)
+        .pipe(finalize(() => this.loading = false))
+        .subscribe();
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.masternodeStatsSubscriber.unsubscribe();
+    this.historicalDataSubscriber.unsubscribe();
   }
 }

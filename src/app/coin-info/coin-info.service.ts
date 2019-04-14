@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CoinInfoModule } from './coin-info.module';
 import { Coin } from './coin.model';
+import { HistoricalData } from './historical-data.model';
 import { MasternodeStats } from './masternode-stats.model';
 
 @Injectable({
@@ -33,5 +34,13 @@ export class CoinInfoService {
       + '&code=8rGh6F5Z0zd5daWGXt24kXWaPnzaM9C4rQr0gQsnk6JSm50dWYmL0A==';
 
     return this.httpClient.get<MasternodeStats>(functionUrl);
+  }
+
+  getHistoricalData(id: string): Observable<HistoricalData[]> {
+    const functionUrl = 'https://posmn-coin-info.azurewebsites.net/api/historical-data'
+      + `?coinId=${id}`
+      + '&code=A0sV/TIXrynO/vu6PepfpUQRiaSQ5LCYE90f2qcXBuDyLh6vaNUAgQ==';
+
+    return this.httpClient.get<HistoricalData[]>(functionUrl);
   }
 }
