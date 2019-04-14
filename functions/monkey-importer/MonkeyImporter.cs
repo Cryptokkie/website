@@ -42,6 +42,7 @@ namespace monkey_importer
           var coinExplorerData = await coinExplorerService.GetData(coinId);
           var masternodeStats = mapper.Map<MasternodeStats>(coinExplorerData.Masternode);
           masternodeStats.CoinId = coinId;
+          masternodeStats.Blockheight = coinExplorerData.Blockheight;
           await coinDataTableStorage.AddMasternodeStats(masternodeStats);
           this.log.LogInformation("Imported masternode stats for '{0}' succesfully", coinId);
         }
