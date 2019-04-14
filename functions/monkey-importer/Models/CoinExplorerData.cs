@@ -20,6 +20,8 @@ namespace monkey_importer.Models
 
     public string Currency { get; set; }
 
+    public int Blockheight { get; set; }
+
     [JsonProperty("lastprice_btc")]
     public decimal LastPriceBtc { get; set; }
 

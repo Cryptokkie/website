@@ -1,0 +1,79 @@
+<div fxLayout="row" fxLayout.lt-sm="column" *ngIf="!loading">
+  <div fxFlex="30">
+    <div class="item">
+      <h6>ROI (Year)</h6>
+      <p>{{ masternodeStats.yearlyRoi }}%</p>
+    </div>
+    <div class="item">
+      <h6>Active Nodes</h6>
+      <p>{{ masternodeStats.activeMasternodes }}</p>
+    </div>
+    <div class="item">
+      <h6>Locked Amount</h6>
+      <p>{{ masternodeStats.lockedAmount }}</p>
+    </div>
+    <div class="item">
+      <h6>Locked Percentage</h6>
+      <p>{{ masternodeStats.lockedPercentage }}%</p>
+    </div>
+    <div class="item">
+      <h6>Collateral</h6>
+      <p>{{ masternodeStats.collateral }} {{ coin.ticker | uppercase }}</p>
+    </div>
+    <div class="item">
+      <h6>First Reward Time</h6>
+      <p>{{ masternodeStats.activeMasternodes * 2.6 / 60 | number:'0.0-2' }} hrs</p>
+    </div>
+  </div>
+  <div fxFlex="70" fxLayout="column">
+    <div fxLayout="row" fxLayout.lt-sm="column">
+      <div fxFlex="25">
+        <h6>Daily Income</h6>
+        <p>{{ masternodeStats.dailyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
+        <p>{{ masternodeStats.dailyRewardBtc }} BTC</p>
+        <p>{{ masternodeStats.dailyRewardUsd }} USD</p>
+      </div>
+      <div fxFlex="25">
+        <h6>Weekly Income</h6>
+        <p>{{ masternodeStats.weeklyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
+        <p>{{ masternodeStats.weeklyRewardBtc }} BTC</p>
+        <p>{{ masternodeStats.weeklyRewardUsd }} USD</p>
+      </div>
+      <div fxFlex="25">
+        <h6>Monthly Income</h6>
+        <p>{{ masternodeStats.monthlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
+        <p>{{ masternodeStats.monthlyRewardBtc }} BTC</p>
+        <p>{{ masternodeStats.monthlyRewardUsd }} USD</p>
+      </div>
+      <div fxFlex="25">
+        <h6>Yearly Income</h6>
+        <p>{{ masternodeStats.yearlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
+        <p>{{ masternodeStats.yearlyRewardBtc }} BTC</p>
+        <p>{{ masternodeStats.yearlyRewardUsd }} USD</p>
+      </div>
+    </div>
+    <div>Charts</div>
+    <div fxLayout="row" fxLayout.lt-sm="column">
+      <div fxFlex="50">
+        <div class="item">
+          <h6>Wallet Version</h6>
+          <p>TBD</p>
+        </div>
+        <div class="item">
+          <h6>Protocol Version</h6>
+          <p>TBD</p>
+        </div>
+      </div>
+      <div fxFlex="50">
+        <div class="item">
+          <h6>Blockheight</h6>
+          <p>{{ masternodeStats.blockheight }}</p>
+        </div>
+        <div class="item">
+          <h6>Average Block Time</h6>
+          <p>TBD</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
