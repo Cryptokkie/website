@@ -17,7 +17,7 @@ namespace monkey_importer
 
     // run each day at 3.00 AM
     [FunctionName("RecordDataPoints")]
-    public async Task Run([TimerTrigger("0 0 3 1 * *")]TimerInfo myTimer, ILogger log)
+    public async Task Run([TimerTrigger("0 0 3 * * *")]TimerInfo myTimer, ILogger log)
     {
       log.LogInformation($"Record Data Points function executed at: {DateTime.Now}");
 
