@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { throwError } from 'rxjs';
-import { catchError, finalize, tap } from 'rxjs/operators';
+import { catchError, finalize, map, tap } from 'rxjs/operators';
 import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 import { LoaderService } from 'src/app/loader/loader.service';
 
@@ -17,12 +17,12 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = [
     'name',
     'lastPriceCurrency',
-    'dailyChangePercentage',
+    'dailyChangePercentageCurrency',
     'dailyVolumeCurrency',
-    'supply',
-    'marketcap'
+    'totalSupply',
+    'marketcapCurrency'
   ];
-  coins = new MatTableDataSource([{name: '1'}, { name: '2'}]);
+  coins = new MatTableDataSource();
 
   sort: MatSort;
   paginator: MatPaginator;
@@ -50,6 +50,16 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
           // show error dialog
           return throwError(err);
         }),
+        map(arr => arr.map(x => ({
+          id: x.id,
+          imageUrlThumbnail: x.imageUrlThumbnail,
+          name: x.name,
+          lastPriceCurrency: x.marketData.lastPriceUsd,
+          dailyChangePercentageCurrency: x.marketData.dailyChangePercentageUsd,
+          dailyVolumeCurrency: x.marketData.dailyVolumeUsd,
+          totalSupply: x.marketData.totalSupply,
+          marketcapCurrency: x.marketData.marketcapUsd
+        }))),
         tap(coins => {
           this.coins = new MatTableDataSource(coins);
           this.setDataSourceAttributes();
