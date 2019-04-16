@@ -24,7 +24,8 @@
     </div>
     <div class="align-center label-value">
       <p>First Reward Time</p>
-      <h4>{{ masternodeStats.activeMasternodes * 2.6 / 60 | number:'0.0-2' }} hrs</h4>
+      <h4>{{ (masternodeStats.activeMasternodes * 2.6 / 60) - 2 | number:'0.0-0' }} -
+        {{ (masternodeStats.activeMasternodes * 2.6 / 60) + 2 | number:'0.0-0' }} hrs</h4>
     </div>
   </div>
   <div fxFlex="70" fxLayout="column" fxLayoutGap="40px">
@@ -38,7 +39,13 @@
 
       <div class="align-right label-value">
         <p>Weekly Income</p>
-        <h4>${{ masternodeStats.weeklyRewardUsd }}</h4>
+        <h4 [class.positive-number]="dailyIncomePercentageUsd() > 0"
+          [class.negative-number]="dailyIncomePercentageUsd() < 0">
+          ${{ masternodeStats.weeklyRewardUsd }}
+          <mat-icon *ngIf="dailyIncomePercentageUsd() > 0">trending_up</mat-icon>
+          <mat-icon *ngIf="dailyIncomePercentageUsd() == 0">trending_flat</mat-icon>
+          <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
+        </h4>
         <hr>
         <h6>{{ masternodeStats.weeklyRewardBtc }} BTC</h6>
         <h6>{{ masternodeStats.weeklyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
@@ -46,7 +53,13 @@
 
       <div class="align-right label-value">
         <p>Monthly Income</p>
-        <h4>${{ masternodeStats.monthlyRewardUsd }}</h4>
+        <h4 [class.positive-number]="dailyIncomePercentageUsd() > 0"
+          [class.negative-number]="dailyIncomePercentageUsd() < 0">
+          ${{ masternodeStats.monthlyRewardUsd }}
+          <mat-icon *ngIf="dailyIncomePercentageUsd() > 0">trending_up</mat-icon>
+          <mat-icon *ngIf="dailyIncomePercentageUsd() == 0">trending_flat</mat-icon>
+          <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
+        </h4>
         <hr>
         <h6>{{ masternodeStats.monthlyRewardBtc }} BTC</h6>
         <h6>{{ masternodeStats.monthlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
@@ -54,7 +67,13 @@
 
       <div class="align-right label-value">
         <p>Yearly Income</p>
-        <h4>${{ masternodeStats.yearlyRewardUsd }}</h4>
+        <h4 [class.positive-number]="dailyIncomePercentageUsd() > 0"
+          [class.negative-number]="dailyIncomePercentageUsd() < 0">
+          ${{ masternodeStats.yearlyRewardUsd }}
+          <mat-icon *ngIf="dailyIncomePercentageUsd() > 0">trending_up</mat-icon>
+          <mat-icon *ngIf="dailyIncomePercentageUsd() == 0">trending_flat</mat-icon>
+          <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
+        </h4>
         <hr>
         <h6>{{ masternodeStats.yearlyRewardBtc }} BTC</h6>
         <h6>{{ masternodeStats.yearlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
@@ -63,10 +82,21 @@
     </div>
     <div class="block shadow">
       <div class="chart pop-top">
-        <app-amount-masternodes-chart [historicalData]="historicalData"></app-amount-masternodes-chart>
+        <app-amount-masternodes-chart [historicalData]="historicalData" [timeframe]="masternodesChartTimeframe">
+        </app-amount-masternodes-chart>
       </div>
-      <div fxLayout="row" fxLayoutAlign="space-between">
+      <div fxLayout="row" fxLayoutAlign="space-between flex-end">
         <div class="label-value">
+          <div class="timeframe-buttons">
+            <button mat-flat-button (click)="masternodesChartTimeframe = '10d'"
+              [ngClass]="{ 'mat-primary': masternodesChartTimeframe === '10d' }">10 days</button>
+            <button mat-flat-button (click)="masternodesChartTimeframe = '1m'"
+              [ngClass]="{ 'mat-primary': masternodesChartTimeframe === '1m' }">1 month</button>
+            <button mat-flat-button (click)="masternodesChartTimeframe = '3m'"
+              [ngClass]="{ 'mat-primary': masternodesChartTimeframe === '3m' }">3 months</button>
+            <button mat-flat-button (click)="masternodesChartTimeframe = '1y'"
+              [ngClass]="{ 'mat-primary': masternodesChartTimeframe === '1y' }">1 year</button>
+          </div>
           <h4>Active Masternodes</h4>
         </div>
         <div class="label-value align-right">

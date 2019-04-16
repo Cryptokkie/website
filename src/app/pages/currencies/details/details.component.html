@@ -9,11 +9,11 @@
   </app-page-content>
 
   <mat-tab-group class="tabs" ngClass.lt-md="no-horizontal-padding" color="accent">
-    <mat-tab label="Overview">
-      <app-coin-overview></app-coin-overview>
-    </mat-tab>
     <mat-tab label="Masternode Stats">
       <app-masternode-stats [coin]="coin"></app-masternode-stats>
+    </mat-tab>
+    <mat-tab label="Overview">
+      <app-coin-overview></app-coin-overview>
     </mat-tab>
     <mat-tab label="PoS Stats"> Proof Of Stake Stats content </mat-tab>
     <mat-tab label="PoS Pools"> Proof Of Stake Pools </mat-tab>
