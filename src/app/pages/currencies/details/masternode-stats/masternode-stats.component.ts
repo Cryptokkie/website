@@ -39,4 +39,10 @@ export class MasternodeStatsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
+
+  dailyActiveMasternodePercentage(): number {
+    const today = this.historicalData[0].activeMasternodes;
+    const yesterday = this.historicalData[1].activeMasternodes;
+    return (today - yesterday) / yesterday;
+  }
 }

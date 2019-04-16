@@ -2,24 +2,26 @@
 
 :host {
     width: 100%;
-    background-color: white;
     display: block;
     padding: 20px 30px;
-    border-bottom: 1px solid #CCC;
     box-sizing: border-box;
 }
 
 h1 {
     display: inline-block;
-    font-size: 18pt;
+    font-size: 14pt;
     vertical-align: bottom;
-    font-weight: normal;
-    margin: 14px;
+    font-weight: 300;
+    margin: 12px;
     color: #4d4d4d;
 }
 
+img {
+    width: 40px;
+}
+
 mat-icon {
-    @include md-icon-size(50px);
+    @include md-icon-size(40px);
     background: -webkit-gradient(linear, left top, right bottom, from(mat-color($accent, 700)), to(mat-color($accent, 300)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
