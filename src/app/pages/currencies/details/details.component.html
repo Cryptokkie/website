@@ -4,16 +4,21 @@
   </app-page-header>
   <app-page-content fxLayoutAlign="center center">
 
-    <app-details-header class="content mat-elevation-z8" [coin]="coin"></app-details-header>
-
-    <mat-tab-group class="tabs mat-elevation-z8">
-      <mat-tab label="Overview"><app-coin-overview></app-coin-overview></mat-tab>
-      <mat-tab label="Masternode Stats"><app-masternode-stats [coin]="coin"></app-masternode-stats></mat-tab>
-      <mat-tab label="PoS Stats"> Proof Of Stake Stats content </mat-tab>
-      <mat-tab label="PoS Pools"> Proof Of Stake Pools </mat-tab>
-      <mat-tab label="Masternode Hosting"> MN Hosting content </mat-tab>
-      <mat-tab label="Markets"> Exchanges/markets etc. </mat-tab>
-    </mat-tab-group>
+    <app-details-header class="content shadow" [coin]="coin"></app-details-header>
 
   </app-page-content>
+
+  <mat-tab-group class="tabs" ngClass.lt-md="no-horizontal-padding" color="accent">
+    <mat-tab label="Overview">
+      <app-coin-overview></app-coin-overview>
+    </mat-tab>
+    <mat-tab label="Masternode Stats">
+      <app-masternode-stats [coin]="coin"></app-masternode-stats>
+    </mat-tab>
+    <mat-tab label="PoS Stats"> Proof Of Stake Stats content </mat-tab>
+    <mat-tab label="PoS Pools"> Proof Of Stake Pools </mat-tab>
+    <mat-tab label="Masternode Hosting"> MN Hosting content </mat-tab>
+    <mat-tab label="Markets"> Exchanges/markets etc. </mat-tab>
+  </mat-tab-group>
+
 </ng-template>

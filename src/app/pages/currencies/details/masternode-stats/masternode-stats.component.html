@@ -1,70 +1,85 @@
-<div fxLayout="row" fxLayout.lt-sm="column" *ngIf="!loading">
-  <div fxFlex="30">
-    <div class="item">
-      <h6>ROI (Year)</h6>
-      <p>{{ masternodeStats.yearlyRoi }}%</p>
+<div fxLayout="row" fxLayoutGap="40px" fxLayout.lt-sm="column" *ngIf="!loading">
+  <div fxFlex="30" class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
+    <div class="align-center label-value">
+      <div class="block-icon pop-top">
+        <mat-icon>bar_chart</mat-icon>
+      </div>
     </div>
-    <div class="item">
-      <h6>Active Nodes</h6>
-      <p>{{ masternodeStats.activeMasternodes }}</p>
+
+    <div class="align-center label-value">
+      <p>ROI (Year)</p>
+      <h4>{{ masternodeStats.yearlyRoi }}%</h4>
     </div>
-    <div class="item">
-      <h6>Locked Amount</h6>
-      <p>{{ masternodeStats.lockedAmount }}</p>
+    <div class="align-center label-value">
+      <p>Locked Amount</p>
+      <h4>{{ masternodeStats.lockedAmount | number }}</h4>
     </div>
-    <div class="item">
-      <h6>Locked Percentage</h6>
-      <p>{{ masternodeStats.lockedPercentage }}%</p>
+    <div class="align-center label-value">
+      <p>Locked Percentage</p>
+      <h4>{{ masternodeStats.lockedPercentage }}%</h4>
     </div>
-    <div class="item">
-      <h6>Collateral</h6>
-      <p>{{ masternodeStats.collateral }} {{ coin.ticker | uppercase }}</p>
+    <div class="align-center label-value">
+      <p>Collateral</p>
+      <h4>{{ masternodeStats.collateral }} {{ coin.ticker | uppercase }}</h4>
     </div>
-    <div class="item">
-      <h6>First Reward Time</h6>
-      <p>{{ masternodeStats.activeMasternodes * 2.6 / 60 | number:'0.0-2' }} hrs</p>
+    <div class="align-center label-value">
+      <p>First Reward Time</p>
+      <h4>{{ masternodeStats.activeMasternodes * 2.6 / 60 | number:'0.0-2' }} hrs</h4>
     </div>
   </div>
-  <div fxFlex="70" fxLayout="column">
-    <div fxLayout="row" fxLayout.lt-sm="column">
-      <div fxFlex="25">
-        <div class="list">
-          <h6>Daily Income</h6>
-          <p>{{ masternodeStats.dailyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
-          <p>{{ masternodeStats.dailyRewardBtc }} BTC</p>
-          <p>{{ masternodeStats.dailyRewardUsd }} USD</p>
+  <div fxFlex="70" fxLayout="column" fxLayoutGap="40px">
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutAlign.lt-sm="space-between center" fxLayout.lt-sm="column"
+      fxLayoutGap="20px" class="block shadow">
+      <div class="align-right label-value">
+        <div class="block-icon pop-top">
+          <mat-icon>account_balance_wallet</mat-icon>
         </div>
       </div>
-      <div fxFlex="25">
-        <div class="list">
-          <h6>Weekly Income</h6>
-          <p>{{ masternodeStats.weeklyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
-          <p>{{ masternodeStats.weeklyRewardBtc }} BTC</p>
-          <p>{{ masternodeStats.weeklyRewardUsd }} USD</p>
-        </div>
+
+      <div class="align-right label-value">
+        <p>Weekly Income</p>
+        <h4>${{ masternodeStats.weeklyRewardUsd }}</h4>
+        <hr>
+        <h6>{{ masternodeStats.weeklyRewardBtc }} BTC</h6>
+        <h6>{{ masternodeStats.weeklyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
       </div>
-      <div fxFlex="25">
-        <div class="list">
-          <h6>Monthly Income</h6>
-          <p>{{ masternodeStats.monthlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
-          <p>{{ masternodeStats.monthlyRewardBtc }} BTC</p>
-          <p>{{ masternodeStats.monthlyRewardUsd }} USD</p>
-        </div>
+
+      <div class="align-right label-value">
+        <p>Monthly Income</p>
+        <h4>${{ masternodeStats.monthlyRewardUsd }}</h4>
+        <hr>
+        <h6>{{ masternodeStats.monthlyRewardBtc }} BTC</h6>
+        <h6>{{ masternodeStats.monthlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
       </div>
-      <div fxFlex="25">
-        <div class="list">
-          <h6>Yearly Income</h6>
-          <p>{{ masternodeStats.yearlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</p>
-          <p>{{ masternodeStats.yearlyRewardBtc }} BTC</p>
-          <p>{{ masternodeStats.yearlyRewardUsd }} USD</p>
+
+      <div class="align-right label-value">
+        <p>Yearly Income</p>
+        <h4>${{ masternodeStats.yearlyRewardUsd }}</h4>
+        <hr>
+        <h6>{{ masternodeStats.yearlyRewardBtc }} BTC</h6>
+        <h6>{{ masternodeStats.yearlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
+      </div>
+
+    </div>
+    <div class="block shadow">
+      <div class="chart pop-top">
+        <app-amount-masternodes-chart [historicalData]="historicalData"></app-amount-masternodes-chart>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div class="label-value">
+          <h4>Active Masternodes</h4>
+        </div>
+        <div class="label-value align-right">
+          <p><span class="accent">{{ masternodeStats.activeMasternodes | number }}</span> active masternodes.</p>
+          <p>
+            <app-percentage [value]="dailyActiveMasternodePercentage()"></app-percentage>
+            {{ dailyActiveMasternodePercentage() < 0 ? 'decrease' : 'increase' }} since yesterday.
+          </p>
         </div>
       </div>
     </div>
-    <div>
-      <app-amount-masternodes-chart [historicalData]="historicalData"></app-amount-masternodes-chart>
-    </div>
-    <div fxLayout="row" fxLayout.lt-sm="column">
-      <div fxFlex="50">
+    <!-- <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+      <div fxFlex="50" class="block shadow">
         <div class="item">
           <h6>Wallet Version</h6>
           <p>TBD</p>
@@ -74,7 +89,7 @@
           <p>TBD</p>
         </div>
       </div>
-      <div fxFlex="50">
+      <div fxFlex="50" class="block shadow">
         <div class="item">
           <h6>Blockheight</h6>
           <p>{{ masternodeStats.blockheight }}</p>
@@ -84,6 +99,6 @@
           <p>TBD</p>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

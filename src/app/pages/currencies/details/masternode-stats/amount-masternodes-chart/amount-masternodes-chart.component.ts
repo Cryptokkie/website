@@ -17,10 +17,6 @@ export class AmountMasternodesChartComponent implements OnInit {
   public lineChartLabels: Label[];
   public lineChartOptions: ChartOptions = {
     responsive: true,
-    title: {
-      display: true,
-      text: 'Amount of Masternodes'
-    },
     tooltips: {
       mode: 'index',
       intersect: false
@@ -37,29 +33,35 @@ export class AmountMasternodesChartComponent implements OnInit {
           tooltipFormat: 'll'
         },
         gridLines: {
-          display: false,
-          drawBorder: false
+          display: true,
+          drawBorder: false,
+          borderDash: [3, 3],
+          color: 'rgb(255,255,255,0.6)'
         },
         ticks: {
-          padding: 20
+          padding: 20,
+          fontColor: 'rgb(255,255,255,0.6)'
         }
       }],
       yAxes: [{
         ticks: {
           maxTicksLimit: 6,
-          padding: 20
+          padding: 20,
+          fontColor: 'rgb(255,255,255,0.6)'
         },
         gridLines: {
-          display: false,
-          drawBorder: false
+          display: true,
+          drawBorder: false,
+          borderDash: [3, 3],
+          color: 'rgb(255,255,255,0.6)'
         }
       }]
     }
   };
   public lineChartColors: Color[] = [
     {
-      borderColor: '#ffc107',
-      backgroundColor: '#ffc107',
+      borderColor: '#fff',
+      backgroundColor: '#fff',
       // @ts-ignore
       fill: false
     },
