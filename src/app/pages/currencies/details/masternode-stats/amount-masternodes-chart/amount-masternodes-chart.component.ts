@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { HistoricalData } from 'src/app/coin-info/historical-data.model';
@@ -8,10 +8,13 @@ import { HistoricalData } from 'src/app/coin-info/historical-data.model';
   templateUrl: './amount-masternodes-chart.component.html',
   styleUrls: ['./amount-masternodes-chart.component.scss']
 })
-export class AmountMasternodesChartComponent implements OnInit {
+export class AmountMasternodesChartComponent implements OnInit, OnChanges {
 
   @Input()
   historicalData: HistoricalData[];
+
+  @Input()
+  timeframe = '10d';
 
   public lineChartData: ChartDataSets[];
   public lineChartLabels: Label[];
@@ -70,8 +73,16 @@ export class AmountMasternodesChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.buildChart();
+  }
 
-    const lastTenPoints = this.historicalData.slice(0, 10);
+  ngOnChanges() {
+    this.buildChart();
+  }
+
+  buildChart() {
+    const days = this.daysFromTimeframe();
+    const lastTenPoints = this.historicalData.slice(0, days);
     const labels = lastTenPoints.map(x => this.toDate(x.date));
     const dataPoints = lastTenPoints.map(x => x.activeMasternodes);
 
@@ -93,5 +104,26 @@ export class AmountMasternodesChartComponent implements OnInit {
 
   trimZero(input: string) {
     return input.replace(new RegExp('^[0]+'), '');
+  }
+
+  daysFromTimeframe(): number {
+    const timechar = this.timeframe[this.timeframe.length - 1];
+    const amount = parseInt(this.timeframe, 10);
+    let multiplier = 1;
+    switch (timechar) {
+      case 'd':
+        multiplier = 1;
+        break;
+      case 'm':
+        multiplier = 30;
+        break;
+      case 'y':
+        multiplier = 365;
+        break;
+      default:
+        break;
+    }
+
+    return amount * multiplier;
   }
 }

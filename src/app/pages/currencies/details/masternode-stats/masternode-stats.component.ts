@@ -21,6 +21,9 @@ export class MasternodeStatsComponent implements OnInit, OnDestroy {
   masternodeStats: MasternodeStats;
   historicalData: HistoricalData[];
 
+  // 10d|30d|3m|1y
+  masternodesChartTimeframe = '10d';
+
   constructor(private coinInfoService: CoinInfoService) { }
 
   ngOnInit() {
@@ -32,8 +35,8 @@ export class MasternodeStatsComponent implements OnInit, OnDestroy {
       .pipe(tap(x => this.historicalData = x));
 
     this.sub = forkJoin(masternodeStats, historicalData)
-        .pipe(finalize(() => this.loading = false))
-        .subscribe();
+      .pipe(finalize(() => this.loading = false))
+      .subscribe();
   }
 
   ngOnDestroy() {
@@ -43,6 +46,12 @@ export class MasternodeStatsComponent implements OnInit, OnDestroy {
   dailyActiveMasternodePercentage(): number {
     const today = this.historicalData[0].activeMasternodes;
     const yesterday = this.historicalData[1].activeMasternodes;
+    return (today - yesterday) / yesterday;
+  }
+
+  dailyIncomePercentageUsd(): number {
+    const today = this.historicalData[0].dailyRewardUsd;
+    const yesterday = this.historicalData[1].dailyRewardUsd;
     return (today - yesterday) / yesterday;
   }
 }

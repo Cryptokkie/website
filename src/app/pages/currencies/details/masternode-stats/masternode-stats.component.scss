@@ -5,6 +5,18 @@
   display: block;
 }
 
+.timeframe-buttons {
+  margin-bottom: 5px;
+
+  button {
+    font-weight: 300;
+    font-size: 12px;
+    padding: 0 10px;
+    line-height: 26px;
+    margin-right: 5px;
+  }
+}
+
 .accent {
   font-weight: normal;
   color: mat-color($accent);
@@ -15,18 +27,20 @@
   background-color: white;
 
   .chart {
+    border-radius: 5px;
+    padding: 20px;
+    background: -webkit-gradient(
+      linear,
+      left top,
+      right bottom,
+      from(mat-color($primary, 700)),
+      to(mat-color($primary, 300))
+    );
+    @include mat-elevation(10, #333, 0.5);
+
     &.pop-top {
       margin-top: -30px;
       margin-bottom: 13px;
-      padding: 20px;
-      background: -webkit-gradient(
-        linear,
-        left top,
-        right bottom,
-        from(mat-color($accent, 700)),
-        to(mat-color($accent, 300))
-      );
-      @include mat-elevation(10, #333, 0.5);
     }
   }
 
@@ -40,6 +54,7 @@
       margin-left: -40px;
     }
 
+    border-radius: 5px;
     padding: 20px;
     line-height: 0px;
     height: 40px;
@@ -86,6 +101,19 @@
     font-weight: 300;
     margin: 0px;
     margin-bottom: 5px;
+
+    &.positive-number {
+      color: mat-color($positive, 500);
+    }
+
+    &.negative-number {
+      color: mat-color($negative, 500);
+    }
+
+    mat-icon {
+      line-height: 18px;
+      vertical-align: middle;
+    }
   }
 
   hr {
