@@ -22,7 +22,7 @@ export class MasternodeStatsComponent implements OnInit, OnDestroy {
   masternodeStats: MasternodeStats;
   historicalData: HistoricalData[];
 
-  // 10d|30d|3m|1y
+  // 1m|3m|1y
   masternodesChartTimeframe = '1m';
 
   constructor(private coinInfoService: CoinInfoService, public loader: LoaderService) { }

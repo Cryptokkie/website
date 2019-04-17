@@ -68,73 +68,36 @@
 
   </div>
 
-  <div fxFlex="60" fxLayout="column" fxLayoutGap="40px">
-    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutAlign.lt-sm="space-between center" fxLayout.lt-sm="column"
-      fxLayoutGap="20px" class="block shadow">
-      <div class="align-right label-value">
-        <div class="block-icon pop-top">
-          <mat-icon>forum</mat-icon>
+  <div fxFlex="80" fxLayout="column" fxLayoutGap="40px">
+    <div class="block shadow">
+      <div class="chart pop-top yellow">
+        <app-price-chart [coin]="coin" [timeframe]="priceChartTimeframe">
+        </app-price-chart>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between flex-end">
+        <div class="label-value">
+          <div class="timeframe-buttons">
+            <button mat-flat-button (click)="priceChartTimeframe = '1d'"
+              [ngClass]="{ 'mat-accent': priceChartTimeframe === '1d' }">1 day</button>
+            <button mat-flat-button (click)="priceChartTimeframe = '1m'"
+              [ngClass]="{ 'mat-accent': priceChartTimeframe === '1m' }">1 month</button>
+            <button mat-flat-button (click)="priceChartTimeframe = '3m'"
+              [ngClass]="{ 'mat-accent': priceChartTimeframe === '3m' }">3 months</button>
+            <button mat-flat-button (click)="priceChartTimeframe = '1y'"
+              [ngClass]="{ 'mat-accent': priceChartTimeframe === '1y' }">1 year</button>
+          </div>
+          <h4>Price Activity in USD</h4>
         </div>
+        <div class="label-value align-right">
+        <p>Current price is <span class="accent">${{ coin.marketData.lastPriceUsd | number }}</span>.</p>
+        <p>
+          <app-percentage [value]="coin.marketData.dailyChangePercentageUsd"></app-percentage>
+          {{ coin.marketData.dailyChangePercentageUsd < 0 ? 'decrease' : 'increase' }} since yesterday.
+        </p>
       </div>
-      <!-- 
-      <div class="align-right label-value">
-        <p>Weekly Income</p>
-        <h4 [class.positive-number]="dailyIncomePercentageUsd() > 0"
-          [class.negative-number]="dailyIncomePercentageUsd() < 0">
-          ${{ masternodeStats.weeklyRewardUsd }}
-          <mat-icon *ngIf="dailyIncomePercentageUsd() > 0">trending_up</mat-icon>
-          <mat-icon *ngIf="dailyIncomePercentageUsd() == 0">trending_flat</mat-icon>
-          <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
-        </h4>
-        <hr>
-        <h6>{{ masternodeStats.weeklyRewardBtc }} BTC</h6>
-        <h6>{{ masternodeStats.weeklyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
       </div>
-
-      <div class="align-right label-value">
-        <p>Monthly Income</p>
-        <h4 [class.positive-number]="dailyIncomePercentageUsd() > 0"
-          [class.negative-number]="dailyIncomePercentageUsd() < 0">
-          ${{ masternodeStats.monthlyRewardUsd }}
-          <mat-icon *ngIf="dailyIncomePercentageUsd() > 0">trending_up</mat-icon>
-          <mat-icon *ngIf="dailyIncomePercentageUsd() == 0">trending_flat</mat-icon>
-          <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
-        </h4>
-        <hr>
-        <h6>{{ masternodeStats.monthlyRewardBtc }} BTC</h6>
-        <h6>{{ masternodeStats.monthlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
-      </div>
-
-      <div class="align-right label-value">
-        <p>Yearly Income</p>
-        <h4 [class.positive-number]="dailyIncomePercentageUsd() > 0"
-          [class.negative-number]="dailyIncomePercentageUsd() < 0">
-          ${{ masternodeStats.yearlyRewardUsd }}
-          <mat-icon *ngIf="dailyIncomePercentageUsd() > 0">trending_up</mat-icon>
-          <mat-icon *ngIf="dailyIncomePercentageUsd() == 0">trending_flat</mat-icon>
-          <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
-        </h4>
-        <hr>
-        <h6>{{ masternodeStats.yearlyRewardBtc }} BTC</h6>
-        <h6>{{ masternodeStats.yearlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
-      </div> -->
-
     </div>
 
-
   </div>
-
-  <div fxFlex="20" class="block shadow">
-
-    <!-- <div class="align-left label-value">
-        <h6>Circulating Supply</h6>
-        <p>{{ coin.marketData.circulatingSupply | number:'1.0-0' }} {{ coin.ticker | uppercase }}</p>
-      </div>
   
-      <div class="align-left label-value">
-        <h6>Total Supply</h6>
-        <p>{{ coin.marketData.totalSupply | number:'1.0-0' }} {{ coin.ticker | uppercase }}</p>
-      </div> -->
-
-  </div>
 </div>

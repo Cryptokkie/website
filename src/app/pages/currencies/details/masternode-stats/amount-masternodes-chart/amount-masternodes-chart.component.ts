@@ -29,9 +29,9 @@ export class AmountMasternodesChartComponent implements OnInit, OnChanges {
 
   buildChart() {
     const days = this.daysFromTimeframe();
-    const lastTenPoints = this.historicalData.slice(0, days);
-    this.labels = lastTenPoints.map(x => this.toDate(x.date));
-    this.dataPoints = lastTenPoints.map(x => x.activeMasternodes);
+    const slice = this.historicalData.slice(0, days);
+    this.labels = slice.map(x => this.toDate(x.date));
+    this.dataPoints = slice.map(x => x.activeMasternodes);
   }
 
   toDate(input: string): Date {
