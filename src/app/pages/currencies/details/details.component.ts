@@ -13,6 +13,7 @@ import { LoaderService } from 'src/app/loader/loader.service';
 })
 export class DetailsComponent implements OnInit, OnDestroy {
 
+  readonly loadingKey = 'coin-details';
   private sub: any;
 
   coin: Coin;
@@ -23,11 +24,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
     public loader: LoaderService) { }
 
   ngOnInit() {
-    this.loader.show();
+    this.loader.show(this.loadingKey);
     this.sub = this.route.params.subscribe(params => {
       this.coinInfoService.getCoin(params.name)
         .pipe(
-          finalize(() => this.loader.hide()),
+          finalize(() => this.loader.hide(this.loadingKey)),
           catchError(err => {
             // show error dialog
             return throwError(err);

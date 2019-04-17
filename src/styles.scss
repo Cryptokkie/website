@@ -14,7 +14,14 @@ body {
   font-weight: 300;
 }
 
-h1, h2, h3, h4, h5, h6, i, a {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+i,
+a {
   &.gradient {
     background: -webkit-gradient(
       linear,
@@ -34,4 +41,183 @@ a {
 
 .shadow {
   @include mat-elevation(5, #333, 0.5);
+}
+
+.accent {
+  font-weight: normal;
+  color: mat-color($accent);
+}
+
+.mat-gray {
+  color: mat-color(mat-palette($mat-grey), 600);
+}
+
+.block {
+  padding: 10px 20px;
+  background-color: white;
+
+  .chart {
+    border-radius: 5px;
+    padding: 20px;
+
+    background: -webkit-gradient(
+      linear,
+      left top,
+      right bottom,
+      from(mat-color($primary, 700)),
+      to(mat-color($primary, 300))
+    );
+
+    &.yellow {
+      background: -webkit-gradient(
+        linear,
+        left top,
+        right bottom,
+        from(mat-color(mat-palette($mat-amber), 700)),
+        to(mat-color(mat-palette($mat-amber), 300))
+      );
+    }
+
+    @include mat-elevation(10, #333, 0.5);
+
+    &.pop-top {
+      margin-top: -30px;
+      margin-bottom: 13px;
+    }
+  }
+
+  .block-icon {
+    &.pop-top {
+      margin-top: -30px;
+      margin-bottom: 13px;
+    }
+
+    &.pop-left {
+      margin-left: -40px;
+    }
+
+    border-radius: 5px;
+    padding: 20px;
+    line-height: 0px;
+    height: 40px;
+    width: 40px;
+
+    /* default accent background */
+    background: -webkit-gradient(
+      linear,
+      left top,
+      right bottom,
+      from(mat-color($accent, 700)),
+      to(mat-color($accent, 300))
+    );
+
+    &.green {
+      background: -webkit-gradient(
+        linear,
+        left top,
+        right bottom,
+        from(mat-color($primary, 700)),
+        to(mat-color($primary, 300))
+      );
+    }
+
+    &.grey {
+      background: -webkit-gradient(
+        linear,
+        left top,
+        right bottom,
+        from(mat-color(mat-palette($mat-grey), 700)),
+        to(mat-color(mat-palette($mat-grey), 500))
+      );
+    }
+
+    @include mat-elevation(10, #333, 0.5);
+
+    mat-icon {
+      @include md-icon-size(40px);
+      color: white;
+    }
+
+    &.small {
+      padding: 15px;
+      height: 30px;
+      width: 30px;
+
+      mat-icon {
+        @include md-icon-size(30px);
+      }
+    }
+  }
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.label-value {
+  margin-bottom: 5px;
+
+  .mat-button,
+  .mat-stroked-button,
+  .mat-raised-button,
+  .mat-flat-button {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-weight: normal;
+    font-size: 12px;
+
+    .fab {
+      font-size: 16px;
+      vertical-align: text-bottom;
+      margin: 0 4px;
+    }
+  }
+
+  p {
+    margin: 0px;
+    font-size: 14px;
+    line-height: 24px;
+
+    /deep/ app-percentage .mat-icon {
+      vertical-align: bottom;
+    }
+  }
+
+  h4 {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 300;
+    margin: 0px;
+    margin-bottom: 5px;
+
+    &.positive-number {
+      color: mat-color($positive, 500);
+    }
+
+    &.negative-number {
+      color: mat-color($negative, 500);
+    }
+
+    mat-icon {
+      line-height: 18px;
+      vertical-align: middle;
+    }
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+  }
+
+  h6 {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 300;
+    margin: 0px;
+  }
 }

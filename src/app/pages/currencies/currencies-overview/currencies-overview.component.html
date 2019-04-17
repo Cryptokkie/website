@@ -1,8 +1,8 @@
-<app-loader></app-loader>
+<app-loader [context]="loadingKey"></app-loader>
 <table mat-table [dataSource]="coins" 
   matSort matSortActive="marketcapCurrency" matSortDirection="desc"
   class="shadow"
-  *ngIf="!loader.loading">
+  *ngIf="!loader.isLoading(loadingKey)">
 
   <!-- Currency Column -->
   <ng-container matColumnDef="name">

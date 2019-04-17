@@ -12,6 +12,8 @@ import { LoaderService } from 'src/app/loader/loader.service';
 })
 export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
 
+  readonly loadingKey = 'currencies';
+
   private sub: any;
 
   displayedColumns: string[] = [
@@ -42,10 +44,10 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
     public loader: LoaderService) { }
 
   ngOnInit() {
-    this.loader.show();
+    this.loader.show(this.loadingKey);
     this.sub = this.coinInfoService.getCoins()
       .pipe(
-        finalize(() => this.loader.hide()),
+        finalize(() => this.loader.hide(this.loadingKey)),
         catchError(err => {
           // show error dialog
           return throwError(err);

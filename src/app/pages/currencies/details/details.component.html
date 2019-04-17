@@ -1,19 +1,19 @@
-<app-loader></app-loader>
-<ng-template [ngIf]="!loader.loading">
+<app-loader [context]="loadingKey"></app-loader>
+<ng-template [ngIf]="!loader.isLoading(loadingKey)">
   <app-page-header thumb="{{ coin.imageUrlSmall }}" title="{{ coin.name }} ({{ coin.ticker | uppercase }})">
   </app-page-header>
   <app-page-content fxLayoutAlign="center center">
 
-    <app-details-header class="content shadow" [coin]="coin"></app-details-header>
+    <app-details-header [coin]="coin"></app-details-header>
 
   </app-page-content>
 
   <mat-tab-group class="tabs" ngClass.lt-md="no-horizontal-padding" color="accent">
+    <mat-tab label="Overview">
+      <app-coin-overview [coin]="coin"></app-coin-overview>
+    </mat-tab>
     <mat-tab label="Masternode Stats">
       <app-masternode-stats [coin]="coin"></app-masternode-stats>
-    </mat-tab>
-    <mat-tab label="Overview">
-      <app-coin-overview></app-coin-overview>
     </mat-tab>
     <mat-tab label="PoS Stats"> Proof Of Stake Stats content </mat-tab>
     <mat-tab label="PoS Pools"> Proof Of Stake Pools </mat-tab>

@@ -1,4 +1,5 @@
-<div fxLayout="row" fxLayoutGap="40px" fxLayout.lt-sm="column" *ngIf="!loading">
+<app-loader [context]="loadingKey"></app-loader>
+<div fxLayout="row" fxLayoutGap="40px" fxLayout.lt-sm="column" *ngIf="!loader.isLoading(loadingKey)">
   <div fxFlex="30" class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
     <div class="align-center label-value">
       <div class="block-icon pop-top">
@@ -10,12 +11,8 @@
       <p>ROI (Year)</p>
       <h4>{{ masternodeStats.yearlyRoi }}%</h4>
     </div>
-    <div class="align-center label-value">
-      <p>Locked Amount</p>
-      <h4>{{ masternodeStats.lockedAmount | number }}</h4>
-    </div>
-    <div class="align-center label-value">
-      <p>Locked Percentage</p>
+    <div class="align-center label-value" matTooltip="Amount of coins locked in masternodes">
+      <p>Locked</p>
       <h4>{{ masternodeStats.lockedPercentage }}%</h4>
     </div>
     <div class="align-center label-value">
@@ -26,6 +23,10 @@
       <p>First Reward Time</p>
       <h4>{{ (masternodeStats.activeMasternodes * 2.6 / 60) - 2 | number:'0.0-0' }} -
         {{ (masternodeStats.activeMasternodes * 2.6 / 60) + 2 | number:'0.0-0' }} hrs</h4>
+    </div>
+    <div class="align-center label-value">
+      <p>Blockheight</p>
+      <h4>{{ masternodeStats.blockheight }}</h4>
     </div>
   </div>
   <div fxFlex="70" fxLayout="column" fxLayoutGap="40px">
@@ -88,8 +89,6 @@
       <div fxLayout="row" fxLayoutAlign="space-between flex-end">
         <div class="label-value">
           <div class="timeframe-buttons">
-            <button mat-flat-button (click)="masternodesChartTimeframe = '10d'"
-              [ngClass]="{ 'mat-primary': masternodesChartTimeframe === '10d' }">10 days</button>
             <button mat-flat-button (click)="masternodesChartTimeframe = '1m'"
               [ngClass]="{ 'mat-primary': masternodesChartTimeframe === '1m' }">1 month</button>
             <button mat-flat-button (click)="masternodesChartTimeframe = '3m'"

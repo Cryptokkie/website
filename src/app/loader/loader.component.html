@@ -1,4 +1,4 @@
-<div *ngIf="loaderService.loading">
+<div *ngIf="loaderService.loading[context]">
   <mat-progress-bar mode="buffer" color="primary"></mat-progress-bar>
   <div class="loading-text">Loading...</div>
 </div>
