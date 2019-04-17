@@ -5,3 +5,14 @@
   display: block;
 }
 
+.timeframe-buttons {
+  margin-bottom: 5px;
+
+  button {
+    font-weight: 300;
+    font-size: 12px;
+    padding: 0 10px;
+    line-height: 26px;
+    margin-right: 5px;
+  }
+}

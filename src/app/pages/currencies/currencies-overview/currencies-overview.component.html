@@ -39,7 +39,7 @@
   <!-- Volume Column -->
   <ng-container matColumnDef="dailyVolumeCurrency">
     <th mat-header-cell fxHide.lt-sm *matHeaderCellDef mat-sort-header> Volume (24h) </th>
-    <td mat-cell fxHide.lt-sm *matCellDef="let element"> {{element.dailyVolumeCurrency | number:'1.2'}}
+    <td mat-cell fxHide.lt-sm *matCellDef="let element"> {{element.dailyVolumeCurrency | number:'1.0-0'}}
       USD</td>
   </ng-container>
 
