@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Coin } from 'src/app/coin-info/coin.model';
 
 @Component({
   selector: 'app-coin-overview',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./coin-overview.component.scss']
 })
 export class CoinOverviewComponent implements OnInit {
+
+  @Input()
+  coin: Coin;
 
   constructor() { }
 

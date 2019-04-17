@@ -1,128 +1,42 @@
-<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between stretch">
-  <div fxFlex="66" fxLayout="column">
+<div fxLayout="row" fxLayoutGap="40px" fxLayout.lt-md="column" 
+  fxLayoutAlign="space-between flex-start" fxLayoutAlign.lt-md>
+  <div fxFlex="40" fxLayout="column" class="block shadow price"
+    [class.positive]="coin.marketData.dailyChangePercentageBtc > 0"
+    [class.negative]="coin.marketData.dailyChangePercentageBtc < 0">
     <p class="big">
-      {{ coin.marketData.lastPriceUsd | number:'0.2-5' }} USD
+      ${{ coin.marketData.lastPriceUsd | number:'0.2-5' }}
       <app-percentage [value]="coin.marketData.dailyChangePercentageUsd"></app-percentage>
     </p>
     <p class="medium margin-bottom">
       {{ coin.marketData.lastPriceBtc | number:'0.2-8' }} BTC
       <app-percentage [value]="coin.marketData.dailyChangePercentageBtc"></app-percentage>
     </p>
-
-    <div fxLayout="row" fxLayout.lt-md="column">
-      <div fxFlex="50">
-
-        <h6>Website</h6>
-        <div class="item" *ngIf="coin.links.homepage">
-          <a mat-flat-button color="accent" target="_blank" [href]="coin.links.homepage">{{ coin.links.homepage | prettyLink }}</a>
-        </div>
-
-        <h6>Explorer</h6>
-        <div class="item" *ngIf="coin.links.explorer">
-          <a mat-flat-button color="accent" target="_blank" [href]="coin.links.explorer">{{ coin.links.explorer | prettyLink }}</a>
-        </div>
-
-        <h6 *ngIf="coin.links.github || coin.links.bitbucket">Development</h6>
-        <div class="item" *ngIf="coin.links.github">
-          <a mat-flat-button color="accent" target="_blank" href="{{coin.links.github}}">
-            <i class="fab fa-github"></i>
-            Github
-          </a>
-        </div>
-
-        <div class="item" *ngIf="coin.links.bitbucket">
-          <a mat-flat-button color="accent" target="_blank" href="{{coin.links.bitbucket}}">
-            <i class="fab fa-bitbucket"></i>
-            Bitbucket
-          </a>
-        </div>
-      </div>
-
-      <div fxFlex="50">
-        <h6>Social</h6>
-        <div class="item" *ngIf="coin.social.twitterLink">
-          <a mat-flat-button color="accent" target="_blank"
-            href="{{coin.social.twitterLink}}">
-            <i class="fab fa-twitter"></i>
-            Twitter ({{coin.social.twitterFollowers}})
-          </a>
-        </div>
-
-        <div class="item" *ngIf="coin.social.facebookLink">
-          <a mat-flat-button color="accent" target="_blank"
-            href="{{coin.social.facebookLink}}">
-            <i class="fab fa-facebook"></i>
-            Facebook ({{coin.social.facebookLikes}})
-          </a>
-        </div>
-
-        <div class="item" *ngIf="coin.social.telegramLink">
-          <a mat-flat-button color="accent" target="_blank"
-            href="{{coin.social.telegramLink}}">
-            <i class="fab fa-telegram"></i>
-            Telegram ({{coin.social.telegramUserCount}})
-          </a>
-        </div>
-
-        <div class="item" *ngIf="coin.social.bitcointalkLink">
-          <a mat-flat-button color="accent" target="_blank"
-            href="{{coin.social.bitcointalkLink}}">
-            <i class="fab fa-bitcoin"></i>
-            Bitcointalk
-          </a>
-        </div>
-
-        <div class="item" *ngIf="coin.social.redditLink">
-          <a mat-flat-button color="accent" target="_blank" href="{{coin.social.redditLink}}">
-            <i class="fab fa-reddit"></i>
-            Reddit ({{coin.social.redditSubscribers}})
-          </a>
-        </div>
-
-        <div class="item" *ngIf="coin.social.discordLink">
-          <a mat-flat-button color="accent" target="_blank" href="{{coin.social.discordLink}}">
-            <i class="fab fa-discord"></i>
-            Discord
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <div fxFlex="33">
-    <div class="item">
-      <h6>Market Cap Rank</h6>
-      <p>#{{ coin.marketcapRank }}</p>
+  <div fxFlex="60" fxLayoutGap="20px" fxLayout="row"
+    fxLayoutAlign="space-between" class="block shadow market-basics">
+
+    <div fxHide.lt-md class="align-center label-value">
+      <div class="block-icon pop-top green">
+        <mat-icon>show_chart</mat-icon>
+      </div>
     </div>
 
-    <div class="item">
-      <h6>Market Cap</h6>
-      <p>{{ coin.marketData.marketcapUsd | number:'1.0-0' }} USD</p>
+    <div class="align-right label-value">
+      <p>Market Cap</p>
+      <h4>${{ coin.marketData.marketcapUsd | number:'1.0-0' }}</h4>
     </div>
 
-    <div class="item">
-      <h6>24h Low</h6>
-      <p>{{ coin.marketData.dailyLowUsd | number:'0.2-8' }} USD</p>
+    <div class="align-right label-value">
+      <p>24h High / Low</p>
+      <h4>${{ coin.marketData.dailyHighUsd | number:'0.2' }} <span>H</span></h4>
+      <h4>${{ coin.marketData.dailyLowUsd | number:'0.2' }} <span>L</span></h4>
     </div>
 
-    <div class="item">
-      <h6>24h High</h6>
-      <p>{{ coin.marketData.dailyHighUsd | number:'0.2-8' }} USD</p>
+    <div class="align-right label-value">
+      <p>24h Volume</p>
+      <h4>${{ coin.marketData.dailyVolumeUsd | number:'1.0-0' }}</h4>
     </div>
-
-    <div class="item">
-      <h6>24h Trading Volume</h6>
-      <p>{{ coin.marketData.dailyVolumeUsd | number:'1.0-0' }} USD</p>
-    </div>
-
-    <div class="item">
-      <h6>Circulating Supply</h6>
-      <p>{{ coin.marketData.circulatingSupply | number:'1.0-0' }} {{ coin.ticker | uppercase }}</p>
-    </div>
-
-    <div class="item">
-      <h6>Total Supply</h6>
-      <p>{{ coin.marketData.totalSupply | number:'1.0-0' }} {{ coin.ticker | uppercase }}</p>
-    </div>
+    
   </div>
 </div>

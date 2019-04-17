@@ -5,6 +5,7 @@ import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 import { Coin } from 'src/app/coin-info/coin.model';
 import { HistoricalData } from 'src/app/coin-info/historical-data.model';
 import { MasternodeStats } from 'src/app/coin-info/masternode-stats.model';
+import { LoaderService } from 'src/app/loader/loader.service';
 
 @Component({
   selector: 'app-masternode-stats',
@@ -14,7 +15,7 @@ import { MasternodeStats } from 'src/app/coin-info/masternode-stats.model';
 export class MasternodeStatsComponent implements OnInit, OnDestroy {
 
   private sub: any;
-  public loading = true;
+  readonly loadingKey = 'masternode-stats';
 
   @Input()
   coin: Coin;
@@ -22,11 +23,13 @@ export class MasternodeStatsComponent implements OnInit, OnDestroy {
   historicalData: HistoricalData[];
 
   // 10d|30d|3m|1y
-  masternodesChartTimeframe = '10d';
+  masternodesChartTimeframe = '1m';
 
-  constructor(private coinInfoService: CoinInfoService) { }
+  constructor(private coinInfoService: CoinInfoService, public loader: LoaderService) { }
 
   ngOnInit() {
+
+    this.loader.show(this.loadingKey);
 
     const masternodeStats = this.coinInfoService.getMasternodeStats(this.coin.id)
       .pipe(tap(x => this.masternodeStats = x));
@@ -35,7 +38,7 @@ export class MasternodeStatsComponent implements OnInit, OnDestroy {
       .pipe(tap(x => this.historicalData = x));
 
     this.sub = forkJoin(masternodeStats, historicalData)
-      .pipe(finalize(() => this.loading = false))
+      .pipe(finalize(() => this.loader.hide(this.loadingKey)))
       .subscribe();
   }
 
@@ -46,12 +49,12 @@ export class MasternodeStatsComponent implements OnInit, OnDestroy {
   dailyActiveMasternodePercentage(): number {
     const today = this.historicalData[0].activeMasternodes;
     const yesterday = this.historicalData[1].activeMasternodes;
-    return (today - yesterday) / yesterday;
+    return (today - yesterday) / yesterday * 100;
   }
 
   dailyIncomePercentageUsd(): number {
     const today = this.historicalData[0].dailyRewardUsd;
     const yesterday = this.historicalData[1].dailyRewardUsd;
-    return (today - yesterday) / yesterday;
+    return (today - yesterday) / yesterday * 100;
   }
 }

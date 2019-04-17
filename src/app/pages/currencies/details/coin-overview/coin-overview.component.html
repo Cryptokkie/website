@@ -1,3 +1,140 @@
-<p>
-  coin-overview works!
-</p>
+<div fxLayout="row" fxLayoutGap="40px" fxLayout.lt-sm="column">
+
+  <div fxFlex="20" fxLayout="column" fxLayoutGap="40px">
+    <div class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
+      <div class="align-center label-value">
+        <div class="block-icon pop-top small grey">
+          <mat-icon>link</mat-icon>
+        </div>
+      </div>
+
+      <div class="align-left label-value">
+        <a mat-button color="gray" *ngIf="coin.links.homepage" target="_blank" [href]="coin.links.homepage">
+          <mat-icon>home</mat-icon>&nbsp;WEBSITE
+        </a>
+        <a mat-button color="gray" *ngIf="coin.links.explorer" target="_blank" [href]="coin.links.explorer">
+          <mat-icon>view_stream</mat-icon>&nbsp;EXPLORER
+        </a>
+        <a mat-button color="gray" *ngIf="coin.links.github" target="_blank" href="{{coin.links.github}}"><i
+            class="fab fa-github"></i>&nbsp;GITHUB</a>
+        <a mat-button color="gray" *ngIf="coin.links.bitbucket" target="_blank" href="{{coin.links.bitbucket}}"><i
+            class="fab fa-bitbucket"></i>&nbsp;Bitbucket</a>
+      </div>
+
+    </div>
+
+    <div class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
+      <div class="align-center label-value">
+        <div class="block-icon pop-top small grey">
+          <mat-icon>forum</mat-icon>
+        </div>
+      </div>
+
+      <div class="align-left label-value">
+
+        <a mat-button color="gray" *ngIf="coin.social.twitterLink" target="_blank" href="{{coin.social.twitterLink}}">
+          <i class="fab fa-twitter"></i>
+          Twitter ({{coin.social.twitterFollowers}})
+        </a>
+
+        <a mat-button color="gray" *ngIf="coin.social.facebookLink" target="_blank" href="{{coin.social.facebookLink}}">
+          <i class="fab fa-facebook"></i>
+          Facebook ({{coin.social.facebookLikes}})
+        </a>
+
+        <a mat-button color="gray" *ngIf="coin.social.telegramLink" target="_blank" href="{{coin.social.telegramLink}}">
+          <i class="fab fa-telegram"></i>
+          Telegram ({{coin.social.telegramUserCount}})
+        </a>
+
+        <a mat-button color="gray" *ngIf="coin.social.bitcointalkLink" target="_blank"
+          href="{{coin.social.bitcointalkLink}}">
+          <i class="fab fa-bitcoin"></i>
+          Bitcointalk
+        </a>
+
+        <a mat-button color="gray" *ngIf="coin.social.redditLink" target="_blank" href="{{coin.social.redditLink}}">
+          <i class="fab fa-reddit"></i>
+          Reddit ({{coin.social.redditSubscribers}})
+        </a>
+
+        <a mat-button color="gray" *ngIf="coin.social.discordLink" target="_blank" href="{{coin.social.discordLink}}">
+          <i class="fab fa-discord"></i>
+          Discord
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div fxFlex="60" fxLayout="column" fxLayoutGap="40px">
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutAlign.lt-sm="space-between center" fxLayout.lt-sm="column"
+      fxLayoutGap="20px" class="block shadow">
+      <div class="align-right label-value">
+        <div class="block-icon pop-top">
+          <mat-icon>forum</mat-icon>
+        </div>
+      </div>
+      <!-- 
+      <div class="align-right label-value">
+        <p>Weekly Income</p>
+        <h4 [class.positive-number]="dailyIncomePercentageUsd() > 0"
+          [class.negative-number]="dailyIncomePercentageUsd() < 0">
+          ${{ masternodeStats.weeklyRewardUsd }}
+          <mat-icon *ngIf="dailyIncomePercentageUsd() > 0">trending_up</mat-icon>
+          <mat-icon *ngIf="dailyIncomePercentageUsd() == 0">trending_flat</mat-icon>
+          <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
+        </h4>
+        <hr>
+        <h6>{{ masternodeStats.weeklyRewardBtc }} BTC</h6>
+        <h6>{{ masternodeStats.weeklyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
+      </div>
+
+      <div class="align-right label-value">
+        <p>Monthly Income</p>
+        <h4 [class.positive-number]="dailyIncomePercentageUsd() > 0"
+          [class.negative-number]="dailyIncomePercentageUsd() < 0">
+          ${{ masternodeStats.monthlyRewardUsd }}
+          <mat-icon *ngIf="dailyIncomePercentageUsd() > 0">trending_up</mat-icon>
+          <mat-icon *ngIf="dailyIncomePercentageUsd() == 0">trending_flat</mat-icon>
+          <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
+        </h4>
+        <hr>
+        <h6>{{ masternodeStats.monthlyRewardBtc }} BTC</h6>
+        <h6>{{ masternodeStats.monthlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
+      </div>
+
+      <div class="align-right label-value">
+        <p>Yearly Income</p>
+        <h4 [class.positive-number]="dailyIncomePercentageUsd() > 0"
+          [class.negative-number]="dailyIncomePercentageUsd() < 0">
+          ${{ masternodeStats.yearlyRewardUsd }}
+          <mat-icon *ngIf="dailyIncomePercentageUsd() > 0">trending_up</mat-icon>
+          <mat-icon *ngIf="dailyIncomePercentageUsd() == 0">trending_flat</mat-icon>
+          <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
+        </h4>
+        <hr>
+        <h6>{{ masternodeStats.yearlyRewardBtc }} BTC</h6>
+        <h6>{{ masternodeStats.yearlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
+      </div> -->
+
+    </div>
+
+
+  </div>
+
+  <div fxFlex="20" class="block shadow">
+
+    <!-- <div class="align-left label-value">
+        <h6>Circulating Supply</h6>
+        <p>{{ coin.marketData.circulatingSupply | number:'1.0-0' }} {{ coin.ticker | uppercase }}</p>
+      </div>
+  
+      <div class="align-left label-value">
+        <h6>Total Supply</h6>
+        <p>{{ coin.marketData.totalSupply | number:'1.0-0' }} {{ coin.ticker | uppercase }}</p>
+      </div> -->
+
+  </div>
+</div>
