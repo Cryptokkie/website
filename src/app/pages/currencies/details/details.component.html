@@ -8,7 +8,8 @@
 
   </app-page-content>
 
-  <mat-tab-group class="tabs" ngClass.lt-md="no-horizontal-padding" color="accent">
+  <mat-tab-group [selectedIndex]="tabIndex" (selectedIndexChange)="tabIndexChange($event)" 
+    class="tabs" ngClass.lt-md="no-horizontal-padding" color="accent">
     <mat-tab label="Overview">
       <app-coin-overview [coin]="coin"></app-coin-overview>
     </mat-tab>
