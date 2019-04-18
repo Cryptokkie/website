@@ -1,5 +1,5 @@
-<div fxLayout="row" fxLayoutGap="40px" fxLayout.lt-md="column" 
-  fxLayoutAlign="space-between flex-start" fxLayoutAlign.lt-md>
+<div fxLayout="row" fxLayoutGap="40px" fxLayout.lt-md="column" fxLayoutAlign="space-between flex-start"
+  fxLayoutAlign.lt-md>
   <div fxFlex="40" fxLayout="column" class="block shadow price"
     [class.positive]="coin.marketData.dailyChangePercentageUsd > 0"
     [class.negative]="coin.marketData.dailyChangePercentageUsd < 0">
@@ -13,30 +13,28 @@
     </p>
   </div>
 
-  <div fxFlex="60" fxLayoutGap="20px" fxLayout="row"
-    fxLayoutAlign="space-between" class="block shadow market-basics">
+  <div fxFlex="60" fxLayoutGap="20px" fxLayout="row" fxLayoutAlign="space-between" class="block shadow market-basics">
 
-    <div fxHide.lt-md class="align-center label-value">
-      <div class="block-icon green">
-        <mat-icon>show_chart</mat-icon>
-      </div>
-    </div>
-
-    <div class="align-right label-value">
+    <div class="align-right label-value"
+      matTooltip="The value of a coin, calculated by multiplying available supply by the present coin price.">
       <p>Market Cap</p>
       <h4>${{ coin.marketData.marketcapUsd | number:'1.0-0' }}</h4>
+      <h5 class="gray">{{ coin.marketData.marketcapBtc | number:'1.0-0' }} BTC</h5>
     </div>
 
-    <div class="align-right label-value">
+    <div class="align-right label-value" matTooltip="High and Low Price in last 24 hours.">
       <p>24h High / Low</p>
-      <h4>${{ coin.marketData.dailyHighUsd | number:'0.2' }} <span>H</span></h4>
-      <h4>${{ coin.marketData.dailyLowUsd | number:'0.2' }} <span>L</span></h4>
+      <h4>${{ coin.marketData.dailyHighUsd | number:'0.2' }} /
+        ${{ coin.marketData.dailyLowUsd | number:'0.2' }}</h4>
+      <h5 class="gray">${{ coin.marketData.dailyHighBtc | number:'0.2-8' }} /
+        ${{ coin.marketData.dailyLowBtc | number:'0.2-8' }}</h5>
     </div>
 
-    <div class="align-right label-value">
+    <div class="align-right label-value" matTooltip="Registered trading volume from last 24hours.">
       <p>24h Volume</p>
       <h4>${{ coin.marketData.dailyVolumeUsd | number:'1.0-0' }}</h4>
+      <h5 class="gray">{{ coin.marketData.dailyVolumeBtc | number:'0.0-3' }} BTC</h5>
     </div>
-    
+
   </div>
 </div>

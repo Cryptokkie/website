@@ -65,10 +65,20 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   tabIndexChange(index: number) {
-    this.location.replaceState(this.router.url + '/' + this.getTabByIndex(index));
+    let relativeUrl = this.router.url;
+
+    Object.keys(this.tabs).forEach(x => {
+      relativeUrl = relativeUrl.replace(new RegExp('/' + this.escapeRegExp(x) + '$'), '');
+    });
+
+    this.location.replaceState(relativeUrl + '/' + this.getTabByIndex(index));
   }
 
   getTabByIndex(index: number) {
     return Object.keys(this.tabs).find(key => this.tabs[key] === index);
+  }
+
+  escapeRegExp(value: string) {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
   }
 }

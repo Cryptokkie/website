@@ -7,25 +7,32 @@
       </div>
     </div>
 
-    <div class="align-center label-value">
-      <p>ROI (Year)</p>
+    <div class="align-center label-value" matTooltip="Return on Investment. How quickly will I get my investment back?">
+      <p class="soft-accent">ROI (Year)</p>
       <h4>{{ masternodeStats.yearlyRoi }}%</h4>
     </div>
-    <div class="align-center label-value" matTooltip="Amount of coins locked in masternodes">
-      <p>Locked</p>
+    <div class="align-center label-value" matTooltip="Number of coins locked in masternodes.">
+      <p class="soft-accent">Locked</p>
       <h4>{{ masternodeStats.lockedPercentage }}%</h4>
+      <h5>{{ masternodeStats.lockedAmount | number }} {{ coin.ticker | uppercase }}</h5>
     </div>
-    <div class="align-center label-value">
-      <p>Collateral</p>
+    <div class="align-center label-value" matTooltip="Number of coins required to setup a masternode.">
+      <p class="soft-accent">Collateral</p>
       <h4>{{ masternodeStats.collateral }} {{ coin.ticker | uppercase }}</h4>
     </div>
-    <div class="align-center label-value">
-      <p>First Reward Time</p>
+    <div class="align-center label-value" matTooltip="Dollar and Bitcoin value of Masternode Collateral.">
+      <p class="soft-accent">Masternode Worth</p>
+      <h4>${{ masternodeStats.collateral * coin.marketData.lastPriceUsd | number:'0.0-0' }} / 
+          {{ masternodeStats.collateral * coin.marketData.lastPriceBtc | number:'0.0-3' }} BTC
+      </h4>
+    </div>
+    <div class="align-center label-value" matTooltip="Average time before first masternode reward.">
+      <p class="soft-accent">First Reward Time</p>
       <h4>{{ (masternodeStats.activeMasternodes * 2.6 / 60) - 2 | number:'0.0-0' }} -
         {{ (masternodeStats.activeMasternodes * 2.6 / 60) + 2 | number:'0.0-0' }} hrs</h4>
     </div>
-    <div class="align-center label-value">
-      <p>Blockheight</p>
+    <div class="align-center label-value" matTooltip="The total number of blocks generated since the genesis block.">
+      <p class="soft-accent">Blockheight</p>
       <h4>{{ masternodeStats.blockheight }}</h4>
     </div>
   </div>

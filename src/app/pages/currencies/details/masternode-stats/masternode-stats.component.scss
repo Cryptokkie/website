@@ -5,6 +5,11 @@
   display: block;
 }
 
+.soft-accent {
+  // font-weight: normal;
+  color: mat-color($accent,700,0.8);
+}
+
 .timeframe-buttons {
   margin-bottom: 5px;
 
