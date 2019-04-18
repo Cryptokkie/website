@@ -6,6 +6,10 @@
   bottom: 0;
   left: 0;
   right: 0;
+
+  background-image: url('/assets/background-chart.jpg');
+  background-position-x: 1440px;
+  background-size: contain;
 }
 
 .mobile-toolbar {
@@ -27,6 +31,11 @@
       width: 70px;
     }
   }
+}
+
+mat-sidenav-container {
+  max-width: 1440px;
+  @include mat-elevation(24, black, 2.5);
 }
 
 mat-sidenav-container > mat-sidenav {
