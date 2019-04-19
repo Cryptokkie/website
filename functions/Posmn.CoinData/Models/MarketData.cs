@@ -1,3 +1,5 @@
+using System;
+
 namespace Posmn.CoinData.Models
 {
   public class MarketData
@@ -17,5 +19,11 @@ namespace Posmn.CoinData.Models
     public double DailyHighBtc { get; set; }
     public double DailyLowUsd { get; set; }
     public double DailyHighUsd { get; set; }
+    public double AlltimeHighBtc { get; set; }
+    public double AlltimeHighUsd { get; set; }
+    public double AlltimeHighPercentageBtc { get; set; }
+    public double AlltimeHighPercentageUsd { get; set; }
+    public DateTimeOffset AlltimeHighDateBtc { get; set; }
+    public DateTimeOffset AlltimeHighDateUsd { get; set; }
   }
 }
