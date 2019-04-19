@@ -11,6 +11,7 @@ namespace coingecko_importer.Mapper
     {
       this.CreateMap<CoinFullDataById, Posmn.CoinData.Models.Coin>()
         .ForMember(d => d.Ticker, o => o.MapFrom(s => s.Symbol))
+        .ForMember(d => d.Description, o => o.MapFrom(s => s.Description.ContainsKey("en") ? s.Description["en"] : ""))
         .ForMember(d => d.MarketcapRank, o => o.MapFrom(s => s.MarketCapRank.HasValue ? s.MarketCapRank.Value : 0))
         .ForMember(d => d.ImageUrlSmall, o => o.MapFrom(s => s.Image.Small.ToString()))
         .ForMember(d => d.ImageUrlThumbnail, o => o.MapFrom(s => s.Image.Thumb.ToString()))
@@ -29,20 +30,45 @@ namespace coingecko_importer.Mapper
           : null));
 
       this.CreateMap<CoinGecko.Entities.Response.Coins.CoinByIdMarketData, Posmn.CoinData.Models.MarketData>()
-        .ForMember(d => d.DailyChangePercentageBtc, o => o.MapFrom(s => s.PriceChangePercentage24HInCurrency["btc"]))
-        .ForMember(d => d.DailyChangePercentageUsd, o => o.MapFrom(s => s.PriceChangePercentage24HInCurrency["usd"]))
-        .ForMember(d => d.DailyVolumeBtc, o => o.MapFrom(s => s.TotalVolume["btc"]))
-        .ForMember(d => d.DailyVolumeUsd, o => o.MapFrom(s => s.TotalVolume["usd"]))
-        .ForMember(d => d.LastPriceBtc, o => o.MapFrom(s => s.CurrentPrice["btc"]))
-        .ForMember(d => d.LastPriceUsd, o => o.MapFrom(s => s.CurrentPrice["usd"]))
-        .ForMember(d => d.MarketcapBtc, o => o.MapFrom(s => s.MarketCap["btc"]))
-        .ForMember(d => d.MarketcapUsd, o => o.MapFrom(s => s.MarketCap["usd"]))
+        .ForMember(d => d.DailyChangePercentageBtc, o => o.MapFrom(s =>
+          s.PriceChangePercentage24HInCurrency.ContainsKey("btc") ? s.PriceChangePercentage24HInCurrency["btc"] : 0))
+        .ForMember(d => d.DailyChangePercentageUsd, o => o.MapFrom(s =>
+          s.PriceChangePercentage24HInCurrency.ContainsKey("usd") ? s.PriceChangePercentage24HInCurrency["usd"] : 0))
+        .ForMember(d => d.DailyVolumeBtc, o => o.MapFrom(s =>
+          s.TotalVolume.ContainsKey("btc") ? s.TotalVolume["btc"] : 0))
+        .ForMember(d => d.DailyVolumeUsd, o => o.MapFrom(s =>
+          s.TotalVolume.ContainsKey("usd") ? s.TotalVolume["usd"] : 0))
+        .ForMember(d => d.LastPriceBtc, o => o.MapFrom(s =>
+          s.CurrentPrice.ContainsKey("btc") ? s.CurrentPrice["btc"] : 0))
+        .ForMember(d => d.LastPriceUsd, o => o.MapFrom(s =>
+          s.CurrentPrice.ContainsKey("usd") ? s.CurrentPrice["usd"] : 0))
+        .ForMember(d => d.MarketcapBtc, o => o.MapFrom(s =>
+          s.MarketCap.ContainsKey("btc") ? s.MarketCap["btc"] : 0))
+        .ForMember(d => d.MarketcapUsd, o => o.MapFrom(s =>
+          s.MarketCap.ContainsKey("usd") ? s.MarketCap["usd"] : 0))
         .ForMember(d => d.CirculatingSupply, o => o.MapFrom(s => decimal.Parse(s.CirculatingSupply)))
         .ForMember(d => d.TotalSupply, o => o.MapFrom(s => s.TotalSupply ?? 0))
-        .ForMember(d => d.DailyLowBtc, o => o.MapFrom(s => s.Low24H["btc"]))
-        .ForMember(d => d.DailyHighBtc, o => o.MapFrom(s => s.High24H["btc"]))
-        .ForMember(d => d.DailyLowUsd, o => o.MapFrom(s => s.Low24H["usd"]))
-        .ForMember(d => d.DailyHighUsd, o => o.MapFrom(s => s.High24H["usd"]));
+        .ForMember(d => d.DailyLowBtc, o => o.MapFrom(s =>
+          s.Low24H.ContainsKey("btc") ? s.Low24H["btc"] : 0))
+        .ForMember(d => d.DailyHighBtc, o => o.MapFrom(s =>
+          s.High24H.ContainsKey("btc") ? s.High24H["btc"] : 0))
+        .ForMember(d => d.DailyLowUsd, o => o.MapFrom(s =>
+          s.Low24H.ContainsKey("usd") ? s.Low24H["usd"] : 0))
+        .ForMember(d => d.DailyHighUsd, o => o.MapFrom(s =>
+          s.High24H.ContainsKey("usd") ? s.High24H["usd"] : 0))
+        .ForMember(d => d.AlltimeHighBtc, o => o.MapFrom(s =>
+          s.Ath.ContainsKey("btc") ? s.Ath["btc"] : 0))
+        .ForMember(d => d.AlltimeHighUsd, o => o.MapFrom(s =>
+          s.Ath.ContainsKey("usd") ? s.Ath["usd"] : 0))
+        .ForMember(d => d.AlltimeHighPercentageBtc, o => o.MapFrom(s =>
+          s.AthChangePercentage.ContainsKey("btc") ? s.AthChangePercentage["btc"] : 0))
+        .ForMember(d => d.AlltimeHighPercentageUsd, o => o.MapFrom(s =>
+          s.AthChangePercentage.ContainsKey("usd") ? s.AthChangePercentage["usd"] : 0))
+        .ForMember(d => d.AlltimeHighDateBtc, o => o.MapFrom(s =>
+          s.AthDate.ContainsKey("btc") ? s.AthDate["btc"] : new DateTimeOffset()))
+        .ForMember(d => d.AlltimeHighDateUsd, o => o.MapFrom(s =>
+          s.AthDate.ContainsKey("usd") ? s.AthDate["usd"] : new DateTimeOffset()));
+
 
       this.CreateMap<CoinFullDataById, Posmn.CoinData.Models.Social>()
         .ForMember(d => d.BitcointalkLink, o => o.MapFrom(s =>

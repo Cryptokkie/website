@@ -26,8 +26,8 @@
       <p>24h High / Low</p>
       <h4>${{ coin.marketData.dailyHighUsd | number:'0.2' }} /
         ${{ coin.marketData.dailyLowUsd | number:'0.2' }}</h4>
-      <h5 class="gray">${{ coin.marketData.dailyHighBtc | number:'0.2-8' }} /
-        ${{ coin.marketData.dailyLowBtc | number:'0.2-8' }}</h5>
+      <h5 class="gray">{{ coin.marketData.dailyHighBtc | number:'0.2-8' }} BTC /
+        {{ coin.marketData.dailyLowBtc | number:'0.2-8' }} BTC</h5>
     </div>
 
     <div class="align-right label-value" matTooltip="Registered trading volume from last 24hours.">

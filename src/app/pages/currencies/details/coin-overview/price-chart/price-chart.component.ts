@@ -43,10 +43,14 @@ export class PriceChartComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(tap(data => {
         const amountOfDataPointsToShow = 30; // amount of data points on the chart
         const mod = data.prices.length / amountOfDataPointsToShow;
-        const slice = data.prices
-          .filter((val, index) =>
-            index % Math.trunc(mod) === 0 // only give certain amount of samples
-            || index === data.prices.length); // always give the last item
+        let slice = data.prices;
+
+        if (slice.length > amountOfDataPointsToShow) {
+          slice = data.prices
+            .filter((val, index) =>
+              index % Math.trunc(mod) === 0 // only give certain amount of samples
+              || index === data.prices.length); // always give the last item
+        }
 
         this.labels = slice.map(x => new Date(x[0]));
         this.dataPoints = slice.map(x => x[1]);

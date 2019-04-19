@@ -7,32 +7,33 @@
       </div>
     </div>
 
-    <div class="align-center label-value" matTooltip="Return on Investment. How quickly will I get my investment back?">
-      <p class="soft-accent">ROI (Year)</p>
+    <div class="align-center label-value">
+      <p class="soft-accent">ROI <mat-icon matTooltip="Return on investment. The return after one year in percentage and the amount of days to have your investment back.">info_outline</mat-icon></p>
       <h4>{{ masternodeStats.yearlyRoi }}%</h4>
+      <h5>{{ masternodeStats.collateral / masternodeStats.dailyReward | number:'0.0-0' }} days</h5>
     </div>
-    <div class="align-center label-value" matTooltip="Number of coins locked in masternodes.">
-      <p class="soft-accent">Locked</p>
+    <div class="align-center label-value">
+      <p class="soft-accent">Locked <mat-icon matTooltip="Number of coins locked in masternodes.">info_outline</mat-icon></p>
       <h4>{{ masternodeStats.lockedPercentage }}%</h4>
       <h5>{{ masternodeStats.lockedAmount | number }} {{ coin.ticker | uppercase }}</h5>
     </div>
-    <div class="align-center label-value" matTooltip="Number of coins required to setup a masternode.">
-      <p class="soft-accent">Collateral</p>
+    <div class="align-center label-value">
+      <p class="soft-accent">Collateral <mat-icon matTooltip="Number of coins required to setup a masternode.">info_outline</mat-icon></p>
       <h4>{{ masternodeStats.collateral }} {{ coin.ticker | uppercase }}</h4>
     </div>
-    <div class="align-center label-value" matTooltip="Dollar and Bitcoin value of Masternode Collateral.">
-      <p class="soft-accent">Masternode Worth</p>
+    <div class="align-center label-value">
+      <p class="soft-accent">Masternode Worth <mat-icon matTooltip="Dollar and Bitcoin value of Masternode Collateral.">info_outline</mat-icon></p>
       <h4>${{ masternodeStats.collateral * coin.marketData.lastPriceUsd | number:'0.0-0' }} / 
           {{ masternodeStats.collateral * coin.marketData.lastPriceBtc | number:'0.0-3' }} BTC
       </h4>
     </div>
-    <div class="align-center label-value" matTooltip="Average time before first masternode reward.">
-      <p class="soft-accent">First Reward Time</p>
+    <div class="align-center label-value">
+      <p class="soft-accent">First Reward Time <mat-icon matTooltip="Average time before first masternode reward.">info_outline</mat-icon></p>
       <h4>{{ (masternodeStats.activeMasternodes * 2.6 / 60) - 2 | number:'0.0-0' }} -
         {{ (masternodeStats.activeMasternodes * 2.6 / 60) + 2 | number:'0.0-0' }} hrs</h4>
     </div>
-    <div class="align-center label-value" matTooltip="The total number of blocks generated since the genesis block.">
-      <p class="soft-accent">Blockheight</p>
+    <div class="align-center label-value">
+      <p class="soft-accent">Blockheight <mat-icon matTooltip="The total number of blocks generated since the genesis block.">info_outline</mat-icon></p>
       <h4>{{ masternodeStats.blockheight }}</h4>
     </div>
   </div>
@@ -49,13 +50,13 @@
         <p>Weekly Income</p>
         <h4 [class.positive-number]="dailyIncomePercentageUsd() > 0"
           [class.negative-number]="dailyIncomePercentageUsd() < 0">
-          ${{ masternodeStats.weeklyRewardUsd }}
+          ${{ masternodeStats.weeklyReward * coin.marketData.lastPriceUsd | number:'0.2-2' }}
           <mat-icon *ngIf="dailyIncomePercentageUsd() > 0">trending_up</mat-icon>
           <mat-icon *ngIf="dailyIncomePercentageUsd() == 0">trending_flat</mat-icon>
           <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
         </h4>
         <hr>
-        <h6>{{ masternodeStats.weeklyRewardBtc }} BTC</h6>
+        <h6>{{ masternodeStats.weeklyReward * coin.marketData.lastPriceBtc }} BTC</h6>
         <h6>{{ masternodeStats.weeklyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
       </div>
 
@@ -63,13 +64,13 @@
         <p>Monthly Income</p>
         <h4 [class.positive-number]="dailyIncomePercentageUsd() > 0"
           [class.negative-number]="dailyIncomePercentageUsd() < 0">
-          ${{ masternodeStats.monthlyRewardUsd }}
+          ${{ masternodeStats.monthlyReward * coin.marketData.lastPriceUsd | number:'0.2-2' }}
           <mat-icon *ngIf="dailyIncomePercentageUsd() > 0">trending_up</mat-icon>
           <mat-icon *ngIf="dailyIncomePercentageUsd() == 0">trending_flat</mat-icon>
           <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
         </h4>
         <hr>
-        <h6>{{ masternodeStats.monthlyRewardBtc }} BTC</h6>
+        <h6>{{ masternodeStats.monthlyReward * coin.marketData.lastPriceBtc }} BTC</h6>
         <h6>{{ masternodeStats.monthlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
       </div>
 
@@ -77,18 +78,20 @@
         <p>Yearly Income</p>
         <h4 [class.positive-number]="dailyIncomePercentageUsd() > 0"
           [class.negative-number]="dailyIncomePercentageUsd() < 0">
-          ${{ masternodeStats.yearlyRewardUsd }}
+          ${{ masternodeStats.yearlyReward * coin.marketData.lastPriceUsd | number:'0.2-2' }}
           <mat-icon *ngIf="dailyIncomePercentageUsd() > 0">trending_up</mat-icon>
           <mat-icon *ngIf="dailyIncomePercentageUsd() == 0">trending_flat</mat-icon>
           <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
         </h4>
         <hr>
-        <h6>{{ masternodeStats.yearlyRewardBtc }} BTC</h6>
+        <h6>{{ masternodeStats.yearlyReward * coin.marketData.lastPriceBtc }} BTC</h6>
         <h6>{{ masternodeStats.yearlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
       </div>
 
     </div>
+
     <div class="block shadow">
+
       <div class="chart pop-top">
         <app-amount-masternodes-chart [historicalData]="historicalData" [timeframe]="masternodesChartTimeframe">
         </app-amount-masternodes-chart>
@@ -113,28 +116,8 @@
           </p>
         </div>
       </div>
+
     </div>
-    <!-- <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
-      <div fxFlex="50" class="block shadow">
-        <div class="item">
-          <h6>Wallet Version</h6>
-          <p>TBD</p>
-        </div>
-        <div class="item">
-          <h6>Protocol Version</h6>
-          <p>TBD</p>
-        </div>
-      </div>
-      <div fxFlex="50" class="block shadow">
-        <div class="item">
-          <h6>Blockheight</h6>
-          <p>{{ masternodeStats.blockheight }}</p>
-        </div>
-        <div class="item">
-          <h6>Average Block Time</h6>
-          <p>TBD</p>
-        </div>
-      </div>
-    </div> -->
+
   </div>
 </div>
