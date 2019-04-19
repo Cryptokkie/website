@@ -6,7 +6,7 @@
 }
 
 p mat-icon {
-  @include md-icon-size(18px);
+  @include icon-size(18px);
   line-height: 16px;
   vertical-align: middle;
 }

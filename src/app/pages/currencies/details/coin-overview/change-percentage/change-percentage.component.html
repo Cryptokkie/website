@@ -1,7 +1,10 @@
-<div class="block shadow change-percentage" [class.positive]="usdValue > 0"
+<div class="block shadow change-percentage" 
+  ngClass.md="md" ngClass.sm="sm" ngClass.xs="xs" ngClass.lg="lg"
+  [class.positive]="usdValue > 0"
   [class.negative]="usdValue < 0">
   <div class="align-left label-value">
     <p>{{ title }}</p>
+    <hr>
     <h4>
       <app-percentage [value]="usdValue"></app-percentage>
     </h4>

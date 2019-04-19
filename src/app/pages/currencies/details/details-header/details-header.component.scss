@@ -11,7 +11,7 @@
 
     /deep/ {
       mat-icon {
-        @include md-icon-size(32px);
+        @include icon-size(32px);
         line-height: 28px;
         vertical-align: middle;
       }
