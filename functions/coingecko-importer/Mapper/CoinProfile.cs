@@ -30,6 +30,11 @@ namespace coingecko_importer.Mapper
           : null));
 
       this.CreateMap<CoinGecko.Entities.Response.Coins.CoinByIdMarketData, Posmn.CoinData.Models.MarketData>()
+        .ForMember(d => d.ChangePercentage1hBtc, o => o.MapFrom(s =>
+          s.PriceChangePercentage1HInCurrency.ContainsKey("btc") ? s.PriceChangePercentage1HInCurrency["btc"] : 0))
+        .ForMember(d => d.ChangePercentage1hUsd, o => o.MapFrom(s =>
+          s.PriceChangePercentage1HInCurrency.ContainsKey("usd") ? s.PriceChangePercentage1HInCurrency["usd"] : 0))
+
         .ForMember(d => d.ChangePercentage24hBtc, o => o.MapFrom(s =>
           s.PriceChangePercentage24HInCurrency.ContainsKey("btc") ? s.PriceChangePercentage24HInCurrency["btc"] : 0))
         .ForMember(d => d.ChangePercentage24hUsd, o => o.MapFrom(s =>

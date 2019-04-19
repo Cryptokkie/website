@@ -4,6 +4,9 @@ namespace Posmn.CoinData.Models
 {
   public class MarketData
   {
+    public double ChangePercentage1hBtc { get; set; }
+    public double ChangePercentage1hUsd { get; set; }
+
     public double ChangePercentage24hBtc { get; set; }
     public double ChangePercentage24hUsd { get; set; }
 
