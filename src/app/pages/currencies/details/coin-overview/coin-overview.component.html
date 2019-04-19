@@ -5,58 +5,13 @@
     <div class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
       <div class="align-center label-value">
         <div class="block-icon pop-top small">
-          <mat-icon>info</mat-icon>
+          <i class="fab fa-twitter"></i>
         </div>
       </div>
 
-      <div class="align-left label-value">
-        <p>{{ coin.description }}</p>
+      <div>
+        <a class="twitter-timeline" href="{{ coin.social.twitterLink }}"></a>
       </div>
-
-      <div class="align-left label-value">
-        <a mat-button color="gray" *ngIf="coin.links.homepage" target="_blank" [href]="coin.links.homepage">
-          <mat-icon>home</mat-icon>&nbsp;WEBSITE
-        </a>
-        <a mat-button color="gray" *ngIf="coin.links.explorer" target="_blank" [href]="coin.links.explorer">
-          <mat-icon>view_stream</mat-icon>&nbsp;EXPLORER
-        </a>
-        <a mat-button color="gray" *ngIf="coin.links.github" target="_blank" href="{{coin.links.github}}"><i
-            class="fab fa-github"></i>&nbsp;GITHUB</a>
-        <a mat-button color="gray" *ngIf="coin.links.bitbucket" target="_blank" href="{{coin.links.bitbucket}}"><i
-            class="fab fa-bitbucket"></i>&nbsp;Bitbucket</a>
-
-        <a mat-button color="gray" *ngIf="coin.social.twitterLink" target="_blank" href="{{coin.social.twitterLink}}">
-          <i class="fab fa-twitter"></i>
-          Twitter ({{coin.social.twitterFollowers}})
-        </a>
-
-        <a mat-button color="gray" *ngIf="coin.social.facebookLink" target="_blank" href="{{coin.social.facebookLink}}">
-          <i class="fab fa-facebook"></i>
-          Facebook ({{coin.social.facebookLikes}})
-        </a>
-
-        <a mat-button color="gray" *ngIf="coin.social.telegramLink" target="_blank" href="{{coin.social.telegramLink}}">
-          <i class="fab fa-telegram"></i>
-          Telegram ({{coin.social.telegramUserCount}})
-        </a>
-
-        <a mat-button color="gray" *ngIf="coin.social.bitcointalkLink" target="_blank"
-          href="{{coin.social.bitcointalkLink}}">
-          <i class="fab fa-bitcoin"></i>
-          Bitcointalk
-        </a>
-
-        <a mat-button color="gray" *ngIf="coin.social.redditLink" target="_blank" href="{{coin.social.redditLink}}">
-          <i class="fab fa-reddit"></i>
-          Reddit ({{coin.social.redditSubscribers}})
-        </a>
-
-        <a mat-button color="gray" *ngIf="coin.social.discordLink" target="_blank" href="{{coin.social.discordLink}}">
-          <i class="fab fa-discord"></i>
-          Discord
-        </a>
-      </div>
-
     </div>
 
   </div>
@@ -64,13 +19,13 @@
   <div fxFlex="70" fxLayout="column" fxLayoutGap="40px">
 
     <div fxLayout="row" fxLayoutGap="20px">
-      <app-change-percentage title="1h" [usdValue]="coin.marketData.changePercentage1hUsd"
+      <app-change-percentage fxFlex="25" title="1h" [usdValue]="coin.marketData.changePercentage1hUsd"
         [btcValue]="coin.marketData.changePercentage1hBtc"></app-change-percentage>
-      <app-change-percentage title="24h" [usdValue]="coin.marketData.changePercentage24hUsd"
+      <app-change-percentage fxFlex="25" title="24h" [usdValue]="coin.marketData.changePercentage24hUsd"
         [btcValue]="coin.marketData.changePercentage24hBtc"></app-change-percentage>
-      <app-change-percentage title="30d" [usdValue]="coin.marketData.changePercentage30dUsd"
+      <app-change-percentage fxFlex="25" title="30d" [usdValue]="coin.marketData.changePercentage30dUsd"
         [btcValue]="coin.marketData.changePercentage30dBtc"></app-change-percentage>
-      <app-change-percentage title="1y" [usdValue]="coin.marketData.changePercentage1yUsd"
+      <app-change-percentage fxFlex="25" title="1y" [usdValue]="coin.marketData.changePercentage1yUsd"
         [btcValue]="coin.marketData.changePercentage1yBtc"></app-change-percentage>
     </div>
 
@@ -101,6 +56,70 @@
           </p>
         </div>
       </div>
+    </div>
+
+    <div class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
+      <div class="align-center label-value">
+        <div class="block-icon pop-top small">
+          <mat-icon>info</mat-icon>
+        </div>
+      </div>
+
+      <div class="align-left label-value">
+        <p *ngIf="!panelOpen">{{ coin.description | slice:0:350 }}<span *ngIf="coin.description.length > 350">...</span>
+        </p>
+        <p *ngIf="!!panelOpen">{{ coin.description }}</p>
+        <div class="align-center" *ngIf="coin.description.length > 350">
+          <button mat-icon-button mat-stroked-button (click)="panelOpen = !panelOpen">
+            <mat-icon *ngIf="!panelOpen">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="!!panelOpen">keyboard_arrow_up</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="align-left label-value">
+          <a mat-button color="gray" *ngIf="coin.links.homepage" target="_blank" [href]="coin.links.homepage">
+            <mat-icon>home</mat-icon>&nbsp;WEBSITE
+          </a>
+          <a mat-button color="gray" *ngIf="coin.links.explorer" target="_blank" [href]="coin.links.explorer">
+            <mat-icon>view_stream</mat-icon>&nbsp;EXPLORER
+          </a>
+          <a mat-button color="gray" *ngIf="coin.links.github" target="_blank" href="{{coin.links.github}}"><i
+              class="fab fa-github"></i>&nbsp;GITHUB</a>
+          <a mat-button color="gray" *ngIf="coin.links.bitbucket" target="_blank" href="{{coin.links.bitbucket}}"><i
+              class="fab fa-bitbucket"></i>&nbsp;Bitbucket</a>
+  
+          <a mat-button color="gray" *ngIf="coin.social.twitterLink" target="_blank" href="{{coin.social.twitterLink}}">
+            <i class="fab fa-twitter"></i>
+            Twitter ({{coin.social.twitterFollowers}})
+          </a>
+  
+          <a mat-button color="gray" *ngIf="coin.social.facebookLink" target="_blank" href="{{coin.social.facebookLink}}">
+            <i class="fab fa-facebook"></i>
+            Facebook ({{coin.social.facebookLikes}})
+          </a>
+  
+          <a mat-button color="gray" *ngIf="coin.social.telegramLink" target="_blank" href="{{coin.social.telegramLink}}">
+            <i class="fab fa-telegram"></i>
+            Telegram ({{coin.social.telegramUserCount}})
+          </a>
+  
+          <a mat-button color="gray" *ngIf="coin.social.bitcointalkLink" target="_blank"
+            href="{{coin.social.bitcointalkLink}}">
+            <i class="fab fa-bitcoin"></i>
+            Bitcointalk
+          </a>
+  
+          <a mat-button color="gray" *ngIf="coin.social.redditLink" target="_blank" href="{{coin.social.redditLink}}">
+            <i class="fab fa-reddit"></i>
+            Reddit ({{coin.social.redditSubscribers}})
+          </a>
+  
+          <a mat-button color="gray" *ngIf="coin.social.discordLink" target="_blank" href="{{coin.social.discordLink}}">
+            <i class="fab fa-discord"></i>
+            Discord
+          </a>
+        </div>
     </div>
 
   </div>

@@ -133,7 +133,14 @@ a {
     @include mat-elevation(10, #333, 0.5);
 
     mat-icon {
-      @include md-icon-size(40px);
+      @include icon-size(40px);
+      color: white;
+    }
+
+    .fab {
+      font-size: 30px;
+      vertical-align: text-bottom;
+      margin: 0;
       color: white;
     }
 
@@ -143,7 +150,7 @@ a {
       width: 30px;
 
       mat-icon {
-        @include md-icon-size(30px);
+        @include icon-size(30px);
       }
     }
   }

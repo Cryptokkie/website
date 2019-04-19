@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Coin } from 'src/app/coin-info/coin.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { Coin } from 'src/app/coin-info/coin.model';
   templateUrl: './coin-overview.component.html',
   styleUrls: ['./coin-overview.component.scss']
 })
-export class CoinOverviewComponent implements OnInit {
+export class CoinOverviewComponent implements OnInit, AfterViewInit {
 
   @Input()
   coin: Coin;
@@ -18,5 +18,10 @@ export class CoinOverviewComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  ngAfterViewInit(): void {
+    // @ts-ignore
+    twttr.widgets.load();
+}
 
 }

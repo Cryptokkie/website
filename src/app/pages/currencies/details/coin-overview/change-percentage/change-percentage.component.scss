@@ -1,72 +1,153 @@
 @import "styles";
 
+$font-size: 22;
+
 .change-percentage {
-    h4 {
-      font-size: 24px;
-      margin: 0;
-  
-      /deep/ {
-        mat-icon {
-          @include md-icon-size(24px);
-          line-height: 20px;
-          vertical-align: middle;
-        }
+  hr {
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+
+  p {
+    font-size: #{$font-size / 22 * 18}px;
+  }
+
+  h4 {
+    font-size: #{$font-size / 22 * 32}px;
+    line-height: #{$font-size / 22 * 32}px;
+    margin: 0;
+
+    /deep/ {
+      mat-icon {
+        @include icon-size(#{$font-size}px);
+        line-height: #{$font-size / 22 * 18}px;
+        vertical-align: middle;
       }
     }
-  
-    h5 {
-      font-size: 14px;
-      margin: 0;
-      color: rgba(255,255,255,0.5);
-  
-      /deep/ {
-        .positive-number,
-        .negative-number {
-          color: rgba(255,255,255,0.5);
-        }
-  
-        mat-icon {
-          @include md-icon-size(14px);
-          line-height: 10px;
-          vertical-align: middle;
-        }
+  }
+
+  h5 {
+    font-size: #{$font-size / 22 * 18}px;
+    line-height: #{$font-size / 22 * 18}px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.5);
+
+    /deep/ {
+      .positive-number,
+      .negative-number {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      mat-icon {
+        @include icon-size(#{$font-size / 22 * 14}px);
+        line-height: #{$font-size / 22 * 10}px;
+        vertical-align: middle;
       }
     }
-  
-    padding: 15px;
-    border-radius: 5px;
-  
-    &,
-    /deep/ .positive-number,
-    /deep/ .negative-number {
-      color: white;
-    }
-  
+  }
+
+  padding: 15px;
+  border-radius: 5px;
+
+  &,
+  /deep/ .positive-number,
+  /deep/ .negative-number {
+    color: white;
+  }
+
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    from(mat-color(mat-palette($mat-grey), 700)),
+    to(mat-color(mat-palette($mat-grey), 500))
+  );
+
+  &.positive {
     background: -webkit-gradient(
       linear,
       left top,
       right bottom,
-      from(mat-color(mat-palette($mat-grey), 700)),
-      to(mat-color(mat-palette($mat-grey), 500))
+      from(mat-color(mat-palette($mat-teal), 700)),
+      to(mat-color(mat-palette($mat-teal), 300))
     );
-  
-    &.positive {
-      background: -webkit-gradient(
-          linear,
-          left top,
-          right bottom,
-          from(mat-color(mat-palette($mat-teal), 700)),
-          to(mat-color(mat-palette($mat-teal), 300))
-        );
+  }
+
+  &.negative {
+    background: -webkit-gradient(
+      linear,
+      left top,
+      right bottom,
+      from(mat-color(mat-palette($mat-red), 700)),
+      to(mat-color(mat-palette($mat-red), 300))
+    );
+  }
+
+  &.lg {
+    p {
+      @include font-size-lg(#{$font-size / 22 * 14}, #{$font-size / 22 * 18});
     }
-  
-    &.negative {
-      background: -webkit-gradient(
-          linear,
-          left top,
-          right bottom,
-          from(mat-color(mat-palette($mat-red), 700)),
-          to(mat-color(mat-palette($mat-red), 300))
-        );
+    h4 {
+      @include font-size-lg(#{$font-size}, #{$font-size / 22 * 32});
+    }
+    h5 {
+      @include font-size-lg(#{$font-size / 22 * 14}, #{$font-size / 22 * 18});
     }
   }
+
+  &.md {
+    p {
+      @include font-size-md(#{$font-size / 22 * 10}, #{$font-size / 22 * 14});
+    }
+    h4 {
+      @include font-size-md(#{$font-size / 22 * 14}, #{$font-size});
+      /deep/ mat-icon {
+        display: none;
+      }
+    }
+
+    h5 {
+      @include font-size-md(#{$font-size / 22 * 10}, #{$font-size / 22 * 14});
+      /deep/ mat-icon {
+        display: none;
+      }
+    }
+  }
+
+  &.sm {
+    p {
+      @include font-size-sm(#{$font-size / 22 * 10}, #{$font-size / 22 * 14});
+    }
+    h4 {
+      @include font-size-sm(#{$font-size / 22 * 14}, #{$font-size / 22 * 22});
+      /deep/ mat-icon {
+        display: none;
+      }
+    }
+
+    h5 {
+      @include font-size-sm(#{$font-size / 22 * 10}, #{$font-size / 22 * 14});
+      /deep/ mat-icon {
+        display: none;
+      }
+    }
+  }
+
+  &.xs {
+    p {
+      @include font-size-xs(#{$font-size / 22 * 12});
+    }
+    h4 {
+      @include font-size-xs(#{$font-size});
+      /deep/ mat-icon {
+        display: none;
+      }
+    }
+
+    h5 {
+      @include font-size-xs(#{$font-size / 22 * 12});
+      /deep/ mat-icon {
+        display: none;
+      }
+    }
+  }
+}
