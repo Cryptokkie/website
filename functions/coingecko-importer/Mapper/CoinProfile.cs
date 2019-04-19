@@ -67,7 +67,7 @@ namespace coingecko_importer.Mapper
 
           .ForMember(d => d.ChangePercentage1yBtc, o => o.MapFrom(s =>
           s.PriceChangePercentage1YInCurrency.ContainsKey("btc") ? s.PriceChangePercentage1YInCurrency["btc"] : 0))
-        .ForMember(d => d.ChangePercentage7dUsd, o => o.MapFrom(s =>
+        .ForMember(d => d.ChangePercentage1yUsd, o => o.MapFrom(s =>
           s.PriceChangePercentage1YInCurrency.ContainsKey("usd") ? s.PriceChangePercentage1YInCurrency["usd"] : 0))
 
         .ForMember(d => d.DailyVolumeBtc, o => o.MapFrom(s =>

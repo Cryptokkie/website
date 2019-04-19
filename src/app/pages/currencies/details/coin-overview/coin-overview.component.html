@@ -1,11 +1,16 @@
 <div fxLayout="row" fxLayoutGap="40px" fxLayout.lt-sm="column">
 
-  <div fxFlex="20" fxLayout="column" fxLayoutGap="40px">
+  <div fxFlex="30" fxLayout="column" fxLayoutGap="40px">
+
     <div class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
       <div class="align-center label-value">
-        <div class="block-icon pop-top small grey">
-          <mat-icon>link</mat-icon>
+        <div class="block-icon pop-top small">
+          <mat-icon>info</mat-icon>
         </div>
+      </div>
+
+      <div class="align-left label-value">
+        <p>{{ coin.description }}</p>
       </div>
 
       <div class="align-left label-value">
@@ -19,18 +24,6 @@
             class="fab fa-github"></i>&nbsp;GITHUB</a>
         <a mat-button color="gray" *ngIf="coin.links.bitbucket" target="_blank" href="{{coin.links.bitbucket}}"><i
             class="fab fa-bitbucket"></i>&nbsp;Bitbucket</a>
-      </div>
-
-    </div>
-
-    <div class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
-      <div class="align-center label-value">
-        <div class="block-icon pop-top small grey">
-          <mat-icon>forum</mat-icon>
-        </div>
-      </div>
-
-      <div class="align-left label-value">
 
         <a mat-button color="gray" *ngIf="coin.social.twitterLink" target="_blank" href="{{coin.social.twitterLink}}">
           <i class="fab fa-twitter"></i>
@@ -68,7 +61,19 @@
 
   </div>
 
-  <div fxFlex="80" fxLayout="column" fxLayoutGap="40px">
+  <div fxFlex="70" fxLayout="column" fxLayoutGap="40px">
+
+    <div fxLayout="row" fxLayoutGap="20px">
+      <app-change-percentage title="1h" [usdValue]="coin.marketData.changePercentage1hUsd"
+        [btcValue]="coin.marketData.changePercentage1hBtc"></app-change-percentage>
+      <app-change-percentage title="24h" [usdValue]="coin.marketData.changePercentage24hUsd"
+        [btcValue]="coin.marketData.changePercentage24hBtc"></app-change-percentage>
+      <app-change-percentage title="30d" [usdValue]="coin.marketData.changePercentage30dUsd"
+        [btcValue]="coin.marketData.changePercentage30dBtc"></app-change-percentage>
+      <app-change-percentage title="1y" [usdValue]="coin.marketData.changePercentage1yUsd"
+        [btcValue]="coin.marketData.changePercentage1yBtc"></app-change-percentage>
+    </div>
+
     <div class="block shadow">
       <div class="chart pop-top yellow">
         <app-price-chart [coin]="coin" [timeframe]="priceChartTimeframe">
@@ -89,12 +94,12 @@
           <h4>Price Activity in USD</h4>
         </div>
         <div class="label-value align-right">
-        <p>Current price is <span class="accent">${{ coin.marketData.lastPriceUsd | number }}</span>.</p>
-        <p>
-          <app-percentage [value]="coin.marketData.dailyChangePercentageUsd"></app-percentage>
-          {{ coin.marketData.dailyChangePercentageUsd < 0 ? 'decrease' : 'increase' }} since yesterday.
-        </p>
-      </div>
+          <p>Current price is <span class="accent">${{ coin.marketData.lastPriceUsd | number }}</span>.</p>
+          <p>
+            <app-percentage [value]="coin.marketData.changePercentage24hUsd"></app-percentage>
+            {{ coin.marketData.changePercentage24hUsd < 0 ? 'decrease' : 'increase' }} since yesterday.
+          </p>
+        </div>
       </div>
     </div>
 

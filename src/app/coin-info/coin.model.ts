@@ -6,8 +6,30 @@ export interface Links {
 }
 
 export interface MarketData {
-    dailyChangePercentageBtc: number;
-    dailyChangePercentageUsd: number;
+    changePercentage1hBtc: number;
+    changePercentage1hUsd: number;
+
+    changePercentage24hBtc: number;
+    changePercentage24hUsd: number;
+
+    changePercentage7dBtc: number;
+    changePercentage7dUsd: number;
+
+    changePercentage14dBtc: number;
+    changePercentage14dUsd: number;
+
+    changePercentage30dBtc: number;
+    changePercentage30dUsd: number;
+
+    changePercentage60dBtc: number;
+    changePercentage60dUsd: number;
+
+    changePercentage200dBtc: number;
+    changePercentage200dUsd: number;
+
+    changePercentage1yBtc: number;
+    changePercentage1yUsd: number;
+
     dailyHighBtc: number;
     dailyHighUsd: number;
     dailyLowBtc: number;
@@ -21,6 +43,12 @@ export interface MarketData {
     marketcapUsd: number;
     totalSupply: number;
     circulatingSupply: number;
+    alltimeHighBtc: number;
+    alltimeHighUsd: number;
+    alltimeHighPercentageBtc: number;
+    alltimeHighPercentageUsd: number;
+    alltimeHighDateBtc: string;
+    alltimeHighDateUsd: string;
 }
 
 export interface Social {
@@ -42,6 +70,7 @@ export interface Coin {
     marketData: MarketData;
     marketcapRank: number;
     name: string;
+    description: string;
     social: Social;
     ticker: string;
     imageUrlSmall: string;

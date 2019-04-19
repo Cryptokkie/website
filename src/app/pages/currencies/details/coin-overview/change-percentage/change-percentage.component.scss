@@ -1,0 +1,72 @@
+@import "styles";
+
+.change-percentage {
+    h4 {
+      font-size: 24px;
+      margin: 0;
+  
+      /deep/ {
+        mat-icon {
+          @include md-icon-size(24px);
+          line-height: 20px;
+          vertical-align: middle;
+        }
+      }
+    }
+  
+    h5 {
+      font-size: 14px;
+      margin: 0;
+      color: rgba(255,255,255,0.5);
+  
+      /deep/ {
+        .positive-number,
+        .negative-number {
+          color: rgba(255,255,255,0.5);
+        }
+  
+        mat-icon {
+          @include md-icon-size(14px);
+          line-height: 10px;
+          vertical-align: middle;
+        }
+      }
+    }
+  
+    padding: 15px;
+    border-radius: 5px;
+  
+    &,
+    /deep/ .positive-number,
+    /deep/ .negative-number {
+      color: white;
+    }
+  
+    background: -webkit-gradient(
+      linear,
+      left top,
+      right bottom,
+      from(mat-color(mat-palette($mat-grey), 700)),
+      to(mat-color(mat-palette($mat-grey), 500))
+    );
+  
+    &.positive {
+      background: -webkit-gradient(
+          linear,
+          left top,
+          right bottom,
+          from(mat-color(mat-palette($mat-teal), 700)),
+          to(mat-color(mat-palette($mat-teal), 300))
+        );
+    }
+  
+    &.negative {
+      background: -webkit-gradient(
+          linear,
+          left top,
+          right bottom,
+          from(mat-color(mat-palette($mat-red), 700)),
+          to(mat-color(mat-palette($mat-red), 300))
+        );
+    }
+  }
