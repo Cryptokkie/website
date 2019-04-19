@@ -7,9 +7,7 @@
   left: 0;
   right: 0;
 
-  // background-image: url('/assets/background-chart.jpg');
-  // background-position-x: 1440px;
-  // background-size: contain;
+  background-color: #eee;
 }
 
 .mobile-toolbar {
@@ -34,8 +32,7 @@
 }
 
 mat-sidenav-container {
-  // max-width: 1600px;
-  // @include mat-elevation(24, black, 1);
+  max-width: 1600px;
 }
 
 mat-sidenav-container > mat-sidenav {
