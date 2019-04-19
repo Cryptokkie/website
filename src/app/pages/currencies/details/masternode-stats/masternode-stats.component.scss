@@ -5,9 +5,15 @@
   display: block;
 }
 
+p mat-icon {
+  @include md-icon-size(18px);
+  line-height: 16px;
+  vertical-align: middle;
+}
+
 .soft-accent {
   // font-weight: normal;
-  color: mat-color($accent,700,0.8);
+  color: mat-color($accent, 700, 0.8);
 }
 
 .timeframe-buttons {
