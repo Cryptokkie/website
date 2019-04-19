@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatTab, MatTabGroup } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 import { Coin } from 'src/app/coin-info/coin.model';
 import { LoaderService } from 'src/app/loader/loader.service';
+import { CoinOverviewComponent } from './coin-overview/coin-overview.component';
 
 @Component({
   selector: 'app-details',
@@ -30,8 +30,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   tabIndex: number;
   coin: Coin;
 
-  @ViewChild('tabCoinOverview') tabCoinOverview: MatTab;
-  @ViewChild('tabGroup') tabGroup: MatTabGroup;
+  @ViewChild('coinOverviewTab') coinOverviewTab: CoinOverviewComponent;
 
   constructor(
     private coinInfoService: CoinInfoService,
@@ -71,7 +70,15 @@ export class DetailsComponent implements OnInit, OnDestroy {
       relativeUrl = relativeUrl.replace(new RegExp('/' + this.escapeRegExp(x) + '$'), '');
     });
 
-    this.location.replaceState(relativeUrl + '/' + this.getTabByIndex(index));
+    const tab = this.getTabByIndex(index);
+
+    this.location.replaceState(relativeUrl + '/' + tab);
+  }
+
+  animationDone() {
+    if (this.location.path().endsWith('coin-overview')) {
+      this.coinOverviewTab.update();
+    }
   }
 
   getTabByIndex(index: number) {
