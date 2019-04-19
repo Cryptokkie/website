@@ -30,10 +30,41 @@ namespace coingecko_importer.Mapper
           : null));
 
       this.CreateMap<CoinGecko.Entities.Response.Coins.CoinByIdMarketData, Posmn.CoinData.Models.MarketData>()
-        .ForMember(d => d.DailyChangePercentageBtc, o => o.MapFrom(s =>
+        .ForMember(d => d.ChangePercentage24hBtc, o => o.MapFrom(s =>
           s.PriceChangePercentage24HInCurrency.ContainsKey("btc") ? s.PriceChangePercentage24HInCurrency["btc"] : 0))
-        .ForMember(d => d.DailyChangePercentageUsd, o => o.MapFrom(s =>
+        .ForMember(d => d.ChangePercentage24hUsd, o => o.MapFrom(s =>
           s.PriceChangePercentage24HInCurrency.ContainsKey("usd") ? s.PriceChangePercentage24HInCurrency["usd"] : 0))
+
+        .ForMember(d => d.ChangePercentage7dBtc, o => o.MapFrom(s =>
+          s.PriceChangePercentage7DInCurrency.ContainsKey("btc") ? s.PriceChangePercentage7DInCurrency["btc"] : 0))
+        .ForMember(d => d.ChangePercentage7dUsd, o => o.MapFrom(s =>
+          s.PriceChangePercentage7DInCurrency.ContainsKey("usd") ? s.PriceChangePercentage7DInCurrency["usd"] : 0))
+
+          .ForMember(d => d.ChangePercentage14dBtc, o => o.MapFrom(s =>
+          s.PriceChangePercentage14DInCurrency.ContainsKey("btc") ? s.PriceChangePercentage14DInCurrency["btc"] : 0))
+        .ForMember(d => d.ChangePercentage30dUsd, o => o.MapFrom(s =>
+          s.PriceChangePercentage14DInCurrency.ContainsKey("usd") ? s.PriceChangePercentage14DInCurrency["usd"] : 0))
+
+          .ForMember(d => d.ChangePercentage30dBtc, o => o.MapFrom(s =>
+          s.PriceChangePercentage30DInCurrency.ContainsKey("btc") ? s.PriceChangePercentage30DInCurrency["btc"] : 0))
+        .ForMember(d => d.ChangePercentage30dUsd, o => o.MapFrom(s =>
+          s.PriceChangePercentage30DInCurrency.ContainsKey("usd") ? s.PriceChangePercentage30DInCurrency["usd"] : 0))
+
+          .ForMember(d => d.ChangePercentage60dBtc, o => o.MapFrom(s =>
+          s.PriceChangePercentage60DInCurrency.ContainsKey("btc") ? s.PriceChangePercentage60DInCurrency["btc"] : 0))
+        .ForMember(d => d.ChangePercentage60dUsd, o => o.MapFrom(s =>
+          s.PriceChangePercentage60DInCurrency.ContainsKey("usd") ? s.PriceChangePercentage60DInCurrency["usd"] : 0))
+
+          .ForMember(d => d.ChangePercentage200dBtc, o => o.MapFrom(s =>
+          s.PriceChangePercentage200DInCurrency.ContainsKey("btc") ? s.PriceChangePercentage200DInCurrency["btc"] : 0))
+        .ForMember(d => d.ChangePercentage200dUsd, o => o.MapFrom(s =>
+          s.PriceChangePercentage200DInCurrency.ContainsKey("usd") ? s.PriceChangePercentage200DInCurrency["usd"] : 0))
+
+          .ForMember(d => d.ChangePercentage1yBtc, o => o.MapFrom(s =>
+          s.PriceChangePercentage1YInCurrency.ContainsKey("btc") ? s.PriceChangePercentage1YInCurrency["btc"] : 0))
+        .ForMember(d => d.ChangePercentage7dUsd, o => o.MapFrom(s =>
+          s.PriceChangePercentage1YInCurrency.ContainsKey("usd") ? s.PriceChangePercentage1YInCurrency["usd"] : 0))
+
         .ForMember(d => d.DailyVolumeBtc, o => o.MapFrom(s =>
           s.TotalVolume.ContainsKey("btc") ? s.TotalVolume["btc"] : 0))
         .ForMember(d => d.DailyVolumeUsd, o => o.MapFrom(s =>

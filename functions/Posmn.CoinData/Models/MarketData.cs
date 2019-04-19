@@ -4,8 +4,27 @@ namespace Posmn.CoinData.Models
 {
   public class MarketData
   {
-    public double DailyChangePercentageBtc { get; set; }
-    public double DailyChangePercentageUsd { get; set; }
+    public double ChangePercentage24hBtc { get; set; }
+    public double ChangePercentage24hUsd { get; set; }
+
+    public double ChangePercentage7dBtc { get; set; }
+    public double ChangePercentage7dUsd { get; set; }
+
+    public double ChangePercentage14dBtc { get; set; }
+    public double ChangePercentage14dUsd { get; set; }
+
+    public double ChangePercentage30dBtc { get; set; }
+    public double ChangePercentage30dUsd { get; set; }
+
+    public double ChangePercentage60dBtc { get; set; }
+    public double ChangePercentage60dUsd { get; set; }
+
+    public double ChangePercentage200dBtc { get; set; }
+    public double ChangePercentage200dUsd { get; set; }
+
+    public double ChangePercentage1yBtc { get; set; }
+    public double ChangePercentage1yUsd { get; set; }
+
     public double DailyVolumeBtc { get; set; }
     public double DailyVolumeUsd { get; set; }
     public double LastPriceBtc { get; set; }
