@@ -32,6 +32,9 @@ export class LineChartComponent implements OnInit, OnChanges {
     elements: {
       point: {
         radius: 0
+      },
+      line: {
+        tension: 0
       }
     },
     tooltips: {

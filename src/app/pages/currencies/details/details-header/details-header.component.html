@@ -1,15 +1,15 @@
 <div fxLayout="row" fxLayoutGap="40px" fxLayout.lt-md="column" fxLayoutAlign="space-between flex-start"
   fxLayoutAlign.lt-md>
   <div fxFlex="40" fxLayout="column" class="block shadow price"
-    [class.positive]="coin.marketData.dailyChangePercentageUsd > 0"
-    [class.negative]="coin.marketData.dailyChangePercentageUsd < 0">
+    [class.positive]="coin.marketData.changePercentage24hUsd > 0"
+    [class.negative]="coin.marketData.changePercentage24hUsd < 0">
     <p class="big">
       ${{ coin.marketData.lastPriceUsd | number:'0.2-5' }}
-      <app-percentage [value]="coin.marketData.dailyChangePercentageUsd"></app-percentage>
+      <app-percentage [value]="coin.marketData.changePercentage24hUsd"></app-percentage>
     </p>
     <p class="medium margin-bottom">
       {{ coin.marketData.lastPriceBtc | number:'0.2-8' }} BTC
-      <app-percentage [value]="coin.marketData.dailyChangePercentageBtc"></app-percentage>
+      <app-percentage [value]="coin.marketData.changePercentage24hUsd"></app-percentage>
     </p>
   </div>
 

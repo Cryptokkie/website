@@ -1,0 +1,12 @@
+<div class="block shadow change-percentage" [class.positive]="usdValue > 0"
+  [class.negative]="usdValue < 0">
+  <div class="align-left label-value">
+    <p>{{ title }}</p>
+    <h4>
+      <app-percentage [value]="usdValue"></app-percentage>
+    </h4>
+    <h5 class="gray">
+      <app-percentage [value]="btcValue"></app-percentage> BTC
+    </h5>
+  </div>
+</div>

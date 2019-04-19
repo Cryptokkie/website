@@ -57,7 +57,7 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
           imageUrlThumbnail: x.imageUrlThumbnail,
           name: x.name,
           lastPriceCurrency: x.marketData.lastPriceUsd,
-          dailyChangePercentageCurrency: x.marketData.dailyChangePercentageUsd,
+          dailyChangePercentageCurrency: x.marketData.changePercentage24hUsd,
           dailyVolumeCurrency: x.marketData.dailyVolumeUsd,
           totalSupply: x.marketData.totalSupply,
           marketcapCurrency: x.marketData.marketcapUsd

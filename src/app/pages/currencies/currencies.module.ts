@@ -11,6 +11,7 @@ import { DetailsComponent } from './details/details.component';
 import { MasternodeStatsComponent } from './details/masternode-stats/masternode-stats.component';
 import { AmountMasternodesChartComponent } from './details/masternode-stats/amount-masternodes-chart/amount-masternodes-chart.component';
 import { PriceChartComponent } from './details/coin-overview/price-chart/price-chart.component';
+import { ChangePercentageComponent } from './details/coin-overview/change-percentage/change-percentage.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PriceChartComponent } from './details/coin-overview/price-chart/price-c
     MasternodeStatsComponent,
     CoinOverviewComponent,
     AmountMasternodesChartComponent,
-    PriceChartComponent],
+    PriceChartComponent,
+    ChangePercentageComponent],
   imports: [
     CommonModule,
     CoinInfoModule,
