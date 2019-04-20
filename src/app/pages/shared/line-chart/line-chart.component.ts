@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { Color, Label, BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-line-chart',
@@ -17,6 +17,9 @@ export class LineChartComponent implements OnInit, OnChanges {
 
   @Input()
   dataPoints: number[];
+
+  @Input()
+  barDataPoints: number[];
 
   @Input()
   labels: any[];
@@ -48,6 +51,7 @@ export class LineChartComponent implements OnInit, OnChanges {
     scales: {
       xAxes: [{
         type: 'time',
+        distribution: 'series',
         time: {
           parser: 'MM/DD/YYYY',
           tooltipFormat: 'll'
@@ -65,6 +69,8 @@ export class LineChartComponent implements OnInit, OnChanges {
         }
       }],
       yAxes: [{
+        id: 'line',
+        position: 'left',
         ticks: {
           maxTicksLimit: 6,
           padding: 20,
@@ -75,6 +81,20 @@ export class LineChartComponent implements OnInit, OnChanges {
           drawBorder: false,
           borderDash: [3, 3],
           color: 'rgb(255,255,255,0.6)'
+        },
+      },
+      {
+        beforeFit: (scale) => {
+          scale.options.ticks.max = Math.max.apply(null, this.barDataPoints) * 5;
+        },
+        id: 'bar',
+        position: 'right',
+        ticks: {
+          display: false,
+          min: 0
+        },
+        gridLines: {
+          display: false
         }
       }]
     }
@@ -87,6 +107,8 @@ export class LineChartComponent implements OnInit, OnChanges {
       fill: false
     },
   ];
+
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
 
   constructor() { }
 
@@ -111,8 +133,29 @@ export class LineChartComponent implements OnInit, OnChanges {
     this.lineChartColors[0].backgroundColor = hexColor;
 
     this.lineChartData = [
-      { data: this.dataPoints },
+      {
+        type: 'line',
+        label: 'Price',
+        data: this.dataPoints,
+        yAxisID: 'line'
+      }
     ];
+
+    if (this.barDataPoints) {
+      // this.lineChartOptions.scales.yAxes[1].ticks.max = Math.max.apply(null, this.barDataPoints) * 2;
+
+      this.lineChartData.push({
+        type: 'bar',
+        label: 'Volume',
+        backgroundColor: 'rgb(255,255,255,0.35)',
+        hoverBackgroundColor: 'rgb(255,255,255,0.5)',
+        data: this.barDataPoints,
+
+        yAxisID: 'bar'
+      });
+
+      this.chart.update();
+    }
     // @ts-ignore
     this.lineChartLabels = this.labels;
   }

@@ -47,8 +47,9 @@ a {
   color: mat-color($accent);
 }
 
-.mat-gray {
-  color: mat-color(mat-palette($mat-grey), 600);
+.mat-grey {
+  color: white;
+  background-color: mat-color(mat-palette($mat-grey), 600);
 }
 
 .block {
@@ -74,6 +75,16 @@ a {
         right bottom,
         from(mat-color(mat-palette($mat-amber), 700)),
         to(mat-color(mat-palette($mat-amber), 300))
+      );
+    }
+
+    &.grey {
+      background: -webkit-gradient(
+        linear,
+        left top,
+        right bottom,
+        from(mat-color(mat-palette($mat-grey), 700)),
+        to(mat-color(mat-palette($mat-grey), 500))
       );
     }
 
