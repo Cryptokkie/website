@@ -29,22 +29,24 @@
     </div>
 
     <div class="block shadow">
-      <div class="chart pop-top yellow">
+      <div class="chart pop-top grey">
         <app-price-chart [coin]="coin" [timeframe]="priceChartTimeframe">
         </app-price-chart>
       </div>
+      <div>
+        <div class="timeframe-buttons">
+          <button mat-flat-button (click)="priceChartTimeframe = '1d'" [class.mat-grey]="priceChartTimeframe === '1d'">1
+            day</button>
+          <button mat-flat-button (click)="priceChartTimeframe = '1m'" [class.mat-grey]="priceChartTimeframe === '1m'">1
+            month</button>
+          <button mat-flat-button (click)="priceChartTimeframe = '3m'" [class.mat-grey]="priceChartTimeframe === '3m'">3
+            months</button>
+          <button mat-flat-button (click)="priceChartTimeframe = '1y'" [class.mat-grey]="priceChartTimeframe === '1y'">1
+            year</button>
+        </div>
+      </div>
       <div fxLayout="row" fxLayoutAlign="space-between flex-end">
         <div class="label-value">
-          <div class="timeframe-buttons">
-            <button mat-flat-button (click)="priceChartTimeframe = '1d'"
-              [ngClass]="{ 'mat-accent': priceChartTimeframe === '1d' }">1 day</button>
-            <button mat-flat-button (click)="priceChartTimeframe = '1m'"
-              [ngClass]="{ 'mat-accent': priceChartTimeframe === '1m' }">1 month</button>
-            <button mat-flat-button (click)="priceChartTimeframe = '3m'"
-              [ngClass]="{ 'mat-accent': priceChartTimeframe === '3m' }">3 months</button>
-            <button mat-flat-button (click)="priceChartTimeframe = '1y'"
-              [ngClass]="{ 'mat-accent': priceChartTimeframe === '1y' }">1 year</button>
-          </div>
           <h4>Price Activity in USD</h4>
         </div>
         <div class="label-value align-right">
@@ -77,48 +79,48 @@
       </div>
 
       <div class="align-left label-value">
-          <a mat-button color="gray" *ngIf="coin.links.homepage" target="_blank" [href]="coin.links.homepage">
-            <mat-icon>home</mat-icon>&nbsp;WEBSITE
-          </a>
-          <a mat-button color="gray" *ngIf="coin.links.explorer" target="_blank" [href]="coin.links.explorer">
-            <mat-icon>view_stream</mat-icon>&nbsp;EXPLORER
-          </a>
-          <a mat-button color="gray" *ngIf="coin.links.github" target="_blank" href="{{coin.links.github}}"><i
-              class="fab fa-github"></i>&nbsp;GITHUB</a>
-          <a mat-button color="gray" *ngIf="coin.links.bitbucket" target="_blank" href="{{coin.links.bitbucket}}"><i
-              class="fab fa-bitbucket"></i>&nbsp;Bitbucket</a>
-  
-          <a mat-button color="gray" *ngIf="coin.social.twitterLink" target="_blank" href="{{coin.social.twitterLink}}">
-            <i class="fab fa-twitter"></i>
-            Twitter ({{coin.social.twitterFollowers}})
-          </a>
-  
-          <a mat-button color="gray" *ngIf="coin.social.facebookLink" target="_blank" href="{{coin.social.facebookLink}}">
-            <i class="fab fa-facebook"></i>
-            Facebook ({{coin.social.facebookLikes}})
-          </a>
-  
-          <a mat-button color="gray" *ngIf="coin.social.telegramLink" target="_blank" href="{{coin.social.telegramLink}}">
-            <i class="fab fa-telegram"></i>
-            Telegram ({{coin.social.telegramUserCount}})
-          </a>
-  
-          <a mat-button color="gray" *ngIf="coin.social.bitcointalkLink" target="_blank"
-            href="{{coin.social.bitcointalkLink}}">
-            <i class="fab fa-bitcoin"></i>
-            Bitcointalk
-          </a>
-  
-          <a mat-button color="gray" *ngIf="coin.social.redditLink" target="_blank" href="{{coin.social.redditLink}}">
-            <i class="fab fa-reddit"></i>
-            Reddit ({{coin.social.redditSubscribers}})
-          </a>
-  
-          <a mat-button color="gray" *ngIf="coin.social.discordLink" target="_blank" href="{{coin.social.discordLink}}">
-            <i class="fab fa-discord"></i>
-            Discord
-          </a>
-        </div>
+        <a mat-button color="gray" *ngIf="coin.links.homepage" target="_blank" [href]="coin.links.homepage">
+          <mat-icon>home</mat-icon>&nbsp;WEBSITE
+        </a>
+        <a mat-button color="gray" *ngIf="coin.links.explorer" target="_blank" [href]="coin.links.explorer">
+          <mat-icon>view_stream</mat-icon>&nbsp;EXPLORER
+        </a>
+        <a mat-button color="gray" *ngIf="coin.links.github" target="_blank" href="{{coin.links.github}}"><i
+            class="fab fa-github"></i>&nbsp;GITHUB</a>
+        <a mat-button color="gray" *ngIf="coin.links.bitbucket" target="_blank" href="{{coin.links.bitbucket}}"><i
+            class="fab fa-bitbucket"></i>&nbsp;Bitbucket</a>
+
+        <a mat-button color="gray" *ngIf="coin.social.twitterLink" target="_blank" href="{{coin.social.twitterLink}}">
+          <i class="fab fa-twitter"></i>
+          Twitter ({{coin.social.twitterFollowers}})
+        </a>
+
+        <a mat-button color="gray" *ngIf="coin.social.facebookLink" target="_blank" href="{{coin.social.facebookLink}}">
+          <i class="fab fa-facebook"></i>
+          Facebook ({{coin.social.facebookLikes}})
+        </a>
+
+        <a mat-button color="gray" *ngIf="coin.social.telegramLink" target="_blank" href="{{coin.social.telegramLink}}">
+          <i class="fab fa-telegram"></i>
+          Telegram ({{coin.social.telegramUserCount}})
+        </a>
+
+        <a mat-button color="gray" *ngIf="coin.social.bitcointalkLink" target="_blank"
+          href="{{coin.social.bitcointalkLink}}">
+          <i class="fab fa-bitcoin"></i>
+          Bitcointalk
+        </a>
+
+        <a mat-button color="gray" *ngIf="coin.social.redditLink" target="_blank" href="{{coin.social.redditLink}}">
+          <i class="fab fa-reddit"></i>
+          Reddit ({{coin.social.redditSubscribers}})
+        </a>
+
+        <a mat-button color="gray" *ngIf="coin.social.discordLink" target="_blank" href="{{coin.social.discordLink}}">
+          <i class="fab fa-discord"></i>
+          Discord
+        </a>
+      </div>
     </div>
 
   </div>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Coin } from 'src/app/coin-info/coin.model';
+import { GeckoChartData } from './gecko-chart-data.model';
 
 @Component({
   selector: 'app-price-chart',
@@ -19,12 +20,14 @@ export class PriceChartComponent implements OnInit, OnChanges, OnDestroy {
   dataPoints: number[];
   labels: any[];
 
+  barDataPoints: number[];
+
   sub: any;
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.buildChart();
+    // this.buildChart();
   }
 
   ngOnChanges() {
@@ -39,7 +42,7 @@ export class PriceChartComponent implements OnInit, OnChanges, OnDestroy {
     const days = this.daysFromTimeframe();
 
     this.sub = this.httpClient
-      .get<{prices: number[][]}>(`https://api.coingecko.com/api/v3/coins/${this.coin.id}/market_chart?vs_currency=usd&days=${days}`)
+      .get<GeckoChartData>(`https://api.coingecko.com/api/v3/coins/${this.coin.id}/market_chart?vs_currency=usd&days=${days}`)
       .pipe(tap(data => {
         const amountOfDataPointsToShow = 30; // amount of data points on the chart
         const mod = data.prices.length / amountOfDataPointsToShow;
@@ -52,8 +55,12 @@ export class PriceChartComponent implements OnInit, OnChanges, OnDestroy {
               || index === data.prices.length); // always give the last item
         }
 
-        this.labels = slice.map(x => new Date(x[0]));
+        const times = slice.map(x => x[0]);
+        this.labels = times.map(time => new Date(time));
         this.dataPoints = slice.map(x => x[1]);
+        this.barDataPoints = data.total_volumes
+          .filter(x => times.includes(x[0]))
+          .map(x => x[1]);
       }))
       .subscribe();
   }
