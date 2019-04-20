@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label, BaseChartDirective } from 'ng2-charts';
+import { BaseChartDirective, Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-line-chart',
@@ -42,7 +42,18 @@ export class LineChartComponent implements OnInit, OnChanges {
     },
     tooltips: {
       mode: 'index',
-      intersect: false
+      intersect: false,
+      callbacks: {
+        label: (tooltipItem, data) => {
+            let label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+            if (label) {
+                label += ': ';
+            }
+            label += (tooltipItem.yLabel as number).toFixed(2);
+            return label;
+        }
+    }
     },
     hover: {
       mode: 'nearest',
@@ -142,8 +153,6 @@ export class LineChartComponent implements OnInit, OnChanges {
     ];
 
     if (this.barDataPoints) {
-      // this.lineChartOptions.scales.yAxes[1].ticks.max = Math.max.apply(null, this.barDataPoints) * 2;
-
       this.lineChartData.push({
         type: 'bar',
         label: 'Volume',

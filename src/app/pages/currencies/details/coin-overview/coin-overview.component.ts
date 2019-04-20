@@ -33,9 +33,8 @@ export class CoinOverviewComponent implements OnInit, AfterViewInit {
 
   initTwitterWidget() {
 
-    this.twitterEmbed.nativeElement.innerHTML = '';
-    this.twitterEmbed.nativeElement.insertAdjacentHTML('beforeend', '<a class="twitter-timeline" href="'
-      + this.coin.social.twitterLink + '" data-tweet-limit="3"></a>');
+    this.twitterEmbed.nativeElement.innerHTML = '<a class="twitter-timeline" href="'
+    + this.coin.social.twitterLink + '" data-tweet-limit="3"></a>';
 
     (window as any).twttr = ((d, s, id) => {
       let js: any;
