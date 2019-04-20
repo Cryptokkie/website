@@ -56,7 +56,7 @@
           <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
         </h4>
         <hr>
-        <h6>{{ masternodeStats.weeklyReward * coin.marketData.lastPriceBtc }} BTC</h6>
+        <h6>{{ masternodeStats.weeklyReward * coin.marketData.lastPriceBtc | number:'0.2-8' }} BTC</h6>
         <h6>{{ masternodeStats.weeklyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
       </div>
 
@@ -70,7 +70,7 @@
           <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
         </h4>
         <hr>
-        <h6>{{ masternodeStats.monthlyReward * coin.marketData.lastPriceBtc }} BTC</h6>
+        <h6>{{ masternodeStats.monthlyReward * coin.marketData.lastPriceBtc | number:'0.2-8' }} BTC</h6>
         <h6>{{ masternodeStats.monthlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
       </div>
 
@@ -84,7 +84,7 @@
           <mat-icon *ngIf="dailyIncomePercentageUsd() < 0">trending_down</mat-icon>
         </h4>
         <hr>
-        <h6>{{ masternodeStats.yearlyReward * coin.marketData.lastPriceBtc }} BTC</h6>
+        <h6>{{ masternodeStats.yearlyReward * coin.marketData.lastPriceBtc | number:'0.2-8' }} BTC</h6>
         <h6>{{ masternodeStats.yearlyReward | number:'0.0-2' }} {{ coin.ticker | uppercase }}</h6>
       </div>
 
