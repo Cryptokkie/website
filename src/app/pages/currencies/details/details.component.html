@@ -9,7 +9,7 @@
   </app-page-content>
 
   <mat-tab-group [selectedIndex]="tabIndex" (animationDone)="animationDone()" (selectedIndexChange)="tabIndexChange($event)" 
-    class="tabs" ngClass.lt-md="no-horizontal-padding" color="accent">
+    class="tabs" ngClass.lt-sm="no-horizontal-padding" color="accent">
     <mat-tab label="Overview">
       <app-coin-overview #coinOverviewTab [coin]="coin"></app-coin-overview>
     </mat-tab>
