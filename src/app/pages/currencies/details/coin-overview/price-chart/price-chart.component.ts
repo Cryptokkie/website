@@ -17,10 +17,10 @@ export class PriceChartComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   timeframe = '1d';
 
-  prices: number[];
+  dataPoints: number[];
   labels: any[];
 
-  volumes: number[];
+  barDataPoints: number[];
 
   sub: any;
 
@@ -60,11 +60,11 @@ export class PriceChartComponent implements OnInit, OnChanges, OnDestroy {
         slice = slice.sort((a, b) => (a[0] > b[0]) ? 1 : -1);
 
         // get timestamps
-        const timestamps = slice.map(x => x[0]);
-        this.labels = timestamps.map(timestamp => new Date(timestamp));
-        this.prices = slice.map(x => x[1]);
-        this.volumes = data.total_volumes
-          .filter(x => timestamps.includes(x[0]))
+        const times = slice.map(x => x[0]);
+        this.labels = times.map(time => new Date(time));
+        this.dataPoints = slice.map(x => x[1]);
+        this.barDataPoints = data.total_volumes
+          .filter(x => times.includes(x[0]))
           .map(x => x[1]);
       }))
       .subscribe();
