@@ -17,10 +17,10 @@ export class PriceChartComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   timeframe = '1d';
 
-  dataPoints: number[];
+  prices: number[];
   labels: any[];
 
-  barDataPoints: number[];
+  volumes: number[];
 
   sub: any;
 
@@ -48,6 +48,7 @@ export class PriceChartComponent implements OnInit, OnChanges, OnDestroy {
         const mod = data.prices.length / amountOfDataPointsToShow;
         let slice = data.prices;
 
+        // if length of array is too big the pick only 30 items
         if (slice.length > amountOfDataPointsToShow) {
           slice = data.prices
             .filter((val, index) =>
@@ -55,11 +56,15 @@ export class PriceChartComponent implements OnInit, OnChanges, OnDestroy {
               || index === data.prices.length); // always give the last item
         }
 
-        const times = slice.map(x => x[0]);
-        this.labels = times.map(time => new Date(time));
-        this.dataPoints = slice.map(x => x[1]);
-        this.barDataPoints = data.total_volumes
-          .filter(x => times.includes(x[0]))
+        // sort on timestamp
+        slice = slice.sort((a, b) => (a[0] > b[0]) ? 1 : -1);
+
+        // get timestamps
+        const timestamps = slice.map(x => x[0]);
+        this.labels = timestamps.map(timestamp => new Date(timestamp));
+        this.prices = slice.map(x => x[1]);
+        this.volumes = data.total_volumes
+          .filter(x => timestamps.includes(x[0]))
           .map(x => x[1]);
       }))
       .subscribe();
