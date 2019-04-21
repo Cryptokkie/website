@@ -8,32 +8,45 @@
     </div>
 
     <div class="align-center label-value">
-      <p class="soft-accent">ROI <mat-icon matTooltip="Return on investment. The return after one year in percentage and the amount of days to have your investment back.">info_outline</mat-icon></p>
+      <p class="soft-accent">ROI <mat-icon
+          matTooltip="Return on investment. The return after one year in percentage and the amount of days to have your investment back.">
+          info_outline</mat-icon>
+      </p>
       <h4>{{ masternodeStats.yearlyRoi }}%</h4>
       <h5>{{ masternodeStats.collateral / masternodeStats.dailyReward | number:'0.0-0' }} days</h5>
     </div>
     <div class="align-center label-value">
-      <p class="soft-accent">Locked <mat-icon matTooltip="Number of coins locked in masternodes.">info_outline</mat-icon></p>
+      <p class="soft-accent">Locked <mat-icon matTooltip="Number of coins locked in masternodes.">info_outline
+        </mat-icon>
+      </p>
       <h4>{{ masternodeStats.lockedPercentage }}%</h4>
       <h5>{{ masternodeStats.lockedAmount | number }} {{ coin.ticker | uppercase }}</h5>
     </div>
     <div class="align-center label-value">
-      <p class="soft-accent">Collateral <mat-icon matTooltip="Number of coins required to setup a masternode.">info_outline</mat-icon></p>
+      <p class="soft-accent">Collateral <mat-icon matTooltip="Number of coins required to setup a masternode.">
+          info_outline</mat-icon>
+      </p>
       <h4>{{ masternodeStats.collateral }} {{ coin.ticker | uppercase }}</h4>
     </div>
     <div class="align-center label-value">
-      <p class="soft-accent">Masternode Worth <mat-icon matTooltip="Dollar and Bitcoin value of Masternode Collateral.">info_outline</mat-icon></p>
-      <h4>${{ masternodeStats.collateral * coin.marketData.lastPriceUsd | number:'0.0-0' }} / 
-          {{ masternodeStats.collateral * coin.marketData.lastPriceBtc | number:'0.0-3' }} BTC
+      <p class="soft-accent">Masternode Worth <mat-icon matTooltip="Dollar and Bitcoin value of Masternode Collateral.">
+          info_outline</mat-icon>
+      </p>
+      <h4>${{ masternodeStats.collateral * coin.marketData.lastPriceUsd | number:'0.0-0' }} /
+        {{ masternodeStats.collateral * coin.marketData.lastPriceBtc | number:'0.0-3' }} BTC
       </h4>
     </div>
     <div class="align-center label-value">
-      <p class="soft-accent">First Reward Time <mat-icon matTooltip="Average time before first masternode reward.">info_outline</mat-icon></p>
+      <p class="soft-accent">First Reward Time <mat-icon matTooltip="Average time before first masternode reward.">
+          info_outline</mat-icon>
+      </p>
       <h4>{{ (masternodeStats.activeMasternodes * 2.6 / 60) - 2 | number:'0.0-0' }} -
         {{ (masternodeStats.activeMasternodes * 2.6 / 60) + 2 | number:'0.0-0' }} hrs</h4>
     </div>
     <div class="align-center label-value">
-      <p class="soft-accent">Blockheight <mat-icon matTooltip="The total number of blocks generated since the genesis block.">info_outline</mat-icon></p>
+      <p class="soft-accent">Blockheight <mat-icon
+          matTooltip="The total number of blocks generated since the genesis block.">info_outline</mat-icon>
+      </p>
       <h4>{{ masternodeStats.blockheight }}</h4>
     </div>
   </div>
@@ -96,16 +109,16 @@
         <app-amount-masternodes-chart [historicalData]="historicalData" [timeframe]="masternodesChartTimeframe">
         </app-amount-masternodes-chart>
       </div>
+      <div class="timeframe-buttons">
+        <button mat-flat-button (click)="masternodesChartTimeframe = '1m'"
+          [ngClass]="{ 'mat-primary': masternodesChartTimeframe === '1m' }">1 month</button>
+        <button mat-flat-button (click)="masternodesChartTimeframe = '3m'"
+          [ngClass]="{ 'mat-primary': masternodesChartTimeframe === '3m' }">3 months</button>
+        <button mat-flat-button (click)="masternodesChartTimeframe = '1y'"
+          [ngClass]="{ 'mat-primary': masternodesChartTimeframe === '1y' }">1 year</button>
+      </div>
       <div fxLayout="row" fxLayoutAlign="space-between flex-end">
         <div class="label-value">
-          <div class="timeframe-buttons">
-            <button mat-flat-button (click)="masternodesChartTimeframe = '1m'"
-              [ngClass]="{ 'mat-primary': masternodesChartTimeframe === '1m' }">1 month</button>
-            <button mat-flat-button (click)="masternodesChartTimeframe = '3m'"
-              [ngClass]="{ 'mat-primary': masternodesChartTimeframe === '3m' }">3 months</button>
-            <button mat-flat-button (click)="masternodesChartTimeframe = '1y'"
-              [ngClass]="{ 'mat-primary': masternodesChartTimeframe === '1y' }">1 year</button>
-          </div>
           <h4>Active Masternodes</h4>
         </div>
         <div class="label-value align-right">
