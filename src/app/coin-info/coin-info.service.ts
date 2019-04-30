@@ -17,7 +17,7 @@ export class CoinInfoService {
   // TODO: deliver basic info here
   getCoins(): Observable<Coin[]> {
     const functionUrl = 'https://posmn-coin-info.azurewebsites.net/api/currencies'
-      + '?code=a3RUUHVaUNvybXmdCo4ebANUkphXbdDHzTOGaFzdf7Jqioy6/5lhqQ==';
+      + '?code=8djNoJ3fA9ik8Nkpv0Rb0R0MBlyTWaXO2v6Xy5tesmn80iez6326wg==';
 
     return this.httpClient.get<Coin[]>(functionUrl);
   }
@@ -31,7 +31,7 @@ export class CoinInfoService {
   getMasternodeStats(id: string): Observable<MasternodeStats> {
     const functionUrl = 'https://posmn-coin-info.azurewebsites.net/api/masternode-stats'
       + `?coinId=${id}`
-      + '&code=8rGh6F5Z0zd5daWGXt24kXWaPnzaM9C4rQr0gQsnk6JSm50dWYmL0A==';
+      + '&code=aBbgEaE0dNjCKsR/Dz9yQqOskld6YvChxNuozcwVOYxUeZzik2ZgQw==';
 
     return this.httpClient.get<MasternodeStats>(functionUrl);
   }
@@ -39,7 +39,7 @@ export class CoinInfoService {
   getHistoricalData(id: string): Observable<HistoricalData[]> {
     const functionUrl = 'https://posmn-coin-info.azurewebsites.net/api/historical-data'
       + `?coinId=${id}`
-      + '&code=A0sV/TIXrynO/vu6PepfpUQRiaSQ5LCYE90f2qcXBuDyLh6vaNUAgQ==';
+      + '&code=8wqdHGfPKdy2PFfpaXpjUODuHha/qTWvXZc9api6ca0Gssp/fNTXAw==';
 
     return this.httpClient.get<HistoricalData[]>(functionUrl);
   }
