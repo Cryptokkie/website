@@ -43,7 +43,7 @@ export class ContactComponent implements OnInit {
     const recaptcha = this.recaptchaElem.nativeElement.querySelector('.g-recaptcha-response').value;
 
     const functionUrl = 'https://posmn-send-mail.azurewebsites.net/api/Send'
-      + '?code=Azt6UTfVxWn73wefp3IwWnAoFCfYy6wXc29plV39kk2gaTw7xJ8yPw==';
+      + '?code=aYGZckFUKQXEBxZMd0o/GMlXSjfrG/R74hlLRr/KILqbcaTrJae3Hw==';
 
     this.httpClient.post(functionUrl, {
       name,
