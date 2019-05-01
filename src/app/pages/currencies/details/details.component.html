@@ -8,8 +8,8 @@
 
   </app-page-content>
 
-  <mat-tab-group [selectedIndex]="tabIndex" (animationDone)="animationDone()" (selectedIndexChange)="tabIndexChange($event)" 
-    class="tabs" ngClass.lt-sm="no-horizontal-padding" color="accent">
+  <mat-tab-group [selectedIndex]="tabIndex" (animationDone)="animationDone()"
+    (selectedIndexChange)="tabIndexChange($event)" class="tabs" ngClass.lt-sm="no-horizontal-padding" color="accent">
     <mat-tab label="Overview">
       <app-coin-overview #coinOverviewTab [coin]="coin"></app-coin-overview>
     </mat-tab>
@@ -19,7 +19,16 @@
     <mat-tab label="PoS Stats"> Proof Of Stake Stats content </mat-tab>
     <mat-tab label="PoS Pools"> Proof Of Stake Pools </mat-tab>
     <mat-tab label="Masternode Hosting"> MN Hosting content </mat-tab>
-    <mat-tab label="Markets"> Exchanges/markets etc. </mat-tab>
+    <mat-tab label="Markets">
+      <div class="padding-top-30">
+        <div class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
+          <div class="block-icon pop-top small">
+            <mat-icon>swap_horiz</mat-icon>
+          </div>
+          <app-overview-exchanges [coin]="coin"></app-overview-exchanges>
+        </div>
+      </div>
+    </mat-tab>
   </mat-tab-group>
 
 </ng-template>

@@ -3,10 +3,8 @@
   <div fxFlex="30" fxLayout="column" fxLayoutGap="40px">
 
     <div class="block shadow" fxLayout="column" fxLayoutAlign="space-between center" fxHide.lt-sm>
-      <div class="align-center label-value">
-        <div class="block-icon pop-top small">
-          <i class="fab fa-twitter"></i>
-        </div>
+      <div class="block-icon pop-top small">
+        <i class="fab fa-twitter"></i>
       </div>
 
       <div #twitterEmbed>
@@ -60,10 +58,8 @@
     </div>
 
     <div class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
-      <div class="align-center label-value">
-        <div class="block-icon pop-top small">
-          <mat-icon>info</mat-icon>
-        </div>
+      <div class="block-icon pop-top small">
+        <mat-icon>info</mat-icon>
       </div>
 
       <div class="align-left label-value">
@@ -121,6 +117,21 @@
           Discord
         </a>
       </div>
+    </div>
+
+    <div class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
+      <div class="block-icon pop-top small">
+        <mat-icon>swap_horiz</mat-icon>
+      </div>
+
+      <h4>Top Markets</h4>
+      <app-overview-exchanges [coin]="coin" limit="5"></app-overview-exchanges>
+
+      <a mat-button color="gray" [routerLink]="['/currencies', coin.id, 'markets']">
+          All markets
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </a>
+
     </div>
 
   </div>
