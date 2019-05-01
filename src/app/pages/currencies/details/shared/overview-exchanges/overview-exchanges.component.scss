@@ -1,8 +1,48 @@
+@import 'styles';
+
 :host {
     width: 100%;
     margin-bottom: 10px;
 }
 
+::ng-deep th:not(:first-of-type) .mat-sort-header-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+::ng-deep .mat-sort-header-arrow {
+    color: mat-color($accent);
+}
+
 table {
     width: 100%;
+}
+
+.mat-cell {
+    font-size: 12px;
+
+    &:not(:first-of-type) {
+        text-align: right;
+    
+        &:not(:last-of-type) {
+            padding-right: 18px;
+        }
+    
+        &:last-of-type {
+            padding-right: 42px;
+        }
+    }
+}
+
+.mat-row{
+    transition: box-shadow 200ms;
+
+    &:hover {
+         background-color: #fcfcfc;
+        cursor: pointer;
+
+        transition: box-shadow 200ms;
+        @include mat-elevation(12, black, 0.5);
+    }
 }
