@@ -17,5 +17,8 @@ namespace Posmn.CoinData.Services
 
     Task AddDataPoint(DataPoint dataPoint);
     Task<IEnumerable<DataPoint>> GetDataPoints(string coinId);
+
+    Task AddCoinExchange(CoinExchange coinExchange);
+    Task<IEnumerable<CoinExchange>> GetCoinExchanges(string coinId);
   }
 }

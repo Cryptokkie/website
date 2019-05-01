@@ -17,6 +17,7 @@ namespace coingecko_importer.Mapper
         .ForMember(d => d.ImageUrlThumbnail, o => o.MapFrom(s => s.Image.Thumb.ToString()))
         .ForMember(d => d.Social, o => o.MapFrom(s => s));
 
+
       this.CreateMap<CoinGecko.Entities.Response.Coins.Links, Posmn.CoinData.Models.Links>()
         .ForMember(d => d.Homepage, o => o.MapFrom(s => s.Homepage.ElementAtOrDefault(0)))
         .ForMember(d => d.Explorer, o => o.MapFrom(s => s.BlockchainSite.ElementAtOrDefault(0)))

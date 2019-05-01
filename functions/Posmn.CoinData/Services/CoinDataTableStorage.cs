@@ -13,6 +13,7 @@ namespace Posmn.CoinData.Services
   {
     CloudTableClient tableClient;
     CloudTable coinsTable;
+    CloudTable coinExchangesTable;
     CloudTable masternodeStatsTable;
     CloudTable supportedCoinsTable;
     CloudTable dataPointsTable;
@@ -23,6 +24,7 @@ namespace Posmn.CoinData.Services
 
       this.tableClient = storageAccount.CreateCloudTableClient();
       this.coinsTable = tableClient.GetTableReference("coins");
+      this.coinExchangesTable = tableClient.GetTableReference("coinexchanges");
       this.masternodeStatsTable = tableClient.GetTableReference("masternodestats");
       this.supportedCoinsTable = tableClient.GetTableReference("supportedcoins");
       this.dataPointsTable = tableClient.GetTableReference("datapoints");
@@ -32,6 +34,7 @@ namespace Posmn.CoinData.Services
     {
       await Task.WhenAll(
         CreateCoinsTableIfNotExists(),
+        CreateCoinExchangesTableIfNotExists(),
         CreateMasternodeStatsTableIfNotExists(),
         CreateDataPointsTableIfNotExists(),
         CreateSupportedCoinsTableIfNotExists());
@@ -40,6 +43,11 @@ namespace Posmn.CoinData.Services
     private async Task CreateCoinsTableIfNotExists()
     {
       await coinsTable.CreateIfNotExistsAsync();
+    }
+
+    private async Task CreateCoinExchangesTableIfNotExists()
+    {
+      await coinExchangesTable.CreateIfNotExistsAsync();
     }
 
     private async Task CreateDataPointsTableIfNotExists()
@@ -116,6 +124,35 @@ namespace Posmn.CoinData.Services
       } while (token != null);
 
       return list;
+    }
+
+    public async Task AddCoinExchange(CoinExchange coinExchange)
+    {
+      var flattenedObject = EntityPropertyConverter.Flatten(coinExchange, new OperationContext());
+      var rowKey = $"{coinExchange.ExchangeIdentifier}-{coinExchange.Base}-{coinExchange.Target}";
+      var tableEntity = new DynamicTableEntity(coinExchange.CoinId, rowKey);
+      tableEntity.Properties = flattenedObject;
+
+      TableOperation insertOperation = TableOperation.InsertOrReplace(tableEntity);
+
+      await this.coinExchangesTable.ExecuteAsync(insertOperation);
+    }
+
+    public async Task<IEnumerable<CoinExchange>> GetCoinExchanges(string coinId)
+    {
+      TableContinuationToken token = null;
+      var list = new List<CoinExchange>();
+      var query = new TableQuery<DynamicTableEntity>();
+      query.FilterString = $"PartitionKey eq '{coinId}'";
+
+      do
+      {
+        var queryResult = await this.coinExchangesTable.ExecuteQuerySegmentedAsync(query, token);
+        list.AddRange(queryResult.Results.Select(x => EntityPropertyConverter.ConvertBack<CoinExchange>(x.Properties, new OperationContext())));
+        token = queryResult.ContinuationToken;
+      } while (token != null);
+
+      return list.OrderByDescending(x => x.VolumeBtc);
     }
 
     public async Task AddMasternodeStats(MasternodeStats masternodeStats)
