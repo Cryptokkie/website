@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CoinExchange } from './coin-exchange.model';
 import { CoinInfoModule } from './coin-info.module';
 import { Coin } from './coin.model';
 import { HistoricalData } from './historical-data.model';
@@ -42,5 +43,13 @@ export class CoinInfoService {
       + '&code=8wqdHGfPKdy2PFfpaXpjUODuHha/qTWvXZc9api6ca0Gssp/fNTXAw==';
 
     return this.httpClient.get<HistoricalData[]>(functionUrl);
+  }
+
+  getCoinExchanges(id: string): Observable<CoinExchange[]> {
+    const functionUrl = 'https://posmn-coin-info.azurewebsites.net/api/coin-exchanges'
+      + `?coinId=${id}`
+      + '&code=YIXa8RcxLojLxCht8vQxIvXzsasPvSxiqNo3rrsNiJtjRqT60GGmGQ==';
+
+    return this.httpClient.get<CoinExchange[]>(functionUrl);
   }
 }

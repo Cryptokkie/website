@@ -25,7 +25,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     'pos-pools': 3,
     'masternode-hosting': 4,
     // tslint:disable-next-line:object-literal-key-quotes
-    'marketing': 5
+    'markets': 5
   };
   tabIndex: number;
   coin: Coin;

@@ -204,43 +204,44 @@ a {
     }
   }
 
-  h4 {
-    font-size: 24px;
-    line-height: 32px;
-    font-weight: 300;
-    margin: 0px;
+}
 
-    &.positive-number {
-      color: mat-color($positive, 500);
-    }
+h4 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 300;
+  margin: 0px;
 
-    &.negative-number {
-      color: mat-color($negative, 500);
-    }
-
-    mat-icon {
-      line-height: 18px;
-      vertical-align: middle;
-    }
+  &.positive-number {
+    color: mat-color($positive, 500);
   }
 
-  h5 {
-    font-size: 14px;
+  &.negative-number {
+    color: mat-color($negative, 500);
+  }
+
+  mat-icon {
     line-height: 18px;
-    font-weight: 300;
-    margin: 0px;
+    vertical-align: middle;
   }
+}
 
-  h6 {
-    font-size: 12px;
-    line-height: 16px;
-    font-weight: 300;
-    margin: 0px;
-  }
+h5 {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 300;
+  margin: 0px;
+}
 
-  hr {
-    border: none;
-    height: 1px;
-    background-color: #ccc;
-  }
+h6 {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 300;
+  margin: 0px;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
 }
