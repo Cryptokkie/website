@@ -10,4 +10,5 @@ export interface CoinExchange {
     volumeUsd: number;
     isStale: boolean;
     url: string;
+    imageUrl: string;
 }

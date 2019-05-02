@@ -5,7 +5,10 @@
 
   <ng-container matColumnDef="exchangeName">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Exchange </th>
-    <td mat-cell *matCellDef="let element"> {{element.exchangeName }} </td>
+    <td mat-cell *matCellDef="let element">
+      <img class="exchange-icon" src="{{ element.imageUrl }}" /> 
+      {{ element.exchangeName }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="pair">
