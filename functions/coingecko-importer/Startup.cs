@@ -20,6 +20,7 @@ namespace coingecko_importer
       builder.Services.AddTransient<ICoinDataTableStorage, CoinDataTableStorage>();
       builder.Services.AddTransient<ICoingeckoImporter, CoingeckoImporter>();
       builder.Services.AddTransient<ICoinsClient>(x => new CoinsClient(new HttpClient()));
+      builder.Services.AddTransient<IExchangesClient>(x => new ExchangesClient(new HttpClient()));
       builder.Services.AddAutoMapper(Assembly.GetAssembly(this.GetType()));
     }
   }

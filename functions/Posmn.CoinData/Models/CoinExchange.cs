@@ -17,5 +17,6 @@ namespace Posmn.CoinData.Models
     public double VolumeUsd { get; set; }
     public Boolean IsStale { get; set; }
     public string Url { get; set; }
+    public string ImageUrl { get; set; }
   }
 }
