@@ -65,6 +65,12 @@ export class OverviewExchangesComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  goToExchange(url: string) {
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
+
   setDataSourceAttributes() {
     this.coinExchanges.paginator = this.paginator;
     this.coinExchanges.sort = this.sort;

@@ -35,7 +35,7 @@ table {
     }
 }
 
-.mat-row{
+.mat-row {
     transition: box-shadow 200ms;
 
     &:hover {
@@ -45,4 +45,11 @@ table {
         transition: box-shadow 200ms;
         @include mat-elevation(12, black, 0.5);
     }
+}
+
+.exchange-icon {
+    width: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+    padding-bottom: 4px;
 }
