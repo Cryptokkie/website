@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { CoinExchange } from './coin-exchange.model';
 import { CoinInfoModule } from './coin-info.module';
 import { Coin } from './coin.model';
@@ -26,7 +26,14 @@ export class CoinInfoService {
   // TODO: deliver specific info here
   getCoin(id: string): Observable<Coin> {
     return this.getCoins()
-      .pipe(map(x => x.find(i => i.id === id)));
+      .pipe(
+        map(x => x.find(i => i.id === id)),
+        tap(x => {
+          if (!x) {
+            throw new Error('Coin not found');
+          }
+        })
+      );
   }
 
   getMasternodeStats(id: string): Observable<MasternodeStats> {

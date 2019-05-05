@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { AccountModule } from './account/account.module';
 import { ContactModule } from './contact/contact.module';
 import { CurrenciesModule } from './currencies/currencies.module';
 import { DisclaimerModule } from './disclaimer/disclaimer.module';
@@ -15,7 +16,8 @@ import { WorkInProgressModule } from './work-in-progress/work-in-progress.module
     PrivacyModule,
     DisclaimerModule,
     TermsAndConditionsModule,
-    ContactModule
+    ContactModule,
+    AccountModule
   ],
   exports: [],
   declarations: []

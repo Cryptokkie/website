@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/auth.service';
+import { CurrentProfileService } from 'src/app/core/current-profile.service';
 
 @Component({
   selector: 'app-page-header',
@@ -16,7 +18,7 @@ export class PageHeaderComponent implements OnInit {
   @Input()
   title: string;
 
-  constructor() { }
+  constructor(public auth: AuthService, public profileService: CurrentProfileService) { }
 
   ngOnInit() {
   }
