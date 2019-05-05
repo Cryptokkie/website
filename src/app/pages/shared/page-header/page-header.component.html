@@ -1,7 +1,26 @@
-
-<mat-icon *ngIf="icon">{{ icon }}</mat-icon>
-<ng-template [ngIf]="thumb">
-    <img src="{{ thumb }}" />
-</ng-template>
-<h1>{{ title }}</h1>
-<ng-content></ng-content>
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <div>
+        <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+        <ng-template [ngIf]="thumb">
+            <img src="{{ thumb }}" />
+        </ng-template>
+        <h1>{{ title }}</h1>
+    </div>
+    <div>
+        <ng-content></ng-content>
+    </div>
+    <div class="account">
+        <div *ngIf="!auth.isAuthenticated()">
+            <button mat-flat-button color="primary" (click)="auth.login()">Login</button>
+            <button mat-flat-button color="accent" (click)="auth.signUp()">Sign up</button>
+        </div>
+        <div *ngIf="auth.isAuthenticated()">
+            <button mat-button color="primary" routerLink="/account">
+                <mat-icon>account_circle</mat-icon>&nbsp;
+                <span class="hover">Account Details</span>
+                <span class="default">{{ profileService.profile?.name }}</span>
+            </button>
+            <button mat-stroked-button color="primary" (click)="auth.logout()">Logout</button>
+        </div>
+    </div>
+</div>

@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  auth0: {
+    domain: 'paarhuis.auth0.com',
+    clientId: 'XKQPLJEFwXmALdchnu522L7d8AqPcQ2y',
+    callbackUrl: 'http://localhost:4200'
+  },
+  functions: {
+    // tslint:disable-next-line:max-line-length
+    deleteAccount: 'https://posmn-auth0management-dev.azurewebsites.net/api/DeleteAccount?code=t7XxXJlFCxcQy0RcbogQsSsRmKjnJ0CW0Ra3QZV0YR47%2F5LECXaXww%3D%3D',
+  }
 };
 
 /*

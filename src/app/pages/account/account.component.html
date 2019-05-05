@@ -1,0 +1,39 @@
+<app-page-header icon="account_circle" title="Account Details">
+</app-page-header>
+<app-page-content>
+
+  <mat-form-field>
+    <input matInput placeholder="EMAIL" readonly value="{{ this.profileService.profile?.email }}">
+  </mat-form-field>
+
+  <h4>Social Media</h4>
+
+  <!-- Twitter -->
+  <div *ngIf="!hasIdentity('twitter')" class="form-group grey">
+    <mat-icon>check_box_outline_blank</mat-icon>&nbsp;
+    <label>Twitter</label>&nbsp;
+    <button mat-flat-button color="primary" (click)="link('twitter')">Link</button>
+  </div>
+  <div *ngIf="hasIdentity('twitter')" class="form-group">
+    <mat-icon>check_box</mat-icon>&nbsp;
+    <label>Twitter</label>&nbsp;
+    <button *ngIf="auth.primaryProvider() !== 'twitter'" mat-stroked-button color="primary"
+      (click)="unlink('twitter')">Unlink</button>
+  </div>
+
+  <!-- Facebook -->
+  <div *ngIf="!hasIdentity('facebook')" class="form-group grey">
+    <mat-icon>check_box_outline_blank</mat-icon>&nbsp;
+    <label>Facebook</label>&nbsp;
+    <button mat-flat-button color="primary" (click)="link('facebook')">Link</button>
+  </div>
+  <div *ngIf="hasIdentity('facebook')" class="form-group">
+    <mat-icon>check_box</mat-icon>&nbsp;
+    <label>Facebook</label>&nbsp;
+    <button *ngIf="auth.primaryProvider() !== 'facebook'" mat-stroked-button color="primary"
+      (click)="unlink('facebook')">Unlink</button>
+  </div>
+
+  <button class="delete-account" mat-button color="warn" (click)="showWarning()">Delete my account</button>
+
+</app-page-content>

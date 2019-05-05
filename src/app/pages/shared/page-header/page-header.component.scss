@@ -1,29 +1,122 @@
-@import 'styles';
+@import "styles";
 
 :host {
-    width: 100%;
-    display: block;
-    padding: 20px 30px;
-    box-sizing: border-box;
+  width: 100%;
+  display: block;
+  padding: 20px 30px;
+  box-sizing: border-box;
 }
 
 h1 {
-    display: inline-block;
-    font-size: 14pt;
-    vertical-align: bottom;
-    font-weight: 300;
-    margin: 12px;
-    color: #4d4d4d;
+  display: inline-block;
+  font-size: 14pt;
+  vertical-align: bottom;
+  font-weight: 300;
+  margin: 12px;
+  color: #4d4d4d;
 }
 
 img {
-    width: 40px;
+  width: 40px;
 }
 
 mat-icon {
-    @include icon-size(40px);
-    background: -webkit-gradient(linear, left top, right bottom, from(mat-color($accent, 700)), to(mat-color($accent, 300)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  @include icon-size(40px);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    from(mat-color($accent, 700)),
+    to(mat-color($accent, 300))
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+.account {
+  mat-icon {
+    @include icon-size(20px);
+    background: -webkit-gradient(
+      linear,
+      left top,
+      right bottom,
+      from(mat-color($primary, 700)),
+      to(mat-color($primary, 300))
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  button {
+    display: inline-block;
+    position: relative;
+    font-weight: 300;
+    margin-left: 10px;
+    font-size: 12px;
+    padding: 0 10px;
+    line-height: 26px;
+
+    span.default {
+      -webkit-transition: 0.6s;
+      -moz-transition: 0.6s;
+      -o-transition: 0.6s;
+      transition: 0.6s;
+      -webkit-transition-delay: 0.2s;
+      -moz-transition-delay: 0.2s;
+      -o-transition-delay: 0.2s;
+      transition-delay: 0.2s;
+    }
+
+    span.hover {
+      content: "";
+      position: absolute;
+      left: 10px;
+      width: 100%;
+      text-align: center;
+
+      opacity: 0;
+
+      -webkit-transition: 0.4s, opacity 0.2s;
+      -moz-transition: 0.4s, opacity 0.2s;
+      -o-transition: 0.4s, opacity 0.2s;
+      transition: 0.4s, opacity 0.2s;
+
+      -webkit-transform: translate(-50%, 0);
+      -moz-transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+      -o-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+    }
+
+    &:hover {
+      span.default {
+        opacity: 0;
+        -webkit-transform: scale(0.3);
+        -moz-transform: scale(0.3);
+        -ms-transform: scale(0.3);
+        -o-transform: scale(0.3);
+        transform: scale(0.3);
+      }
+
+      span.hover {
+        opacity: 1;
+
+        -webkit-transition: 0.4s, opacity 0.6s;
+        -moz-transition: 0.4s, opacity 0.6s;
+        -o-transition: 0.4s, opacity 0.6s;
+        transition: 0.4s, opacity 0.6s;
+
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        -o-transform: translate(0, 0);
+        transform: translate(0, 0);
+
+        -webkit-transition-delay: 0.4s;
+        -moz-transition-delay: 0.4s;
+        -o-transition-delay: 0.4s;
+        transition-delay: 0.4s;
+      }
+    }
+  }
+}

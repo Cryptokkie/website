@@ -1,11 +1,13 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 import { Coin } from 'src/app/coin-info/coin.model';
 import { LoaderService } from 'src/app/loader/loader.service';
+import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { CoinOverviewComponent } from './coin-overview/coin-overview.component';
 
 @Component({
@@ -37,7 +39,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     public loader: LoaderService,
-    private location: Location) { }
+    private location: Location,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.loader.show(this.loadingKey);
@@ -46,7 +49,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         .pipe(
           finalize(() => this.loader.hide(this.loadingKey)),
           catchError(err => {
-            // show error dialog
+            this.dialog.open(ErrorDialogComponent);
             return throwError(err);
           }),
           tap(x => this.coin = x),

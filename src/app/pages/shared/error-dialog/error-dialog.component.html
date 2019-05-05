@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Oops!</h2>
+<mat-dialog-content>
+  Oops. Something went wrong. Try it again or <a routerLink="/contact">contact support</a>.
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Ignore</button>
+  <button mat-button (click)="reload()">Reload</button>
+</mat-dialog-actions>
