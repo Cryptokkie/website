@@ -69,11 +69,6 @@ export class AuthenticationCallbackActivateGuard implements CanActivate {
                         this.router.navigate([''], { fragment: path });
                     }
                 }
-
-
-                // webAuth.client.userInfo(authResult.accessToken, (err, user) => {
-                //   // Now you have the user's information
-                // });
               });
 
             return false;
