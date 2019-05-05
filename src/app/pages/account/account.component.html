@@ -9,12 +9,12 @@
   <h4>Social Media</h4>
 
   <!-- Twitter -->
-  <div *ngIf="!profile?.hasTwitter" class="form-group grey">
+  <div *ngIf="!hasIdentity('twitter')" class="form-group grey">
     <mat-icon>check_box_outline_blank</mat-icon>&nbsp;
     <label>Twitter</label>&nbsp;
     <button mat-flat-button color="primary" (click)="link('twitter')">Link</button>
   </div>
-  <div *ngIf="profile?.hasTwitter" class="form-group">
+  <div *ngIf="hasIdentity('twitter')" class="form-group">
     <mat-icon>check_box</mat-icon>&nbsp;
     <label>Twitter</label>&nbsp;
     <button *ngIf="auth.primaryProvider() !== 'twitter'" mat-stroked-button color="primary"
@@ -22,12 +22,12 @@
   </div>
 
   <!-- Facebook -->
-  <div *ngIf="!profile?.hasFacebook" class="form-group grey">
+  <div *ngIf="!hasIdentity('facebook')" class="form-group grey">
     <mat-icon>check_box_outline_blank</mat-icon>&nbsp;
     <label>Facebook</label>&nbsp;
     <button mat-flat-button color="primary" (click)="link('facebook')">Link</button>
   </div>
-  <div *ngIf="profile?.hasFacebook" class="form-group">
+  <div *ngIf="hasIdentity('facebook')" class="form-group">
     <mat-icon>check_box</mat-icon>&nbsp;
     <label>Facebook</label>&nbsp;
     <button *ngIf="auth.primaryProvider() !== 'facebook'" mat-stroked-button color="primary"

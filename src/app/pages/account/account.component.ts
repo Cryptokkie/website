@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrentProfileService } from 'src/app/core/current-profile.service';
-import { AuthService } from 'src/app/core/auth.service';
-import { LoaderService } from 'src/app/loader/loader.service';
-import { catchError, finalize } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
-import { ErrorDialogComponent } from '../shared/error-dialog/error-dialog.component';
 import { throwError } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
+import { AuthService } from 'src/app/core/auth.service';
+import { CurrentProfileService } from 'src/app/core/current-profile.service';
+import { LoaderService } from 'src/app/loader/loader.service';
+import { ErrorDialogComponent } from '../shared/error-dialog/error-dialog.component';
 import { DeleteAccountDialogComponent } from './delete-account-dialog.component';
 
 @Component({
@@ -17,12 +17,20 @@ export class AccountComponent implements OnInit {
 
   constructor(
     public profileService: CurrentProfileService,
-    private auth: AuthService,
+    public auth: AuthService,
     public loader: LoaderService,
     private dialog: MatDialog) { }
 
   ngOnInit() {
 
+  }
+
+  hasIdentity(identity: string): boolean {
+    if (!this.profileService.profile) {
+      return false;
+    }
+
+    return this.profileService.profile.identities.some(x => x.provider === identity);
   }
 
   link(provider: string) {

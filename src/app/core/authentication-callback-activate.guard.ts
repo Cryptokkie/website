@@ -22,6 +22,7 @@ export class AuthenticationCallbackActivateGuard implements CanActivate {
 
         const error = this.getParam('error');
 
+        // verify email message for example
         if (error) {
             const errorDescription = decodeURIComponent(this.getParam('error_description'));
             this.snackBar.open(errorDescription, 'OK', { verticalPosition: 'top' });
@@ -32,9 +33,7 @@ export class AuthenticationCallbackActivateGuard implements CanActivate {
             clientID: environment.auth0.clientId
         });
 
-        const token = this.getParam('access_token');
-
-        if (window.location.href.indexOf('access_token') !== -1) {
+        if (this.getParam('access_token')) {
 
             webAuth.parseHash({ hash: window.location.hash }, (authErr, authResult) => {
                 if (authErr) {
@@ -53,10 +52,11 @@ export class AuthenticationCallbackActivateGuard implements CanActivate {
                         }))
                         .subscribe(() => {
                             this.auth.onAuthenticated.emit(null);
+                            this.router.navigate(['/account']);
                         });
                 } else {
 
-                    localStorage.setItem('access_token', token);
+                    localStorage.setItem('access_token', authResult.accessToken);
                     localStorage.setItem('id_token', authResult.idToken);
                     localStorage.setItem('user_id', authResult.idTokenPayload.sub);
 
@@ -75,10 +75,6 @@ export class AuthenticationCallbackActivateGuard implements CanActivate {
                 //   // Now you have the user's information
                 // });
               });
-
-            // const jwt = new JwtHelperService();
-            // const decodedToken = jwt.decodeToken(token);
-
 
             return false;
         }
