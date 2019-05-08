@@ -34,7 +34,7 @@ namespace Posmn.CoinData.Models
     public double LastPriceUsd { get; set; }
     public double MarketcapBtc { get; set; }
     public double MarketcapUsd { get; set; }
-    public decimal CirculatingSupply { get; set; }
+    public double CirculatingSupply { get; set; }
     public long TotalSupply { get; set; }
     public int MarketcapRank { get; set; }
     public double DailyLowBtc { get; set; }
