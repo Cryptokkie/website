@@ -21,6 +21,7 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
     'lastPriceCurrency',
     'dailyChangePercentageCurrency',
     'dailyVolumeCurrency',
+    'circulatingSupply',
     'totalSupply',
     'marketcapCurrency'
   ];
@@ -59,6 +60,7 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
           lastPriceCurrency: x.marketData.lastPriceUsd,
           dailyChangePercentageCurrency: x.marketData.changePercentage24hUsd,
           dailyVolumeCurrency: x.marketData.dailyVolumeUsd,
+          circulatingSupply: x.marketData.circulatingSupply,
           totalSupply: x.marketData.totalSupply,
           marketcapCurrency: x.marketData.marketcapUsd
         }))),

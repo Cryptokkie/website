@@ -82,9 +82,6 @@ namespace coingecko_importer
       {
         var exchangeData = allExchanges.FirstOrDefault(x => x.Id == coinExchange.ExchangeIdentifier);
         coinExchange.ImageUrl = exchangeData?.Image;
-
-        // this is a temporary workaround until https://github.com/tosunthex/CoinGecko/issues/11 is fixed
-        coinExchange.Url = exchangeData?.Url;
       }
       return coinExchanges;
     }
