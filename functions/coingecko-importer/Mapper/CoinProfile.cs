@@ -1,6 +1,7 @@
 using AutoMapper;
 using CoinGecko.Entities.Response.Coins;
 using System;
+using System.Globalization;
 using System.Linq;
 
 namespace coingecko_importer.Mapper
@@ -83,7 +84,7 @@ namespace coingecko_importer.Mapper
           s.MarketCap.ContainsKey("btc") ? s.MarketCap["btc"] : 0))
         .ForMember(d => d.MarketcapUsd, o => o.MapFrom(s =>
           s.MarketCap.ContainsKey("usd") ? s.MarketCap["usd"] : 0))
-        .ForMember(d => d.CirculatingSupply, o => o.MapFrom(s => decimal.Parse(s.CirculatingSupply)))
+        .ForMember(d => d.CirculatingSupply, o => o.MapFrom(s => decimal.Parse(s.CirculatingSupply, CultureInfo.InvariantCulture)))
         .ForMember(d => d.TotalSupply, o => o.MapFrom(s => s.TotalSupply ?? 0))
         .ForMember(d => d.DailyLowBtc, o => o.MapFrom(s =>
           s.Low24H.ContainsKey("btc") ? s.Low24H["btc"] : 0))
