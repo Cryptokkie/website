@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
 import { CoinExchange } from './coin-exchange.model';
 import { CoinInfoModule } from './coin-info.module';
 import { Coin } from './coin.model';
@@ -15,25 +14,19 @@ export class CoinInfoService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // TODO: deliver basic info here
   getCoins(): Observable<Coin[]> {
-    const functionUrl = 'https://posmn-coin-info.azurewebsites.net/api/currencies'
-      + '?code=8djNoJ3fA9ik8Nkpv0Rb0R0MBlyTWaXO2v6Xy5tesmn80iez6326wg==';
+    const functionUrl = 'https://posmn-coin-info.azurewebsites.net/api/coins'
+      + '?code=F5S/nWSTjVa2lyHRniAOgnfEXSbWLRXOcL6tOoF9lEoAktSW0qTOyA==';
 
     return this.httpClient.get<Coin[]>(functionUrl);
   }
 
-  // TODO: deliver specific info here
   getCoin(id: string): Observable<Coin> {
-    return this.getCoins()
-      .pipe(
-        map(x => x.find(i => i.id === id)),
-        tap(x => {
-          if (!x) {
-            throw new Error('Coin not found');
-          }
-        })
-      );
+    const functionUrl = 'https://posmn-coin-info.azurewebsites.net/api/coin'
+      + `?coinId=${id}`
+      + '&code=YRkpwZnU1MwWi0BmURx0C3fkaEj3Eu7q/ndWXSCgrIc3CU9kGSuApA==';
+
+    return this.httpClient.get<Coin>(functionUrl);
   }
 
   getMasternodeStats(id: string): Observable<MasternodeStats> {

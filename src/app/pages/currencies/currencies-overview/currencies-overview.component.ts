@@ -22,7 +22,7 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
     'dailyChangePercentageCurrency',
     'dailyVolumeCurrency',
     'circulatingSupply',
-    'totalSupply',
+    // 'totalSupply',
     'marketcapCurrency'
   ];
   coins = new MatTableDataSource();
@@ -57,6 +57,7 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
           id: x.id,
           imageUrlThumbnail: x.imageUrlThumbnail,
           name: x.name,
+          ticker: x.ticker,
           lastPriceCurrency: x.marketData.lastPriceUsd,
           dailyChangePercentageCurrency: x.marketData.changePercentage24hUsd,
           dailyVolumeCurrency: x.marketData.dailyVolumeUsd,

@@ -49,11 +49,10 @@
     <td mat-cell fxHide.lt-sm *matCellDef="let element"> {{element.circulatingSupply | number:'1.0-0'}} {{element.ticker | uppercase}} </td>
   </ng-container>
 
-  <!-- Total Supply Column -->
-  <ng-container matColumnDef="totalSupply">
+  <!-- <ng-container matColumnDef="totalSupply">
     <th mat-header-cell fxHide.lt-sm *matHeaderCellDef mat-sort-header> Total Supply </th>
     <td mat-cell fxHide.lt-sm *matCellDef="let element"> {{element.totalSupply | number:'1.0-0'}} {{element.ticker | uppercase}} </td>
-  </ng-container>
+  </ng-container> -->
 
   <!-- Market Cap Column -->
   <ng-container matColumnDef="marketcapCurrency">
