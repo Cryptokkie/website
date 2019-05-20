@@ -1,0 +1,46 @@
+@import 'styles';
+
+.block {
+    position: relative;
+}
+
+h4 {
+    text-transform: uppercase;
+    color: mat-color($primary);
+    font-size: 16px;
+}
+
+
+button {
+    border-radius: 10px;
+    min-width: 40px;
+    line-height: 30px;
+    padding: 0 12px;
+    margin-bottom: 10px;
+}
+
+mat-icon {
+    vertical-align: middle;
+    color: mat-color($primary);
+}
+
+.form-group label {
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.social-media {
+
+    border-left: 1px solid mat-color($primary, 50);
+    border-right: 1px solid mat-color($primary, 50);
+
+    .grey {
+        color: #999;
+    }
+}
+
+.delete-account {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
