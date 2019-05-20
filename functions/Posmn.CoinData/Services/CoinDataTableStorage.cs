@@ -126,6 +126,15 @@ namespace Posmn.CoinData.Services
       return list;
     }
 
+    public async Task<Coin> GetCoin(string coinId)
+    {
+      TableOperation getOperation = TableOperation.Retrieve<DynamicTableEntity>("coin", coinId);
+      var result = await this.coinsTable.ExecuteAsync(getOperation);
+
+      var tableEntity = result.Result as DynamicTableEntity;
+      return EntityPropertyConverter.ConvertBack<Coin>(tableEntity.Properties, new OperationContext());
+    }
+
     public async Task AddCoinExchange(CoinExchange coinExchange)
     {
       var flattenedObject = EntityPropertyConverter.Flatten(coinExchange, new OperationContext());

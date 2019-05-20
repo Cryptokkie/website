@@ -11,6 +11,7 @@ namespace Posmn.CoinData.Services
     Task<IEnumerable<string>> GetSupportedCoins();
     Task AddCoin(Coin coin);
     Task<IEnumerable<Coin>> GetCoins();
+    Task<Coin> GetCoin(string coinId);
 
     Task AddMasternodeStats(MasternodeStats masternodeStats);
     Task<MasternodeStats> GetMasternodeStats(string coinId);
