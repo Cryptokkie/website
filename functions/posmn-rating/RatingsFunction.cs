@@ -44,7 +44,7 @@ namespace posmn_rating
         log.LogError("Authentication failed");
         return new UnauthorizedResult();
       }
-      var uuidClaim = principal.Claims.FirstOrDefault(x => x.Type == "http://dco.dco/uuid");
+      var uuidClaim = principal.Claims.FirstOrDefault(x => x.Type == "http://posmn.com/uuid");
       if (uuidClaim == null)
       {
         log.LogError("Missing uuid claim");
@@ -73,7 +73,7 @@ namespace posmn_rating
 
     [FunctionName("average-rating")]
     public async Task<IActionResult> AverageRating(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
         ILogger log)
     {
       log.LogInformation("Ratings function processed a request.");
@@ -126,7 +126,7 @@ namespace posmn_rating
         log.LogError("Authentication failed");
         return new UnauthorizedResult();
       }
-      var uuidClaim = principal.Claims.FirstOrDefault(x => x.Type == "http://dco.dco/uuid");
+      var uuidClaim = principal.Claims.FirstOrDefault(x => x.Type == "http://posmn.com/uuid");
       if (uuidClaim == null)
       {
         log.LogError("Missing uuid claim");
