@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Posmn.CoinData", "Posmn.Coi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "monkey-importer", "monkey-importer\monkey-importer.csproj", "{680C6A3A-6D9E-4995-8E5F-1609851D45FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "posmn-rating", "posmn-rating\posmn-rating.csproj", "{684812ED-1856-406A-B76A-10047372AD8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{680C6A3A-6D9E-4995-8E5F-1609851D45FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{680C6A3A-6D9E-4995-8E5F-1609851D45FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{680C6A3A-6D9E-4995-8E5F-1609851D45FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{684812ED-1856-406A-B76A-10047372AD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{684812ED-1856-406A-B76A-10047372AD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{684812ED-1856-406A-B76A-10047372AD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{684812ED-1856-406A-B76A-10047372AD8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
