@@ -4,8 +4,8 @@ using Microsoft.Azure.WebJobs.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Posmn.RatingData.Services;
 using posmn_rating;
-using posmn_rating.Services;
 using System;
 using System.Text;
 

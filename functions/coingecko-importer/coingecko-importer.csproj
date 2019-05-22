@@ -13,6 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Posmn.CoinData\Posmn.CoinData.csproj" />
+    <ProjectReference Include="..\Posmn.RatingData\Posmn.RatingData.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

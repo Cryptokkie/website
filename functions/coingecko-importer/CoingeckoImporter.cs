@@ -9,6 +9,7 @@ using CoinGecko.Interfaces;
 using Microsoft.Extensions.Logging;
 using Posmn.CoinData.Models;
 using Posmn.CoinData.Services;
+using Posmn.RatingData.Services;
 
 namespace coingecko_importer
 {
@@ -16,6 +17,7 @@ namespace coingecko_importer
   {
     private readonly ILogger log;
     private readonly ICoinDataTableStorage coinDataTableStorage;
+    private readonly IRatingDataTableStorage ratingDataTableStorage;
     private readonly ICoinsClient coinGeckoClient;
     private readonly IExchangesClient exchangesGeckoClient;
     private readonly IMapper mapper;
@@ -23,12 +25,14 @@ namespace coingecko_importer
     public CoingeckoImporter(
       ILoggerFactory loggerFactory,
       ICoinDataTableStorage coinDataTableStorage,
+      IRatingDataTableStorage ratingDataTableStorage,
       ICoinsClient coinGeckoClient,
       IExchangesClient exchangesGeckoClient,
       IMapper mapper)
     {
       this.log = loggerFactory.CreateLogger(Constants.FUNCTION_LOG_KEY);
       this.coinDataTableStorage = coinDataTableStorage;
+      this.ratingDataTableStorage = ratingDataTableStorage;
       this.coinGeckoClient = coinGeckoClient;
       this.exchangesGeckoClient = exchangesGeckoClient;
       this.mapper = mapper;
@@ -60,8 +64,21 @@ namespace coingecko_importer
     private async Task StoreCoinData(CoinFullDataById coinData)
     {
       var coin = mapper.Map<Coin>(coinData);
+      coin.Rating = await GetCoinRating(coin.Id);
       await coinDataTableStorage.AddCoin(coin);
       this.log.LogInformation("Imported data for '{0}' succesfully", coin.Id);
+    }
+
+    private async Task<double> GetCoinRating(string coinId)
+    {
+      var ratings = await ratingDataTableStorage.GetRatings(coinId);
+
+      if (ratings.Count() == 0)
+      {
+        return 0;
+      }
+
+      return ratings.Average(x => x.AverageRating);
     }
 
     private async Task StoreCoinExchanges(CoinFullDataById coinData, IReadOnlyList<Exchanges> allExchanges)
