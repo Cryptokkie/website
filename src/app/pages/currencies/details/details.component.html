@@ -1,9 +1,12 @@
 <app-loader [context]="loadingKey"></app-loader>
 <ng-template [ngIf]="!loader.isLoading(loadingKey)">
   <app-page-header thumb="{{ coin.imageUrlSmall }}" title="{{ coin.name }} ({{ coin.ticker | uppercase }})">
-    <star-rating *ngIf="rating || rating === 0" showHalfStars="true" 
-      hoverEnabled="true" [starType]="'svg'" [rating]="rating"
-      (ratingChange)="onRatingChange($event)" [readOnly]="!auth.isAuthenticated()"></star-rating>
+    <a [routerLink]="['/currencies', coin.id, 'reviews']" 
+      matTooltip="Click to view rating details and submit your own review.">
+      <star-rating *ngIf="rating || rating === 0" showHalfStars="true" 
+        [hoverEnabled]="false" [starType]="'svg'" [rating]="rating"
+        [readOnly]="true"></star-rating>
+    </a>
   </app-page-header>
   <app-page-content fxLayoutAlign="center center">
 
@@ -19,9 +22,6 @@
     <mat-tab label="Masternode Stats">
       <app-masternode-stats [coin]="coin"></app-masternode-stats>
     </mat-tab>
-    <mat-tab label="PoS Stats"> Proof Of Stake Stats content </mat-tab>
-    <mat-tab label="PoS Pools"> Proof Of Stake Pools </mat-tab>
-    <mat-tab label="Masternode Hosting"> MN Hosting content </mat-tab>
     <mat-tab label="Markets">
       <div class="padding-top-30">
         <div class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
@@ -31,6 +31,9 @@
           <app-overview-exchanges [coin]="coin"></app-overview-exchanges>
         </div>
       </div>
+    </mat-tab>
+    <mat-tab label="Reviews">
+      <app-coin-reviews [coin]="coin"></app-coin-reviews>
     </mat-tab>
   </mat-tab-group>
 

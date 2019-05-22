@@ -9,4 +9,6 @@ export class Rating {
 
     // average of the above 4
     averageRating: number;
+
+    comment: string;
 }

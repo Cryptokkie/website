@@ -2,14 +2,12 @@ import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RatingChangeEvent } from 'angular-star-rating';
 import { of, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 import { Coin } from 'src/app/coin-info/coin.model';
 import { AuthService } from 'src/app/core/auth.service';
 import { LoaderService } from 'src/app/loader/loader.service';
-import { Rating } from 'src/app/rating/rating';
 import { RatingService } from 'src/app/rating/rating.service';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { CoinOverviewComponent } from './coin-overview/coin-overview.component';
@@ -28,11 +26,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   tabs = {
     'coin-overview': 0,
     'masternode-stats': 1,
-    'pos-stats': 2,
-    'pos-pools': 3,
-    'masternode-hosting': 4,
-    // tslint:disable-next-line:object-literal-key-quotes
-    'markets': 5
+    markets: 2,
+    reviews: 3
   };
   tabIndex: number;
   coin: Coin;
@@ -63,19 +58,18 @@ export class DetailsComponent implements OnInit, OnDestroy {
         )
         .subscribe();
 
-      if (this.auth.isAuthenticated()) {
-        this.ratingService.getAverageRating(params.name)
-          .pipe(
-            tap(rating => this.rating = rating.averageRating),
-            catchError(error => {
-              if (error.status === 404) {
-                this.rating = 0;
-                return of([]);
-              }
-              return throwError(error);
-            }))
-          .subscribe();
-      }
+      this.ratingService.getAverageRating(params.name)
+        .pipe(
+          tap(rating => this.rating = rating.averageRating),
+          catchError(error => {
+            if (error.status === 404) {
+              this.rating = 0;
+              return of([]);
+            }
+            return throwError(error);
+          }))
+        .subscribe();
+
 
       if (params.tab) {
         this.tabIndex = this.tabs[params.tab];
@@ -112,17 +106,5 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   escapeRegExp(value: string) {
     return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-  }
-
-  onRatingChange($event: RatingChangeEvent) {
-    // TODO: write $event.rating to function
-    const rating = new Rating();
-    rating.coinId = this.coin.id;
-    rating.communityRating = $event.rating;
-    rating.productRating = $event.rating;
-    rating.teamRating = $event.rating;
-    rating.walletRating = $event.rating;
-
-    this.ratingService.addRating(rating).subscribe();
   }
 }
