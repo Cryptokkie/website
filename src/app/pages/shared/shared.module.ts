@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
+import { StarRatingModule } from 'angular-star-rating';
 import { ChartsModule } from 'ng2-charts';
 import { LoaderModule } from '../../loader/loader.module';
 import { MaterialModule } from '../../material/material.module';
@@ -21,7 +22,8 @@ import { PrettyLinkPipe } from './pretty-link.pipe';
     FlexLayoutModule,
     LoaderModule,
     ChartsModule,
-    RouterModule
+    RouterModule,
+    StarRatingModule.forRoot()
   ],
   exports: [
     PageHeaderComponent,
@@ -32,7 +34,8 @@ import { PrettyLinkPipe } from './pretty-link.pipe';
     FlexLayoutModule,
     MaterialModule,
     LoaderModule,
-    ChartsModule
+    ChartsModule,
+    StarRatingModule
   ]
 })
 export class SharedModule { }

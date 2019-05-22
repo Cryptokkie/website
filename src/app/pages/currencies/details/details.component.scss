@@ -1,59 +1,62 @@
-@import 'styles';
+@import "styles";
 
 /* Force full width */
 /deep/ app-page-content > div {
-    width: 100%;
+  width: 100%;
 }
 
 /deep/ .tabs {
-    margin-top: 20px;
-    font-size: 14px;
-    width: 100%;
+  margin-top: 20px;
+  font-size: 14px;
+  width: 100%;
 
-    .mat-tab-labels {
-        border-bottom: 1px solid #ccc;
+  .mat-tab-labels {
+    border-bottom: 1px solid #ccc;
+  }
+
+  .mat-tab-label {
+    min-width: 120px;
+    font-weight: 300;
+  }
+
+  .mat-tab-header {
+    padding: 0 30px;
+  }
+
+  .mat-tab-header {
+    border: none;
+  }
+
+  .mat-tab-body-wrapper {
+    overflow: visible;
+  }
+
+  .mat-tab-body {
+    &.mat-tab-body.mat-tab-body-active {
+      overflow-y: hidden;
     }
 
-    .mat-tab-label {
-        min-width: 120px;
-        font-weight: 300;
+    .mat-tab-body-content {
+      overflow: visible;
+      padding: 0 30px 30px 30px;
     }
+  }
 
+  &.no-horizontal-padding {
+    .mat-tab-body-content,
     .mat-tab-header {
-        padding: 0 30px;
+      overflow: visible;
+      padding-left: 0;
+      padding-right: 0;
     }
-
-    .mat-tab-header {
-        border: none;
-    }
-    
-    .mat-tab-body-wrapper {
-        overflow: visible;
-    }
-    
-    .mat-tab-body {
-
-        &.mat-tab-body.mat-tab-body-active {
-            overflow-y: hidden;
-        }
-
-        .mat-tab-body-content {
-            overflow: visible;
-            padding: 0 30px 30px 30px;
-        }
-    }
-
-    &.no-horizontal-padding {
-        .mat-tab-body-content,
-        .mat-tab-header {
-            overflow: visible;
-            padding-left: 0;
-            padding-right: 0;
-        }
-    }
+  }
 }
 
+star-rating {
+  padding-top: 12px;
+  display: block;
+}
 
 .padding-top-30 {
-    padding-top: 30px;
+  padding-top: 30px;
 }

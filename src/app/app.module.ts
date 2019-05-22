@@ -10,7 +10,6 @@ import { MaterialModule } from './material/material.module';
 import { PagesModule } from './pages/pages.module';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

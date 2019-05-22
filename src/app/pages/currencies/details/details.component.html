@@ -1,6 +1,9 @@
 <app-loader [context]="loadingKey"></app-loader>
 <ng-template [ngIf]="!loader.isLoading(loadingKey)">
   <app-page-header thumb="{{ coin.imageUrlSmall }}" title="{{ coin.name }} ({{ coin.ticker | uppercase }})">
+    <star-rating *ngIf="rating || rating === 0" showHalfStars="true" 
+      hoverEnabled="true" [starType]="'svg'" [rating]="rating"
+      (ratingChange)="onRatingChange($event)" [readOnly]="!auth.isAuthenticated()"></star-rating>
   </app-page-header>
   <app-page-content fxLayoutAlign="center center">
 

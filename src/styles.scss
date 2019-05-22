@@ -1,4 +1,5 @@
 @import "material.scss";
+@import '~css-star-rating/scss/star-rating';
 
 body {
   font-family: $font;
@@ -244,4 +245,9 @@ hr {
   border: none;
   height: 1px;
   background-color: #ccc;
+}
+
+.rating {
+  outline: none;
+  justify-content: left;
 }
