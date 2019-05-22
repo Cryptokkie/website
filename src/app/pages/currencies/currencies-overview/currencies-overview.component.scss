@@ -95,3 +95,11 @@ table {
         @include mat-elevation(12, black, 0.5);
     }
 }
+
+::ng-deep .rating {
+    justify-content: flex-end;
+
+    .star-container {
+        margin-right: 0;
+    }
+}
