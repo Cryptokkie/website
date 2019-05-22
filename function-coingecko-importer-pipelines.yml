@@ -11,6 +11,7 @@ trigger:
     include:
     - functions/coingecko-importer/*
     - functions/Posmn.CoinData/*
+    - functions/Posmn.RatingData/*
 pr: none
 
 pool:
