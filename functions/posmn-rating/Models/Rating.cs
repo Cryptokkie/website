@@ -12,5 +12,7 @@ namespace posmn_rating.Models
 
     // average of Team, Community, Wallet and Product
     public double AverageRating { get; set; }
+
+    public string Comment { get; set; }
   }
 }

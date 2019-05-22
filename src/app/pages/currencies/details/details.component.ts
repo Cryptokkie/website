@@ -7,12 +7,12 @@ import { of, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 import { Coin } from 'src/app/coin-info/coin.model';
+import { AuthService } from 'src/app/core/auth.service';
 import { LoaderService } from 'src/app/loader/loader.service';
+import { Rating } from 'src/app/rating/rating';
 import { RatingService } from 'src/app/rating/rating.service';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { CoinOverviewComponent } from './coin-overview/coin-overview.component';
-import { Rating } from 'src/app/rating/rating';
-import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-details',
@@ -63,7 +63,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
         )
         .subscribe();
 
-      this.ratingService.getAverageRating(params.name)
+      if (this.auth.isAuthenticated()) {
+        this.ratingService.getAverageRating(params.name)
           .pipe(
             tap(rating => this.rating = rating.averageRating),
             catchError(error => {
@@ -74,6 +75,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
               return throwError(error);
             }))
           .subscribe();
+      }
 
       if (params.tab) {
         this.tabIndex = this.tabs[params.tab];
