@@ -6,6 +6,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Posmn.CoinData.Services;
+using Posmn.RatingData.Services;
 using System.Net.Http;
 using System.Reflection;
 
@@ -18,6 +19,7 @@ namespace coingecko_importer
     {
       // Registers custom services.
       builder.Services.AddTransient<ICoinDataTableStorage, CoinDataTableStorage>();
+      builder.Services.AddTransient<IRatingDataTableStorage, RatingDataTableStorage>();
       builder.Services.AddTransient<ICoingeckoImporter, CoingeckoImporter>();
       builder.Services.AddTransient<ICoinsClient>(x => new CoinsClient(new HttpClient()));
       builder.Services.AddTransient<IExchangesClient>(x => new ExchangesClient(new HttpClient()));

@@ -1,4 +1,4 @@
-namespace posmn_rating.Models
+namespace Posmn.RatingData.Models
 {
   public class Rating
   {

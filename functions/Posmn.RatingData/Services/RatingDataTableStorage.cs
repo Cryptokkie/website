@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace posmn_rating.Services
+namespace Posmn.RatingData.Services
 {
   using Models;
 

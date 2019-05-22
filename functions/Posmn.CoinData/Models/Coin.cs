@@ -7,6 +7,7 @@ namespace Posmn.CoinData.Models
     public string ImageUrlSmall { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
+    public double Rating { get; set; }
     public string Ticker { get; set; }
     public long MarketcapRank { get; set; }
     public MarketData MarketData { get; set; }
