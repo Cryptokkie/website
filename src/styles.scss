@@ -1,5 +1,9 @@
-@import "material.scss";
+@import 'material';
 @import '~css-star-rating/scss/star-rating';
+
+@include mat-core();
+$theme: mat-light-theme($primary, $accent, $warn);
+@include angular-material-theme($theme);
 
 body {
   font-family: $font;

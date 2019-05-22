@@ -1,4 +1,21 @@
-@import "styles";
+@import "material";
+
+@mixin font-size-lg($min: 10, $max:22) {
+  font-size: calc(#{$min}px + (#{$max} - #{$min}) * ((100vw - 1280px) / (1599 - 1280)));
+}
+
+@mixin font-size-md($min: 10, $max:22) {
+  // font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
+  font-size: calc(#{$min}px + (#{$max} - #{$min}) * ((100vw - 960px) / (1279 - 960)));
+}
+
+@mixin font-size-sm($min: 10, $max:22) {
+  font-size: calc(#{$min}px + (#{$max} - #{$min}) * ((100vw - 600px) / (959 - 600)));
+}
+
+@mixin font-size-xs($max:22) {
+  font-size: calc((#{$max}) * (100vw / 599));
+}
 
 $font-size: 22;
 
