@@ -36,7 +36,7 @@ namespace posmn_rating
         [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
         ILogger log)
     {
-      log.LogInformation("Ratings function processed a request.");
+      log.LogInformation("Rating function processed a post.");
 
       ClaimsPrincipal principal;
       if ((principal = Authentication.ValidateTokenAsync(req.Headers["Authorization"])) == null)
@@ -71,12 +71,57 @@ namespace posmn_rating
       return new OkResult();
     }
 
+    [FunctionName("ratings")]
+    public async Task<IActionResult> Ratings(
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
+        ILogger log)
+    {
+      log.LogInformation("Ratings function processed a request.");
+
+      string coinId = req.Query["coinId"];
+
+      if (coinId == null)
+      {
+        return new BadRequestObjectResult("Please pass a coinId on the query string");
+      }
+
+      await ratingsDataTableStorage.Init();
+      var ratings = await ratingsDataTableStorage.GetRatings(coinId);
+
+      if (ratings.Count() == 0)
+      {
+        return new NotFoundResult();
+      }
+
+      string filter = req.Query["order"];
+      string limitStr = req.Query["limit"];
+
+      if (filter != null &&
+        limitStr != null &&
+        int.TryParse(limitStr, out var limit))
+      {
+        switch (filter.ToLower())
+        {
+          case "top":
+            ratings = ratings.OrderByDescending(x => x.AverageRating).Take(limit);
+            break;
+          case "bad":
+            ratings = ratings.OrderBy(x => x.AverageRating).Take(limit);
+            break;
+          default:
+            break;
+        }
+      }
+
+      return new OkObjectResult(ratings);
+    }
+
     [FunctionName("average-rating")]
     public async Task<IActionResult> AverageRating(
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
         ILogger log)
     {
-      log.LogInformation("Ratings function processed a request.");
+      log.LogInformation("Average rating function processed a request.");
 
       string coinId = req.Query["coinId"];
 
@@ -107,11 +152,11 @@ namespace posmn_rating
     }
 
     [FunctionName("user-rating")]
-    public async Task<IActionResult> Ratings(
+    public async Task<IActionResult> UserRating(
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
         ILogger log)
     {
-      log.LogInformation("Ratings function processed a request.");
+      log.LogInformation("User rating function processed a request.");
 
       string coinId = req.Query["coinId"];
 
