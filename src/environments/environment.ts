@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   auth0: {
-    domain: 'paarhuis.auth0.com',
-    clientId: 'XKQPLJEFwXmALdchnu522L7d8AqPcQ2y',
+    domain: 'posmn.eu.auth0.com',
+    clientId: 'NZKRP75HXHVho2n55gyusGEmjiwW6HXa',
     callbackUrl: 'http://localhost:4200'
   },
   functions: {

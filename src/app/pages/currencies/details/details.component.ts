@@ -2,13 +2,17 @@ import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { throwError } from 'rxjs';
+import { RatingChangeEvent } from 'angular-star-rating';
+import { of, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 import { Coin } from 'src/app/coin-info/coin.model';
 import { LoaderService } from 'src/app/loader/loader.service';
+import { RatingService } from 'src/app/rating/rating.service';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 import { CoinOverviewComponent } from './coin-overview/coin-overview.component';
+import { Rating } from 'src/app/rating/rating';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-details',
@@ -19,6 +23,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   readonly loadingKey = 'coin-details';
   private sub: any;
+  rating: number;
 
   tabs = {
     'coin-overview': 0,
@@ -36,6 +41,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private coinInfoService: CoinInfoService,
+    public auth: AuthService,
+    private ratingService: RatingService,
     private route: ActivatedRoute,
     private router: Router,
     public loader: LoaderService,
@@ -56,10 +63,23 @@ export class DetailsComponent implements OnInit, OnDestroy {
         )
         .subscribe();
 
+      this.ratingService.getAverageRating(params.name)
+          .pipe(
+            tap(rating => this.rating = rating.averageRating),
+            catchError(error => {
+              if (error.status === 404) {
+                this.rating = 0;
+                return of([]);
+              }
+              return throwError(error);
+            }))
+          .subscribe();
+
       if (params.tab) {
         this.tabIndex = this.tabs[params.tab];
       }
     });
+
   }
 
   ngOnDestroy() {
@@ -90,5 +110,17 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   escapeRegExp(value: string) {
     return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  }
+
+  onRatingChange($event: RatingChangeEvent) {
+    // TODO: write $event.rating to function
+    const rating = new Rating();
+    rating.coinId = this.coin.id;
+    rating.communityRating = $event.rating;
+    rating.productRating = $event.rating;
+    rating.teamRating = $event.rating;
+    rating.walletRating = $event.rating;
+
+    this.ratingService.addRating(rating).subscribe();
   }
 }
