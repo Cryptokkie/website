@@ -13,6 +13,8 @@ import { DetailsComponent } from './details/details.component';
 import { AmountMasternodesChartComponent } from './details/masternode-stats/amount-masternodes-chart/amount-masternodes-chart.component';
 import { MasternodeStatsComponent } from './details/masternode-stats/masternode-stats.component';
 import { OverviewExchangesComponent } from './details/shared/overview-exchanges/overview-exchanges.component';
+import { CoinReviewsComponent } from './details/coin-reviews/coin-reviews.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { OverviewExchangesComponent } from './details/shared/overview-exchanges/
     AmountMasternodesChartComponent,
     PriceChartComponent,
     ChangePercentageComponent,
-    OverviewExchangesComponent],
+    OverviewExchangesComponent,
+    CoinReviewsComponent],
   imports: [
     CommonModule,
     CoinInfoModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class CurrenciesModule { }
