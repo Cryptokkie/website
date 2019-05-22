@@ -1,16 +1,11 @@
 @import '~@angular/material/theming';
 
-@include mat-core();
-
 $font: "Roboto", sans-serif;
 $primary: mat-palette($mat-teal);
 $accent: mat-palette($mat-amber);
 $warn: mat-palette($mat-red);
 $positive: mat-palette($mat-teal);
 $negative: mat-palette($mat-pink);
-
-$theme: mat-light-theme($primary, $accent, $warn);
-@include angular-material-theme($theme);
 
 @mixin icon-size($size: 24px) {
     font-size: $size;
@@ -25,21 +20,4 @@ $theme: mat-light-theme($primary, $accent, $warn);
 	   -moz-transition : all $second ease 0s;
 		 -o-transition : all $second ease 0s;
 			transition : all $second ease 0s;
-}
-
-@mixin font-size-lg($min: 10, $max:22) {
-    font-size: calc(#{$min}px + (#{$max} - #{$min}) * ((100vw - 1280px) / (1599 - 1280)));
-}
-
-@mixin font-size-md($min: 10, $max:22) {
-    // font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
-    font-size: calc(#{$min}px + (#{$max} - #{$min}) * ((100vw - 960px) / (1279 - 960)));
-}
-
-@mixin font-size-sm($min: 10, $max:22) {
-    font-size: calc(#{$min}px + (#{$max} - #{$min}) * ((100vw - 600px) / (959 - 600)));
-}
-
-@mixin font-size-xs($max:22) {
-    font-size: calc((#{$max}) * (100vw / 599));
 }
