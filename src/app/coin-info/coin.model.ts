@@ -71,6 +71,7 @@ export interface Coin {
     marketcapRank: number;
     name: string;
     description: string;
+    rating: number;
     social: Social;
     ticker: string;
     imageUrlSmall: string;

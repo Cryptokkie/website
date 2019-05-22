@@ -1,7 +1,5 @@
 <app-loader [context]="loadingKey"></app-loader>
-<table mat-table [dataSource]="coins" 
-  matSort matSortActive="marketcapCurrency" matSortDirection="desc"
-  class="shadow"
+<table mat-table [dataSource]="coins" matSort matSortActive="marketcapCurrency" matSortDirection="desc" class="shadow"
   *ngIf="!loader.isLoading(loadingKey)">
 
   <!-- Currency Column -->
@@ -16,10 +14,19 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="rating">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
+    <td mat-cell *matCellDef="let element">
+      <star-rating showHalfStars="true" size="small" [starType]="'svg'" [rating]="element.rating"
+        [readOnly]="true">
+      </star-rating>
+    </td>
+  </ng-container>
+
   <!-- Price Column -->
   <ng-container matColumnDef="lastPriceCurrency">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
-    <td mat-cell *matCellDef="let element"> {{element.lastPriceCurrency | number:'1.2-8'}} USD</td>
+    <td mat-cell *matCellDef="let element"> {{element.lastPriceCurrency | number:'1.2-4'}} USD</td>
   </ng-container>
 
   <!-- Change Column -->
@@ -27,8 +34,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Change (24h) </th>
     <td mat-cell *matCellDef="let element">
       <mat-chip-list fxFill fxLayoutAlign="end center">
-        <mat-basic-chip class="mat-standard-chip" 
-          [class.positive-number]="element.dailyChangePercentageCurrency > 0"
+        <mat-basic-chip class="mat-standard-chip" [class.positive-number]="element.dailyChangePercentageCurrency > 0"
           [class.negative-number]="element.dailyChangePercentageCurrency < 0">
           {{ element.dailyChangePercentageCurrency | number:'1.1-2'}} %
         </mat-basic-chip>
@@ -46,7 +52,8 @@
   <!-- Circulating Supply Column -->
   <ng-container matColumnDef="circulatingSupply">
     <th mat-header-cell fxHide.lt-sm *matHeaderCellDef mat-sort-header> Circulating Supply </th>
-    <td mat-cell fxHide.lt-sm *matCellDef="let element"> {{element.circulatingSupply | number:'1.0-0'}} {{element.ticker | uppercase}} </td>
+    <td mat-cell fxHide.lt-sm *matCellDef="let element"> {{element.circulatingSupply | number:'1.0-0'}}
+      {{element.ticker | uppercase}} </td>
   </ng-container>
 
   <!-- <ng-container matColumnDef="totalSupply">

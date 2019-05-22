@@ -18,6 +18,7 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = [
     'name',
+    'rating',
     'lastPriceCurrency',
     'dailyChangePercentageCurrency',
     'dailyVolumeCurrency',
@@ -58,6 +59,7 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
           imageUrlThumbnail: x.imageUrlThumbnail,
           name: x.name,
           ticker: x.ticker,
+          rating: x.rating,
           lastPriceCurrency: x.marketData.lastPriceUsd,
           dailyChangePercentageCurrency: x.marketData.changePercentage24hUsd,
           dailyVolumeCurrency: x.marketData.dailyVolumeUsd,
