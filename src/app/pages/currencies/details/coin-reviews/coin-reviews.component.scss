@@ -26,14 +26,23 @@ p mat-icon {
     }
 }
 
-textarea {
-  height: 50px;
-}
-
 .separator {
   width: 200px;
 }
 
 .italic {
   font-style: italic;
+}
+
+.rating-icon {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.block {
+  &.grey {
+    background-color: mat-color(mat-palette($mat-grey, 300));
+
+    color: mat-color(mat-palette($mat-grey, 500));
+  }
 }

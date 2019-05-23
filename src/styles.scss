@@ -94,22 +94,20 @@ a {
     }
 
     @include mat-elevation(10, #333, 0.5);
+  }
 
-    &.pop-top {
-      margin-top: -30px;
-      margin-bottom: 13px;
-    }
+  .pop-top {
+    margin-top: -30px;
+    margin-bottom: 13px;
+    text-align: center;
+  }
+
+  .pop-left {
+    margin-left: -40px;
+    text-align: center;
   }
 
   .block-icon {
-    &.pop-top {
-      margin-top: -30px;
-      margin-bottom: 13px;
-    }
-
-    &.pop-left {
-      margin-left: -40px;
-    }
 
     border-radius: 5px;
     padding: 20px;
@@ -153,6 +151,16 @@ a {
         right bottom,
         from(mat-color(mat-palette($mat-grey), 700)),
         to(mat-color(mat-palette($mat-grey), 500))
+      );
+    }
+
+    &.white {
+      background: -webkit-gradient(
+        linear,
+        left top,
+        right bottom,
+        from(mat-color(mat-palette($mat-grey), 200)),
+        to(white)
       );
     }
 
@@ -264,4 +272,8 @@ hr {
 .rating {
   outline: none;
   justify-content: left;
+}
+
+.self-stretch {
+  align-self: stretch;
 }

@@ -2,12 +2,28 @@
 
 table {
     width: 100%;
+
+    &.small {
+
+        td.mat-cell:first-of-type,
+        td.mat-footer-cell:first-of-type,
+        th.mat-header-cell:first-of-type {
+            padding-left: 10px;
+        }
+
+        .mat-cell:not(:first-of-type):last-of-type {
+            padding-right: 22px;
+        }
+    }
+}
+
+::ng-deep .small th .mat-sort-header-container {
+    justify-content: flex-end;
 }
 
 .icon {
     height: 22px;
     vertical-align: bottom;
-    margin-right: 5px;
 }
 
 ::ng-deep th:not(:first-of-type) .mat-sort-header-container {
@@ -41,6 +57,7 @@ table {
 }
 
 .name {
+    padding-left: 10px;
     padding-right: 10px;
 }
 
