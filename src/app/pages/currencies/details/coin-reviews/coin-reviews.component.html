@@ -1,9 +1,192 @@
 <app-loader [context]="loadingKey"></app-loader>
 <div fxLayout="row" fxLayoutGap="40px" fxLayout.lt-sm="column" *ngIf="!loader.isLoading(loadingKey)">
-  <div fxFlex="30" fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="space-between">
+
+  <div fxFlex="72" fxLayout="column" fxLayoutGap="40px">
+
+    <div *ngIf="!auth.isAuthenticated()" class="block grey shadow" fxLayout="column" fxLayoutAlign="space-between center">
+      <div class="align-center label-value extra-margin">
+        <h4>My Review</h4>
+        <hr>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+        <div class="align-center label-value">
+          <star-rating [starType]="'svg'" [disabled]="true">
+          </star-rating>
+          <h5>Team Rating</h5>
+        </div>
+        <div class="align-center label-value">
+          <star-rating [starType]="'svg'" [disabled]="true">
+          </star-rating>
+          <h5>Community Rating</h5>
+        </div>
+        <div class="align-center label-value">
+          <star-rating [starType]="'svg'" [disabled]="true">
+          </star-rating>
+          <h5>Product Rating</h5>
+        </div>
+        <div class="align-center label-value">
+          <star-rating [starType]="'svg'" [disabled]="true">
+          </star-rating>
+          <h5>Wallet Rating</h5>
+        </div>
+      </div>
+      <div fxLayout="column">
+        <div class="align-center label-value extra-margin">
+          Login to leave a review.
+        </div>
+        <button mat-flat-button color="primary" (click)="auth.login()">Login</button>
+      </div>
+    </div>
+
+    <div *ngIf="auth.isAuthenticated()" [formGroup]="userRating" class="block shadow" fxLayout="column"
+      fxLayoutAlign="space-between center">
+      <div class="align-center label-value extra-margin">
+        <h4>My Review</h4>
+        <hr>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+        <div class="align-center label-value">
+          <star-rating-control [starType]="'svg'" [hoverEnabled]="true" formControlName="teamRating">
+          </star-rating-control>
+          <h5>Team Rating</h5>
+        </div>
+        <div class="align-center label-value">
+          <star-rating-control [starType]="'svg'" [hoverEnabled]="true" formControlName="communityRating">
+          </star-rating-control>
+          <h5>Community Rating</h5>
+        </div>
+        <div class="align-center label-value">
+          <star-rating-control [starType]="'svg'" [hoverEnabled]="true" formControlName="productRating">
+          </star-rating-control>
+          <h5>Product Rating</h5>
+        </div>
+        <div class="align-center label-value">
+          <star-rating-control [starType]="'svg'" [hoverEnabled]="true" formControlName="walletRating">
+          </star-rating-control>
+          <h5>Wallet Rating</h5>
+        </div>
+      </div>
+      <div fxLayout="column" class="self-stretch">
+        <mat-form-field>
+          <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
+        </mat-form-field>
+      </div>
+      <div>
+        <button [disabled]="userRating.untouched" mat-flat-button color="accent" (click)="submit()">Save review</button>
+      </div>
+    </div>
+
+    <div fxLayoutGap="40px" fxLayout="row">
+      <div class="block shadow" fxLayout="column" fxLayoutAlign="flex-start center">
+        <div class="block-icon pop-top small green">
+          <mat-icon>thumb_up</mat-icon>
+        </div>
+
+        <div class="align-center label-value extra-margin">
+          <h4>Top Reviews</h4>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px"
+          *ngFor="let topRating of topRatings">
+          <hr class="separator">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+
+            <div class="align-center label-value">
+              <star-rating showHalfStars="true" size="small" [starType]="'svg'" [rating]="topRating.teamRating"
+                [readOnly]="true">
+              </star-rating>
+              <h6>Team</h6>
+            </div>
+
+            <div class="align-center label-value">
+              <star-rating showHalfStars="true" size="small" [starType]="'svg'" [rating]="topRating.communityRating"
+                [readOnly]="true">
+              </star-rating>
+              <h6>Community</h6>
+            </div>
+
+            <div class="align-center label-value">
+              <star-rating showHalfStars="true" size="small" [starType]="'svg'" [rating]="topRating.productRating"
+                [readOnly]="true">
+              </star-rating>
+              <h6>Product</h6>
+            </div>
+
+            <div class="align-center label-value">
+              <star-rating showHalfStars="true" size="small" [starType]="'svg'" [rating]="topRating.walletRating"
+                [readOnly]="true">
+              </star-rating>
+              <h6>Wallet</h6>
+            </div>
+
+          </div>
+          <div *ngIf="topRating.comment" class="align-center label-value italic">
+            <p>{{ topRating.comment }}</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="block shadow" fxLayout="column" fxLayoutAlign="flex-start center">
+        <div class="block-icon pop-top small red">
+          <mat-icon>thumb_down</mat-icon>
+        </div>
+
+        <div class="align-center label-value extra-margin">
+          <h4>Bad Reviews</h4>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px"
+          *ngFor="let badRating of badRatings">
+          <hr class="separator">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+
+            <div class="align-center label-value">
+              <star-rating showHalfStars="true" size="small" [starType]="'svg'" [rating]="badRating.teamRating"
+                [readOnly]="true">
+              </star-rating>
+              <h6>Team</h6>
+            </div>
+
+            <div class="align-center label-value">
+              <star-rating showHalfStars="true" size="small" [starType]="'svg'" [rating]="badRating.communityRating"
+                [readOnly]="true">
+              </star-rating>
+              <h6>Community</h6>
+            </div>
+
+            <div class="align-center label-value">
+              <star-rating showHalfStars="true" size="small" [starType]="'svg'" [rating]="badRating.productRating"
+                [readOnly]="true">
+              </star-rating>
+              <h6>Product</h6>
+            </div>
+
+            <div class="align-center label-value">
+              <star-rating showHalfStars="true" size="small" [starType]="'svg'" [rating]="badRating.walletRating"
+                [readOnly]="true">
+              </star-rating>
+              <h6>Wallet</h6>
+            </div>
+
+          </div>
+          <div *ngIf="badRating.comment" class="align-center label-value italic">
+            <p>{{ badRating.comment }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div fxFlex="28" fxLayout="column" fxLayoutGap="40px">
+
     <div class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
-      <div class="block-icon pop-top grey">
-        <mat-icon>poll</mat-icon>
+      <div class="block-icon pop-top white">
+        <img class="rating-icon" src="{{ coin.imageUrlSmall }}" />
       </div>
 
       <div class="align-center label-value extra-margin">
@@ -39,135 +222,5 @@
       </div>
     </div>
 
-    <div *ngIf="auth.isAuthenticated()" class="block shadow" fxLayout="column" fxLayoutAlign="space-between center">
-      <div class="block-icon pop-top small">
-        <mat-icon>person</mat-icon>
-      </div>
-
-      <div class="align-center label-value extra-margin">
-        <h4>My Review</h4>
-        <hr>
-      </div>
-
-      <div [formGroup]="userRating" fxLayout="column" fxLayoutAlign="space-between center">
-        <div class="align-center label-value">
-          <star-rating-control [starType]="'svg'" [hoverEnabled]="true" formControlName="teamRating">
-          </star-rating-control>
-          <h5>Team Rating</h5>
-        </div>
-        <div class="align-center label-value">
-          <star-rating-control [starType]="'svg'" [hoverEnabled]="true" formControlName="communityRating">
-          </star-rating-control>
-          <h5>Community Rating</h5>
-        </div>
-        <div class="align-center label-value">
-          <star-rating-control [starType]="'svg'" [hoverEnabled]="true" formControlName="productRating">
-          </star-rating-control>
-          <h5>Product Rating</h5>
-        </div>
-        <div class="align-center label-value">
-          <star-rating-control [starType]="'svg'" [hoverEnabled]="true" formControlName="walletRating">
-          </star-rating-control>
-          <h5>Wallet Rating</h5>
-        </div>
-        <mat-form-field>
-          <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
-        </mat-form-field>
-        <button [disabled]="userRating.untouched" mat-flat-button color="accent" (click)="submit()">Save review</button>
-      </div>
-    </div>
-  </div>
-
-  <div fxFlex="70" fxLayout="column" fxLayoutGap="40px">
-    <div class="block shadow" fxLayout="column" fxLayoutAlign="flex-start center">
-      <div class="block-icon pop-top small green">
-        <mat-icon>thumb_up</mat-icon>
-      </div>
-
-      <div class="align-center label-value extra-margin">
-        <h4>Top Reviews</h4>
-      </div>
-
-      <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px"
-        *ngFor="let topRating of topRatings">
-        <hr class="separator">
-        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-
-          <div class="align-center label-value">
-            <star-rating showHalfStars="true" [starType]="'svg'" [rating]="topRating.teamRating" [readOnly]="true">
-            </star-rating>
-            <h5>Team Rating</h5>
-          </div>
-
-          <div class="align-center label-value">
-            <star-rating showHalfStars="true" [starType]="'svg'" [rating]="topRating.communityRating" [readOnly]="true">
-            </star-rating>
-            <h5>Community Rating</h5>
-          </div>
-
-          <div class="align-center label-value">
-            <star-rating showHalfStars="true" [starType]="'svg'" [rating]="topRating.productRating" [readOnly]="true">
-            </star-rating>
-            <h5>Product Rating</h5>
-          </div>
-
-          <div class="align-center label-value">
-            <star-rating showHalfStars="true" [starType]="'svg'" [rating]="topRating.walletRating" [readOnly]="true">
-            </star-rating>
-            <h5>Wallet Rating</h5>
-          </div>
-
-        </div>
-        <div *ngIf="topRating.comment" class="align-center label-value italic">
-          <p>{{ topRating.comment }}</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="block shadow" fxLayout="column" fxLayoutAlign="flex-start center">
-      <div class="block-icon pop-top small red">
-        <mat-icon>thumb_down</mat-icon>
-      </div>
-
-      <div class="align-center label-value extra-margin">
-          <h4>Bad Reviews</h4>
-        </div>
-  
-        <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px"
-          *ngFor="let badRating of badRatings">
-          <hr class="separator">
-          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-  
-            <div class="align-center label-value">
-              <star-rating showHalfStars="true" [starType]="'svg'" [rating]="badRating.teamRating" [readOnly]="true">
-              </star-rating>
-              <h5>Team Rating</h5>
-            </div>
-  
-            <div class="align-center label-value">
-              <star-rating showHalfStars="true" [starType]="'svg'" [rating]="badRating.communityRating" [readOnly]="true">
-              </star-rating>
-              <h5>Community Rating</h5>
-            </div>
-  
-            <div class="align-center label-value">
-              <star-rating showHalfStars="true" [starType]="'svg'" [rating]="badRating.productRating" [readOnly]="true">
-              </star-rating>
-              <h5>Product Rating</h5>
-            </div>
-  
-            <div class="align-center label-value">
-              <star-rating showHalfStars="true" [starType]="'svg'" [rating]="badRating.walletRating" [readOnly]="true">
-              </star-rating>
-              <h5>Wallet Rating</h5>
-            </div>
-  
-          </div>
-          <div *ngIf="badRating.comment" class="align-center label-value italic">
-            <p>{{ badRating.comment }}</p>
-          </div>
-        </div>
-    </div>
   </div>
 </div>
