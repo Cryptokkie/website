@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 import { Coin } from 'src/app/coin-info/coin.model';
@@ -59,15 +59,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         .subscribe();
 
       this.ratingService.getAverageRating(params.name)
-        .pipe(
-          tap(rating => this.rating = rating.averageRating),
-          catchError(error => {
-            if (error.status === 404) {
-              this.rating = 0;
-              return of([]);
-            }
-            return throwError(error);
-          }))
+        .pipe(tap(rating => this.rating = rating !== undefined ? rating.averageRating : 0))
         .subscribe();
 
 

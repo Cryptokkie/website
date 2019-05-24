@@ -1,7 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { throwError } from 'rxjs';
-import { catchError, finalize, tap } from 'rxjs/operators';
+import { finalize, tap } from 'rxjs/operators';
 import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 import { Coin } from 'src/app/coin-info/coin.model';
 import { LoaderService } from 'src/app/loader/loader.service';
@@ -50,10 +49,6 @@ export class OverviewExchangesComponent implements OnInit, OnDestroy {
     this.sub = this.coinInfoService.getCoinExchanges(this.coin.id)
       .pipe(
         finalize(() => this.loader.hide(this.loadingKey)),
-        catchError(err => {
-          // show error dialog
-          return throwError(err);
-        }),
         tap(coinExchanges => {
           if (this.limit) {
             coinExchanges = coinExchanges.slice(0, this.limit);

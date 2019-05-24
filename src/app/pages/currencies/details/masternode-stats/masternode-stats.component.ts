@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 import { Coin } from 'src/app/coin-info/coin.model';
 import { HistoricalData } from 'src/app/coin-info/historical-data.model';
@@ -38,7 +38,7 @@ export class MasternodeStatsComponent implements OnInit, OnDestroy {
       .pipe(tap(x => this.historicalData = x));
 
     this.sub = forkJoin(masternodeStats, historicalData)
-      .pipe(finalize(() => this.loader.hide(this.loadingKey)))
+      .pipe(tap(() => this.loader.hide(this.loadingKey)))
       .subscribe();
   }
 

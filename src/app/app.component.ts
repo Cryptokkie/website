@@ -1,11 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
-import { MatDialog } from '@angular/material';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { AuthService } from './core/auth.service';
 import { CurrentProfileService } from './core/current-profile.service';
-import { ErrorDialogComponent } from './pages/shared/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     public auth: AuthService,
     private profileService: CurrentProfileService,
-    public mediaObserver: MediaObserver,
-    private dialog: MatDialog) {
+    public mediaObserver: MediaObserver) {
 
   }
 
@@ -38,13 +33,6 @@ export class AppComponent implements OnInit, OnDestroy {
   retrieveProfile(forceRenew = false) {
 
     this.getProfileSub = this.profileService.getProfile(forceRenew)
-      .pipe(
-        // finalize(() => this.loader.hide()),
-        catchError(err => {
-          this.dialog.open(ErrorDialogComponent);
-          return throwError(err);
-        })
-      )
       .subscribe();
   }
 

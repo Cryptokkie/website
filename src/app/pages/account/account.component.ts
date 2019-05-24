@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { throwError } from 'rxjs';
-import { catchError, finalize } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth.service';
 import { CurrentProfileService } from 'src/app/core/current-profile.service';
 import { LoaderService } from 'src/app/loader/loader.service';
@@ -61,13 +61,7 @@ export class AccountComponent implements OnInit {
   retrieveProfile(forceRenew = false) {
     this.loader.show('retrieve-profile');
     this.profileService.getProfile(forceRenew)
-      .pipe(
-        finalize(() => this.loader.hide('retrieve-profile')),
-        catchError(err => {
-          this.dialog.open(ErrorDialogComponent);
-          return throwError(err);
-        })
-      )
+      .pipe(tap(() => this.loader.hide('retrieve-profile')))
       .subscribe();
   }
 
