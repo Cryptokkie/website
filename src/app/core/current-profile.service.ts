@@ -49,29 +49,4 @@ export class CurrentProfileService {
       });
     });
   }
-
-  updateProfile(userMetadata: any): Observable<Auth0UserProfile> {
-
-    const accessToken = localStorage.getItem('access_token');
-    const userId = localStorage.getItem('user_id');
-
-    const auth0Management = new Management({
-      domain: environment.auth0.domain,
-      token: accessToken
-    });
-
-    return new Observable<Auth0UserProfile>(subscriber => {
-      auth0Management.patchUserMetadata(userId, userMetadata, (err, profile) => {
-
-        if (err) {
-          subscriber.error(err);
-        }
-
-        this.profile = profile;
-
-        subscriber.next(profile);
-        subscriber.complete();
-      });
-    });
-  }
 }

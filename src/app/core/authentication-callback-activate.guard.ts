@@ -56,9 +56,11 @@ export class AuthenticationCallbackActivateGuard implements CanActivate {
                         });
                 } else {
 
+                    const expiresAt = (authResult.expiresIn * 1000) + Date.now();
                     localStorage.setItem('access_token', authResult.accessToken);
                     localStorage.setItem('id_token', authResult.idToken);
                     localStorage.setItem('user_id', authResult.idTokenPayload.sub);
+                    localStorage.setItem('expires_at', expiresAt + '');
 
                     this.auth.onAuthenticated.emit(null);
 
