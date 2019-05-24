@@ -29,8 +29,7 @@ export class ContactComponent implements OnInit {
       message: ['', [Validators.required]]
     });
 
-    // Will need this if module is lazy loaded
-    // (window as any).grecaptcha.render(this.recaptchaElem.nativeElement);
+    (window as any).grecaptcha.render(this.recaptchaElem.nativeElement);
   }
 
   send() {

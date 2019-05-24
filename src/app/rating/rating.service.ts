@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { AuthService } from '../core/auth.service';
 import { Rating } from './rating';
 
 @Injectable({
@@ -17,68 +19,64 @@ export class RatingService {
   userRatingFunctionUrl = 'https://posmn-rating.azurewebsites.net/api/user-rating'
     + '?code=YtdouQN/51VyKWgfgBhAeMzzEuiHaxe0Vq1m3IUsZ/zx49JEdUX9Ig==';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private auth: AuthService) { }
 
   addRating(rating: Rating) {
-    const accessToken = localStorage.getItem('access_token');
-
-    return this.httpClient.post(this.ratingFunctionUrl, rating,
-      {
-        headers: {
-          Authorization: 'Bearer ' + accessToken
-        }
-      }
-    );
+    return this.httpClient.post(this.ratingFunctionUrl, rating, { headers: this.auth.authHeaders() });
   }
 
   getAverageRating(coinId: string): Observable<Rating> {
     const functionUrl = this.averageRatingFunctionUrl
       + `&coinId=${coinId}`;
 
-    const accessToken = localStorage.getItem('access_token');
-
-    return this.httpClient.get<Rating>(functionUrl,
-      {
-        headers: {
-          Authorization: 'Bearer ' + accessToken
-        }
-      }
-    );
+    return this.httpClient
+      .get<Rating>(functionUrl, { headers: this.auth.authHeaders() })
+      .pipe(catchError(this.ignore404));
   }
 
   getRatings(coinId: string): Observable<Rating[]> {
     const functionUrl = this.ratingsFunctionUrl
       + `&coinId=${coinId}`;
 
-    return this.httpClient.get<Rating[]>(functionUrl);
+    return this.httpClient
+      .get<Rating[]>(functionUrl)
+      .pipe(catchError(this.ignore404));
   }
 
   getTopRatings(coinId: string): Observable<Rating[]> {
     const functionUrl = this.ratingsFunctionUrl
       + `&coinId=${coinId}&order=top&limit=4`;
 
-    return this.httpClient.get<Rating[]>(functionUrl);
+    return this.httpClient
+      .get<Rating[]>(functionUrl)
+      .pipe(catchError(this.ignore404));
   }
 
   getBadRatings(coinId: string): Observable<Rating[]> {
     const functionUrl = this.ratingsFunctionUrl
       + `&coinId=${coinId}&order=bad&limit=2`;
 
-    return this.httpClient.get<Rating[]>(functionUrl);
+    return this.httpClient
+      .get<Rating[]>(functionUrl)
+      .pipe(catchError(this.ignore404));
   }
 
   getUserRating(coinId: string): Observable<Rating> {
     const functionUrl = this.userRatingFunctionUrl
       + `&coinId=${coinId}`;
 
-    const accessToken = localStorage.getItem('access_token');
-
-    return this.httpClient.get<Rating>(functionUrl,
-      {
-        headers: {
-          Authorization: 'Bearer ' + accessToken
-        }
-      }
-    );
+    return this.httpClient
+      .get<Rating>(functionUrl, { headers: this.auth.authHeaders() })
+      .pipe(catchError(this.ignore404));
   }
+
+  private ignore404(error: HttpErrorResponse) {
+    if (error.status === 404) {
+      // A client-side or network error occurred. Handle it accordingly.
+      return of(undefined);
+    }
+    // return an observable with a user-facing error message
+    return throwError(error);
+  }
+
 }

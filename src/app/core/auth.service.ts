@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -99,6 +99,12 @@ export class AuthService {
     localStorage.removeItem('expires_at');
     // Go back to the home route
     this.router.navigate(['/']);
+  }
+
+  authHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('access_token')
+    });
   }
 
   isAuthenticated(): boolean {

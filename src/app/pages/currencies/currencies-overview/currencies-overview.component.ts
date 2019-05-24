@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { throwError } from 'rxjs';
-import { catchError, finalize, map, tap } from 'rxjs/operators';
+import { finalize, map, tap } from 'rxjs/operators';
 import { CoinInfoService } from 'src/app/coin-info/coin-info.service';
 import { LoaderService } from 'src/app/loader/loader.service';
 
@@ -50,10 +49,6 @@ export class CurrenciesOverviewComponent implements OnInit, OnDestroy {
     this.sub = this.coinInfoService.getCoins()
       .pipe(
         finalize(() => this.loader.hide(this.loadingKey)),
-        catchError(err => {
-          // show error dialog
-          return throwError(err);
-        }),
         map(arr => arr.map(x => ({
           id: x.id,
           imageUrlThumbnail: x.imageUrlThumbnail,

@@ -1,8 +1,15 @@
 <h2 mat-dialog-title>Oops!</h2>
 <mat-dialog-content>
-  Oops. Something went wrong. Try it again or <a routerLink="/contact">contact support</a>.
+  <p>
+    Oops. Something went wrong. Try it again or <a routerLink="/contact">contact support</a>.
+  </p>
+  <div *ngIf="data">
+    <p>Please disclose the following error details when contacting support:</p>
+    <pre>{{ data | json }}</pre>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Ignore</button>
   <button mat-button (click)="reload()">Reload</button>
+  <button mat-flat-button color="accent" (click)="goHome()">Get me out of this situation!</button>
 </mat-dialog-actions>

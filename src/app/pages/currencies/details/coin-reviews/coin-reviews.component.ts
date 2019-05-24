@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { forkJoin, Observable, of, throwError } from 'rxjs';
-import { catchError, finalize, tap } from 'rxjs/operators';
+import { forkJoin, of } from 'rxjs';
+import { filter, finalize, tap } from 'rxjs/operators';
 import { Coin } from 'src/app/coin-info/coin.model';
 import { AuthService } from 'src/app/core/auth.service';
 import { LoaderService } from 'src/app/loader/loader.service';
@@ -48,19 +48,27 @@ export class CoinReviewsComponent implements OnInit, OnDestroy {
 
     const getAverageRatingObs = this.ratingService.getAverageRating(this.coin.id)
       .pipe(
-        tap(rating => this.averageRating = rating),
-        catchError(error => this.ignore404(error)));
+        filter(rating => !!rating),
+        tap(rating => this.averageRating = rating)
+      );
 
     const getTopRatingsObs = this.ratingService.getTopRatings(this.coin.id)
-      .pipe(tap(ratings => this.topRatings = ratings));
+      .pipe(
+        filter(rating => !!rating),
+        tap(ratings => this.topRatings = ratings)
+      );
 
     const getBadRatingsObs = this.ratingService.getBadRatings(this.coin.id)
-      .pipe(tap(ratings => this.badRatings = ratings));
-
-    const getUserRatingObs = this.ratingService.getUserRating(this.coin.id)
       .pipe(
-        tap(rating => this.userRating.patchValue(rating)),
-        catchError(error => this.ignore404(error)));
+        filter(rating => !!rating),
+        tap(ratings => this.badRatings = ratings)
+      );
+
+    let getUserRatingObs = of({});
+    if (this.auth.isAuthenticated()) {
+      getUserRatingObs = this.ratingService.getUserRating(this.coin.id)
+        .pipe(tap(rating => this.userRating.patchValue(rating)));
+    }
 
     this.sub = forkJoin(
       getAverageRatingObs,
@@ -69,6 +77,9 @@ export class CoinReviewsComponent implements OnInit, OnDestroy {
       getUserRatingObs)
       .pipe(finalize(() => this.loader.hide(this.loadingKey)))
       .subscribe();
+
+
+
   }
 
   submit() {
@@ -83,13 +94,6 @@ export class CoinReviewsComponent implements OnInit, OnDestroy {
         });
       }))
       .subscribe();
-  }
-
-  ignore404(error: any): Observable<any> {
-    if (error.status === 404) {
-      return of([]);
-    }
-    return throwError(error);
   }
 
   ngOnDestroy() {
