@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { WebAuth } from 'auth0-js';
 import Auth0Lock from 'auth0-lock';
 import { environment } from '../../environments/environment';
 
@@ -14,10 +15,19 @@ export class AuthService {
 
   responseType = 'token id_token';
   audience = `https://${environment.auth0.domain}/api/v2/`;
-  scope = 'read:current_user update:current_user_identities '
+  scope = 'openid email profile read:current_user update:current_user_identities '
     + 'create:current_user_metadata update:current_user_metadata '
     + 'delete:current_user_metadata create:current_user_device_credentials '
     + 'delete:current_user_device_credentials delete:current_user';
+
+  webAuth = new WebAuth({
+    clientID: environment.auth0.clientId,
+    domain: environment.auth0.domain,
+    audience: this.audience,
+    responseType: this.responseType,
+    redirectUri: environment.auth0.callbackUrl,
+    scope: this.scope
+  });
 
   lock = new Auth0Lock(
     environment.auth0.clientId,
@@ -59,12 +69,26 @@ export class AuthService {
 
   }
 
+  // security issues for Safari (iOS) that needs this workaround
+  // https://auth0.com/docs/cross-origin-authentication
+  isSafari(): boolean {
+    return !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+  }
+
   login(): void {
-    this.lock.show();
+    if (this.isSafari()) {
+      this.webAuth.authorize();
+    } else {
+      this.lock.show();
+    }
   }
 
   signUp(): void {
-    this.lock.show({ initialScreen: 'signUp' });
+    if (this.isSafari()) {
+      this.webAuth.authorize({ action: 'signup' });
+    } else {
+      this.lock.show({ initialScreen: 'signUp' });
+    }
   }
 
   logout(): void {
@@ -72,17 +96,24 @@ export class AuthService {
     localStorage.removeItem('user_id');
     localStorage.removeItem('id_token');
     localStorage.removeItem('access_token');
+    localStorage.removeItem('expires_at');
     // Go back to the home route
     this.router.navigate(['/']);
   }
 
   isAuthenticated(): boolean {
+
     const token = localStorage.getItem('access_token');
     if (!token) {
       return false;
     }
 
-    return !this.jwtHelper.isTokenExpired(token);
+    const expiresAt = localStorage.getItem('expires_at');
+    if (!expiresAt) {
+      return false;
+    }
+
+    return Date.now() < parseInt(expiresAt, 10);
   }
 
   link(provider: string) {
