@@ -52,6 +52,9 @@ export class OverviewExchangesComponent implements OnInit, OnDestroy {
         finalize(() => this.loader.hide(this.loadingKey)),
         tap(coinExchanges => {
 
+          // First filter the 'dead' markets out (isStale)
+          coinExchanges = coinExchanges.filter(market => !market.isStale)
+
           if (this.limit) {
             coinExchanges = coinExchanges.slice(0, this.limit);
           }
