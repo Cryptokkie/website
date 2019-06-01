@@ -55,10 +55,24 @@ export class OverviewExchangesComponent implements OnInit, OnDestroy {
           }
           this.coinExchanges = new MatTableDataSource(coinExchanges);
           this.setDataSourceAttributes();
+          this.changeSortCriteriumForPairColumn();
         }),
       )
       .subscribe();
   }
+    /**
+     * Set the sort after the view init since this component will
+     * be able to query its view for the initialized sort.
+     */
+    changeSortCriteriumForPairColumn() {
+        this.coinExchanges.sortingDataAccessor = (item, property) => {
+            if (property == 'pair') {
+                return item['target'];
+            } else {
+                return item[property];
+            }
+        }
+    }
 
   goToExchange(url: string) {
     if (url) {
