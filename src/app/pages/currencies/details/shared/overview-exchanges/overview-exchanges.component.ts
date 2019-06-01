@@ -48,16 +48,39 @@ export class OverviewExchangesComponent implements OnInit, OnDestroy {
     this.loader.show(this.loadingKey);
     this.sub = this.coinInfoService.getCoinExchanges(this.coin.id)
       .pipe(
+
         finalize(() => this.loader.hide(this.loadingKey)),
         tap(coinExchanges => {
+
           if (this.limit) {
             coinExchanges = coinExchanges.slice(0, this.limit);
           }
+          // From the data that is left, see to it that coinExchange url's are fixed:
+          coinExchanges = this.createCoinExchangeURLs(coinExchanges);
+
           this.coinExchanges = new MatTableDataSource(coinExchanges);
           this.setDataSourceAttributes();
         }),
       )
       .subscribe();
+  }
+
+    /**
+     *  transform the data as retrieved from the request
+     *  possible other approach is to do it on the fly
+     *  after a user has clicked on the market/pair.
+     *
+     *  When more exchanges need 'personal care' they can be added here in this method,
+     *  but then the method should be renamed to something more general (polishResultExchangeData)
+     */
+  createCoinExchangeURLs(exchanges) {
+    return exchanges.map(function(market){
+        if (market.exchangeIdentifier == "coin_exchange") {
+          market.url = `https://www.coinexchange.io/market/${market.base}/${market.target}`;
+        }
+        return market;
+    });
+    return exchanges;
   }
 
   goToExchange(url: string) {
