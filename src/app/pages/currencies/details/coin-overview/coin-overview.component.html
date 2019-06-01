@@ -63,9 +63,9 @@
       </div>
 
       <div class="align-left label-value">
-        <p *ngIf="!panelOpen">{{ coin.description | slice:0:350 }}<span *ngIf="coin.description.length > 350">...</span>
+        <p *ngIf="!panelOpen" [innerHTML]="coin.description | slice:0:350"><span *ngIf="coin.description.length > 350">...</span>
         </p>
-        <p *ngIf="!!panelOpen">{{ coin.description }}</p>
+        <p *ngIf="!!panelOpen" [innerHTML]="coin.description"></p>
         <div class="align-center" *ngIf="coin.description.length > 350">
           <button mat-icon-button mat-stroked-button (click)="panelOpen = !panelOpen">
             <mat-icon *ngIf="!panelOpen">keyboard_arrow_down</mat-icon>
